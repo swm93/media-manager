@@ -8,6 +8,30 @@
 
 import Foundation
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate
@@ -29,7 +53,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
         {
             if let newData:[String: String] = newValue
             {
-                orderedKeys = newData.keys.sort()
+                orderedKeys = newData.keys.sorted()
             }
             else
             {
@@ -41,7 +65,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     }
     private var orderedKeys:[String]?
 
-    private let animationDuration:NSTimeInterval = 0.3
+    private let animationDuration:TimeInterval = 0.3
     private let headerHeightBounds:(min: CGFloat, max: CGFloat) = (min: 64.0, max: 160.0)
     private let cornerRadiusAnimation:CABasicAnimation = CABasicAnimation(keyPath: "cornerRadius")
     
@@ -55,67 +79,53 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     {
         super.viewDidLoad()
         
-        data = [
-            "bio": "this is a sample",
-            "date": "1970",
-            "test1": "test",
-            "test2": "test",
-            "test3": "test",
-            "test4": "test",
-            "test5": "test",
-            "test6": "test",
-            "test7": "test",
-            "test8": "test",
-            "test9": "test",
-            "test10": "test",
-            "test11": "test",
-            "test12": "test",
-            "test13": "test",
-            "test14": "test",
-            "test15": "test",
-            "test16": "test",
-            "test17": "test",
-            "test18": "test",
-            "test19": "test"
-        ]
+        if let artist: ArtistManaged = mediaObject as? ArtistManaged
+        {
+            data = [
+                "bio": artist.summary ?? "",
+                "genres": (artist.genres.flatMap { genre in (genre as? GenreManaged)?.name }).joined(separator: ", ")
+            ]
+        }
         
         cornerRadiusAnimation.duration = animationDuration
         cornerRadiusAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         cornerRadiusAnimation.fillMode = kCAFillModeForwards
-        cornerRadiusAnimation.removedOnCompletion = true
+        cornerRadiusAnimation.isRemovedOnCompletion = true
 
-        let artist:Artist = mediaObject as! Artist
-        imageView.image = artist.image
-        titleLabel.text = artist.name
+        imageView.image = createImage(for: mediaObject!)
+        titleLabel.text = mediaObject!.name
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140.0
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaDetailCell", forIndexPath: indexPath)
+        let cell:MediaDetailCell = tableView.dequeueReusableCell(withIdentifier: "MediaDetailCell", for: indexPath) as! MediaDetailCell
         
         if let key:String = orderedKeys?[indexPath.row]
         {
-            cell.textLabel?.text = key
-            cell.detailTextLabel?.text = data?[key]
+            cell.titleLabel.text = key.uppercased()
+            cell.contentLabel.text = data?[key]
         }
         
         return cell
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return data?.count ?? 0
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView)
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
     {
         lastScrollOffset = scrollView.contentOffset.y
         totalDeltaScrollOffset = 0.0
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
     {
         let diffToMin:CGFloat = headerView.frame.height - headerHeightBounds.min
         let diffToMax:CGFloat = headerHeightBounds.max - headerView.frame.height
@@ -137,20 +147,20 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
         
         cornerRadiusAnimation.toValue = cornerRadiusToValue
         cornerRadiusAnimation.fromValue = min(imageView.frame.height, imageView.frame.width) / 2
-        imageView.layer.addAnimation(cornerRadiusAnimation, forKey: "cornerRadius")
+        imageView.layer.add(cornerRadiusAnimation, forKey: "cornerRadius")
         
-        UIView.animateWithDuration(animationDuration)
-        { [weak self] in
+        UIView.animate(withDuration: animationDuration, animations: { [weak self] in
             self?.tableView.layoutIfNeeded()
             self?.headerView.layoutIfNeeded()
-        }
+        })
+        
         
         lastScrollOffset = nil
         deltaScrollOffset = nil
         totalDeltaScrollOffset = nil
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView)
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         if let lastOffset:CGFloat = lastScrollOffset
         {
@@ -172,5 +182,12 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
             deltaScrollOffset = deltaOffset
             totalDeltaScrollOffset = totalDeltaOffset
         }
+    }
+    
+    
+    func createImage(for media:Media) -> UIImage
+    {
+        let mediaType:MediaType = type(of: media).type
+        return UIImage(data: media.imageData ?? mediaType.defaultImageDataAsset.data)!
     }
 }

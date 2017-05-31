@@ -9,15 +9,15 @@
 import Foundation
 
 
-class JSONParser : APIParser
+class JSONParser<T> : APIParser<T>
 {
-    override internal func parse(data:NSData?, response:NSURLResponse?, error:NSError?)
+    override internal func parse(_ data:Data?, response:URLResponse?, error:Error?)
     {
-        if let d:NSData = data
+        if let d:Data = data
         {
             do
             {
-                let json:AnyObject = try NSJSONSerialization.JSONObjectWithData(d, options: .AllowFragments)
+                let json:Any = try JSONSerialization.jsonObject(with: d, options: .allowFragments)
                 objectifyJSON(json)
             }
             catch
@@ -28,7 +28,7 @@ class JSONParser : APIParser
     }
     
     
-    internal func objectifyJSON(json:AnyObject) -> ()
+    internal func objectifyJSON(_ json:Any)
     {
         assert(false, "This method must be overridden")
     }

@@ -15,66 +15,56 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 {
     @IBOutlet var searchTableView:UITableView!
     
-    var mediaObjects:[Media] = [Media]()
+    var searchResults:[SearchResult] = [SearchResult]()
     {
         didSet
         {
-            dispatch_async(dispatch_get_main_queue())
+            DispatchQueue.main.async
             {
                 self.searchTableView?.reloadData()
             }
         }
     }
     
-    var lastFMParser:LastFMParser?
-    var libraryThingParser:LibraryThingParser?
-    var tvdbParser:TVDBParser?
-
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        lastFMParser = LastFMParser(completionHandler: addMediaObject)
-        libraryThingParser = LibraryThingParser(completionHandler: addMediaObject)
-        tvdbParser = TVDBParser(completionHandler: addMediaObject)
-    }
+    let searchParsers:[ParserType: APIParser<SearchResult>] = [
+        .lastFM: LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String),
+        .igdb: IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
+    ]
+    
+    let detailParsers:[ParserType: APIParser<ManagedObject>] = [
+        .lastFM: LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+    ]
     
     
     @IBAction func dismissViewController()
     {
-        dismissViewControllerAnimated(true) {}
+        dismiss(animated: true) {}
     }
     
     
-    override func viewDidLoad()
+    func addSearchResults(_ results:[SearchResult])
     {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        // dispose of any resources that can be recreated
+        searchResults += results
     }
     
-    func addMediaObject(mediaObject:Media?)
+    func downloadSearchResultDetail(_ searchResult:SearchResult, completionHandler:@escaping ([ManagedObject]) -> Void)
     {
-        if let mediaObj:Media = mediaObject
-        {
-            mediaObjects.append(mediaObj)
-        }
+        detailParsers[searchResult.parserType]?.parse([
+            "query": searchResult.text
+            ], completionHandler: completionHandler)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("SearchCell", forIndexPath: indexPath)
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
         let titleLabel:UILabel = cell.viewWithTag(1) as! UILabel
         let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
         let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
+        let searchResult:SearchResult = searchResults[indexPath.row]
         
-        titleLabel.text = mediaObjects[indexPath.row].description
-        subtitleLabel.text = mediaObjects[indexPath.row].secondaryText
-        imageView.image = mediaObjects[indexPath.row].image
+        titleLabel.text = searchResult.text
+        subtitleLabel.text = searchResult.mediaType.name
+        imageView.image = searchResult.image
         
         imageView.layer.cornerRadius = imageView.frame.height / 2
         imageView.layer.masksToBounds = true
@@ -82,56 +72,46 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mediaObjects.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return searchResults.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if let mediaObject:Artist = mediaObjects[indexPath.row] as? Artist
-        {
-            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let searchResult:SearchResult = searchResults[indexPath.row]
+
+        downloadSearchResultDetail(searchResult)
+        { [weak self] (mediaManaged:[ManagedObject]) -> Void in
+            let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
             let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
-            let entity:NSEntityDescription? =  NSEntityDescription.entityForName("Artist", inManagedObjectContext:managedContext)
-            let artist:NSManagedObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-            
-            artist.setValue(mediaObject.name, forKey: "name")
-            artist.setValue(mediaObject.summary, forKey: "summary")
-            artist.setValue(mediaObject.genres.joinWithSeparator(","), forKey: "genres")
-            artist.setValue(UIImagePNGRepresentation(mediaObject.image), forKey: "image")
-            
+                
             do
             {
                 try managedContext.save()
-                dismissViewController()
+                self?.dismissViewController()
             }
-            catch let error as NSError
+            catch let error
             {
-                print("Could not save \(error), \(error.userInfo)")
+                print("Could not save \(error)")
             }
         }
+        
     }
     
-    func textFieldShouldReturn(textField:UITextField) -> Bool
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool
     {
         if let query:String = textField.text
         {
-            mediaObjects.removeAll()
+            searchResults.removeAll()
             
-            lastFMParser?.parse([
-                "api_key": "be3b35a76e9315d68bcbb13e3d5a704c",
-                "query": query
-            ])
-            
-//            tvdbParser.parse([
-//                "api_key": "PUT_API_KEY_HERE",
-//                "query": query
-//            ])
-//            
-//            libraryThingParser.parse([
-//                "api_key": "d57000b17ebbf55714fd7514b804fb9e",
-//                "query": query
-//            ])
+            for (_, parser) in searchParsers
+            {
+                parser.parse([
+                    "api_key": "",
+                    "query": query
+                    ], completionHandler: addSearchResults)
+            }
         }
         
         textField.resignFirstResponder()
@@ -139,9 +119,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return true
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool
+    func textFieldShouldClear(_ textField: UITextField) -> Bool
     {
-        mediaObjects.removeAll()
+        searchResults.removeAll()
         
         return true
     }

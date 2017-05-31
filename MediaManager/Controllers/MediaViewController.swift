@@ -18,7 +18,7 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var filterViewTopConstraint: NSLayoutConstraint!
 
     
-    var mediaObjects:[NSManagedObject] = [NSManagedObject]()
+    var mediaObjects:[MediaType: [Media]] = [MediaType: [Media]]()
     {
         didSet
         {
@@ -26,19 +26,30 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    private var _mediaObjectTypes:[MediaType] {
+        get {
+            return mediaObjects.keys.sorted(by: {
+                return $0.name > $1.name
+            })
+        }
+    }
     
-    override func viewWillAppear(animated: Bool)
+    
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        var mediaObjs:[MediaType: [Media]] = [MediaType: [Media]]()
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
-        let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Artist")
+        let fetchRequest:NSFetchRequest<ArtistManaged> = NSFetchRequest(entityName: "Artist")
         
         do
         {
-            let results:[AnyObject] = try managedContext.executeFetchRequest(fetchRequest)
-            mediaObjects = results as! [NSManagedObject]
+            let results:[Media] = try managedContext.fetch(fetchRequest)
+            //let musicResults:[MediaManaged] = results.map({ $0 })
+            mediaObjs[MediaType.music] = results
+            mediaObjects = mediaObjs
         }
         catch let error as NSError
         {
@@ -47,22 +58,18 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        super.prepareForSegue(segue, sender: sender)
+        super.prepare(for: segue, sender: sender)
         
         if (segue.identifier == "MediaDetailSegue")
         {
-            if let indexPath:NSIndexPath = mediaTable.indexPathForSelectedRow
+            if let indexPath:IndexPath = mediaTable.indexPathForSelectedRow
             {
-                let destinationVC:MediaDetailViewController = segue.destinationViewController as! MediaDetailViewController
-                let mediaObject:Artist = Artist()
-                mediaObject.name = mediaObjects[indexPath.row].valueForKey("name") as? String
-                mediaObject.summary = mediaObjects[indexPath.row].valueForKey("summary") as? String
-                mediaObject.genres = ((mediaObjects[indexPath.row].valueForKey("genres") as? String)?.componentsSeparatedByString(","))!
-                mediaObject.image = UIImage(data: mediaObjects[indexPath.row].valueForKey("image") as! NSData)!
+                let destinationVC:MediaDetailViewController = segue.destination as! MediaDetailViewController
+                let mediaType:MediaType = _mediaObjectTypes[indexPath.section]
                 
-                destinationVC.mediaObject = mediaObject
+                destinationVC.mediaObject = mediaObjects[mediaType]?[indexPath.row]
             }
         }
     }
@@ -72,24 +79,27 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
     {
         filterViewTopConstraint.constant = (filterViewTopConstraint.constant == 0.0) ? -filterView.frame.height : 0.0
         
-        UIView.animateWithDuration(0.1)
-        { [weak self] in
+        UIView.animate(withDuration: 0.1, animations: { [weak self] in
             self?.filterView.layoutIfNeeded()
             self?.mediaTable.layoutIfNeeded()
-        }
+        })
+        
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaCell", forIndexPath: indexPath)
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath)
         let titleLabel:UILabel = cell.viewWithTag(1) as! UILabel
         let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
         let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
         
-        titleLabel.text = mediaObjects[indexPath.row].valueForKey("name") as? String
-        subtitleLabel.text = mediaObjects[indexPath.row].valueForKey("genres") as? String
-        imageView.image = UIImage(data: mediaObjects[indexPath.row].valueForKey("image") as! NSData)
+        let mediaType:MediaType = _mediaObjectTypes[indexPath.section]
+        let mediaObject:Media? = mediaObjects[mediaType]?[indexPath.row]
+        
+        titleLabel.text = mediaObject?.name
+        subtitleLabel.text = ""
+        imageView.image = UIImage(data: mediaObject?.imageData ?? mediaType.defaultImageDataAsset.data)
         
         imageView.layer.cornerRadius = imageView.frame.height / 2
         imageView.layer.masksToBounds = true
@@ -98,8 +108,28 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return mediaObjects.count
+        let mediaType:MediaType = _mediaObjectTypes[section]
+        let count:Int = mediaObjects[mediaType]?.count ?? 0
+        
+        return count
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        return _mediaObjectTypes.count
+    }
+    
+    
+//    func sectionIndexTitles(for tableView: UITableView) -> [String]?
+//    {
+//        return [MediaType.book.name, MediaType.game.name, MediaType.movie.name, MediaType.music.name, MediaType.show.name]
+//    }
+    
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return _mediaObjectTypes[section].name
     }
 }

@@ -10,68 +10,83 @@ import Foundation
 import UIKit
 
 
-class TMDBParser: JSONParser
+class TMDBParser: JSONParser<SearchResult>
 {
     private let maxMediaResults:[MediaType: Int] = [
-        .Movie: 1,
-        .Show: 1
+        .movie: 1,
+        .show: 1
     ]
     
     private let mediaTypeMap:[String: MediaType] = [
-        "movie": .Movie,
-        "tv": .Show
+        "movie": .movie,
+        "tv": .show
     ]
     
-    //afe4803cef4c0e689b7cbf339b767129
-    //https://api.themoviedb.org/3/search/multi?api_key=afe4803cef4c0e689b7cbf339b767129&query=simpsons&page=1
-    override init(completionHandler: (Media?) -> ())
+    //https://api.themoviedb.org/3/search/multi?api_key=API_KEY&query=simpsons&page=1
+    init(_ apiKey:String)
     {
-        super.init(completionHandler: completionHandler)
-        
-        searchParameterizedUrl = ParameterizedURL(
+        let parameterizedUrl:ParameterizedURL = ParameterizedURL(
             url: "https://api.themoviedb.org/3/search/multi?api_key={api_key}&query={query}&page={page}",
             defaultParameters: [
+                "api_key": apiKey,
                 "page": "1"
             ],
-            requiredParameterNames: ["api_key", "query"]
+            requiredParameterNames: ["query"]
         )
+        
+        super.init(parameterizedUrl)
     }
     
     
-    override func objectifyJSON(json: AnyObject)
+    override func objectifyJSON(_ json: Any)
     {
-        if let root:[String: AnyObject] = json as? [String: AnyObject]
+        var results:[SearchResult] = [SearchResult]()
+        
+        if let root:[String: Any] = json as? [String: Any]
         {
-            if let results:[[String: AnyObject]] = root["results"] as? [[String: AnyObject]]
+            if let jsonResults:[[String: Any]] = root["results"] as? [[String: Any]]
             {
                 var resultsFound:[MediaType: Int] = [
-                    .Movie: 0,
-                    .Show: 0
+                    .movie: 0,
+                    .show: 0
                 ]
                 
-                for result:[String: AnyObject] in results
+                for jsonResult:[String: Any] in jsonResults
                 {
-                    do
+                    let mediaType:MediaType = mediaTypeMap[jsonResult["media_type"] as! String]!
+                    
+                    resultsFound[mediaType]! += 1
+                    
+                    if (resultsFound[mediaType]! <= maxMediaResults[mediaType]! || maxMediaResults[mediaType]! == -1)
                     {
-                        let mediaType:MediaType = mediaTypeMap[result["media_type"] as! String]!
+                        var text:String? = nil
+                        var image:UIImage? = nil
                         
-                        if (++resultsFound[mediaType]! <= maxMediaResults[mediaType]! || maxMediaResults[mediaType]! == -1)
+                        switch (mediaType)
                         {
-                            let text:String = result["title"] as! String
-                            var image:UIImage? = nil
-                            
-                            if let relImagePath:String = result["poster_path"] as? String
-                            {
-                                
-                            }
+                        case .movie:
+                            text = jsonResult["title"] as? String
+                        case .show:
+                            text = jsonResult["name"] as? String
+                        default:
+                            break
                         }
-                    }
-                    catch
-                    {
-                        continue
+                        
+                        
+                        if let relImagePath:String = jsonResult["poster_path"] as? String
+                        {
+                            image = downloadImage(fromUrl: relImagePath)
+                        }
+                        
+                        if let t:String = text
+                        {
+                            results.append(SearchResult(mediaType: .movie, parserType: .tmdb, text: t, image: image))
+                        }
                     }
                 }
             }
         }
+        
+        didFinishParsing(results)
     }
 }

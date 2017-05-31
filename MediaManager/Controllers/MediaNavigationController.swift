@@ -14,12 +14,12 @@ class MediaNavigationController : UINavigationController
 {
     override func awakeFromNib()
     {
-        navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
+        navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         navigationBar.shadowImage = UIImage()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle
+    override var preferredStatusBarStyle : UIStatusBarStyle
     {
-        return .LightContent
+        return .lightContent
     }
 }

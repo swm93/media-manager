@@ -10,88 +10,88 @@ import Foundation
 import UIKit
 
 
-class APIParser : NSObject
+class APIParser<T> : NSObject
 {
-    internal var searchParameterizedUrl:ParameterizedURL? = nil
-    private let completionHandler:(Media?) -> ()
+    internal var parameterizedUrl:ParameterizedURL
+    internal var headers:[String: String]?
+    
+    private var isParsing:Bool = false
+    private var completionHandler:(([T]) -> ())? = nil
     
     
-    init(completionHandler:(Media?) -> ())
+    init(_ parameterizedUrl:ParameterizedURL, _ headers:[String: String]? = nil)
     {
-        self.completionHandler = completionHandler
-        
-        super.init()
+        self.parameterizedUrl = parameterizedUrl
+        self.headers = headers
     }
     
     
     /**
-     Fetch data at URL asynchronously and ...
+     Fetch data at URL asynchronously and begin parsing it.
      
-     ...
-     - returns: ...
+     - parameter parameters: ...
+     - parameter completionHandler: ...
      */
-    func parse(parameters:[String: String])
+    func parse(_ parameters:[String: String], completionHandler:@escaping ([T]) -> Void)
     {
-        let url:NSURL = getUrl(parameters)
-        let session:NSURLSession = NSURLSession.sharedSession()
-        let task:NSURLSessionDataTask = session.dataTaskWithURL(url, completionHandler: parse)
-        
-        task.resume()
-        
-        print("Parsing URL: \(url)")
-    }
-    
-    
-    func didFinishParsing(mediaObject:Media?)
-    {
-        completionHandler(mediaObject)
+        // fetch data at URL asynchronously if we are not already parsing
+        if (!isParsing)
+        {
+            let request:URLRequest = getUrlRequest(parameters)
+            fetchData(request, completionHandler: parse)
+            
+            self.isParsing = true
+            self.completionHandler = completionHandler
+            
+            print("Parsing URL: \(request.url!)")
+        }
+        // handle error if we are already parsing another URL
+        // TODO: handle parse in progress error
+        else
+        {
+            print("ERROR: Can only parse one URL at a time")
+        }
     }
     
     
     /**
-        Replace parameters in the paramaterized URL with provided values.
-        This will throw an exception if the parameterdictionary provided does not contain the required parameters.
+     Perform completion handler once parsing is complete.
      
-        - parameter parameters: Mapping of parameter names to the values that they represent.
-        - returns: ...
+     - parameter object: The object that is produced by parsing the data found at URL provided.
     */
-    func getUrl(parameters:[String: String]) -> NSURL
+    func didFinishParsing(_ results:[T])
     {
-        assert(containsRequiredParameters(parameters, requiredParameters: searchParameterizedUrl!.requiredParameterNames), "All required parameters must be provided")
-        
-        var url:String = searchParameterizedUrl!.url
-        var allParameters:[String: String]
-        if let params:[String: String] = searchParameterizedUrl!.defaultParameters
+        // NOTE: completionHandler is expected to be defined at this point; however if it is not, fail gracefully.
+        if let handler:([T]) -> () = completionHandler
         {
-            allParameters = params
+            print("Finished Parsing: Found \(results.count) results")
             
-            for (param, val) in parameters
-            {
-                allParameters[param] = val
-            }
+            handler(results)
         }
         else
         {
-            allParameters = parameters
+            print("ERROR: Bad code path; completion handler should be defined")
         }
         
-        for (param, val) in allParameters
-        {
-            let escapedVal:String = val.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
-            url = url.stringByReplacingOccurrencesOfString("{\(param)}", withString: escapedVal)
-        }
-        
-        return NSURL(string: url)!
+        isParsing = false
+        completionHandler = nil
     }
     
     
-    func downloadImage(urlName:String) -> UIImage?
+    // TODO: (Scott) return proper data
+    internal func parse(_ data:Data?, response:URLResponse?, error:Error?) -> ()
+    {
+        assert(false, "This method must be overridden")
+    }
+    
+    
+    internal func downloadImage(fromUrl urlName:String) -> UIImage?
     {
         var image:UIImage? = nil
         
-        if let url:NSURL = NSURL(string: urlName)
+        if let url:URL = URL(string: urlName)
         {
-            if let data:NSData = NSData(contentsOfURL: url)
+            if let data:Data = try? Data(contentsOf: url)
             {
                 image = UIImage(data: data)
             }
@@ -101,22 +101,29 @@ class APIParser : NSObject
     }
     
     
-    // TODO: (Scott) return proper data
-    internal func parse(data:NSData?, response:NSURLResponse?, error:NSError?) -> ()
+    
+    private func getUrlRequest(_ parameters:[String: String]) -> URLRequest
     {
-        assert(false, "This method must be overridden")
+        let url:URL = parameterizedUrl.resolve(with: parameters)
+        var request:URLRequest = URLRequest(url: url)
+        
+        if let headers:[String: String] = headers
+        {
+            for (headerName, value) in headers
+            {
+                request.addValue(value, forHTTPHeaderField: headerName)
+            }
+        }
+        
+        return request
     }
     
-
-    /**
-        Check if a dictionary contains the parameters that are required to populated the paramaterized URL.
     
-        - parameter parameters: Mapping of parameter names to the values that they represent.
-        - returns: Boolean representing whether the dictionary contains the required parameters.
-    */
-    private func containsRequiredParameters(parameters:[String: String], requiredParameters:Set<String>) -> Bool
+    private func fetchData(_ request:URLRequest, completionHandler:@escaping (Data?, URLResponse?, Error?) -> Void)
     {
-        let parameterNames:Set<String> = Set(parameters.keys)
-        return parameterNames.isSupersetOf(requiredParameters)
+        let session:URLSession = URLSession.shared
+        let task:URLSessionDataTask = session.dataTask(with: request, completionHandler: completionHandler)
+        
+        task.resume()
     }
 }

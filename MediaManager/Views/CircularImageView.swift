@@ -29,11 +29,11 @@ class CircularImageView : UIImageView
     {
         get
         {
-            return UIColor(CGColor: layer.borderColor ?? UIColor.clearColor().CGColor)
+            return UIColor(cgColor: layer.borderColor ?? UIColor.clear.cgColor)
         }
         set
         {
-            layer.borderColor = newValue?.CGColor
+            layer.borderColor = newValue?.cgColor
         }
     }
     

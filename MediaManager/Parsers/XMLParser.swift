@@ -9,56 +9,48 @@
 import Foundation
 
 
-class XMLParser : APIParser, NSXMLParserDelegate
+class XMLParser<T> : APIParser<T>, XMLParserDelegate
 {
-    internal var rootNode:[NSXMLParser: XMLNode] = [NSXMLParser: XMLNode]()
-    private var currentNode:[NSXMLParser: XMLNode] = [NSXMLParser: XMLNode]()
+    internal var rootNode:XMLNode? = nil
+    private var currentNode:XMLNode? = nil
+    
+    private var parser:Foundation.XMLParser?
     
     
-    override internal func parse(data:NSData?, response:NSURLResponse?, error:NSError?)
+    override internal func parse(_ data:Data?, response:URLResponse?, error:Error?)
     {
-        if let d:NSData = data
+        if let d:Data = data
         {
-            let parser:NSXMLParser = NSXMLParser(data: d)
-            parser.delegate = self
+            parser = Foundation.XMLParser(data: d)
+            parser!.delegate = self
             
-            parser.parse()
+            parser!.parse()
         }
     }
     
     
-    func parserDidStartDocument(parser: NSXMLParser)
+    internal func objectifyXML(_ rootNode:XMLNode)
     {
-        rootNode.removeValueForKey(parser)
-        currentNode.removeValueForKey(parser)
+        assert(false, "This method must be overridden")
     }
     
     
-    func parserDidStopDocument(parser: NSXMLParser, mediaObject: Media?)
+    func parser(_ parser: Foundation.XMLParser, foundCharacters string: String)
     {
-        rootNode.removeValueForKey(parser)
-        currentNode.removeValueForKey(parser)
-        
-        didFinishParsing(mediaObject)
-    }
-    
-    
-    func parser(parser: NSXMLParser, foundCharacters string: String)
-    {
-        if (currentNode[parser]?.value == nil)
+        if (currentNode?.value == nil)
         {
-            currentNode[parser]?.value = ""
+            currentNode?.value = ""
         }
         
-        currentNode[parser]?.value! += string
+        currentNode?.value! += string
     }
     
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String])
+    func parser(_ parser: Foundation.XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String])
     {
-        let node:XMLNode = XMLNode(parent: currentNode[parser], attributes: attributeDict)
+        let node:XMLNode = XMLNode(parent: currentNode, attributes: attributeDict)
         
-        if let cNode:XMLNode = currentNode[parser]
+        if let cNode:XMLNode = currentNode
         {
             if (cNode[elementName] == nil)
             {
@@ -69,15 +61,24 @@ class XMLParser : APIParser, NSXMLParserDelegate
         }
         else
         {
-            rootNode[parser] = node
+            rootNode = node
         }
         
-        currentNode[parser] = node
+        currentNode = node
     }
     
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
+    func parser(_ parser: Foundation.XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
     {
-        currentNode[parser] = currentNode[parser]?.parent
+        currentNode = currentNode?.parent
+    }
+    
+    
+    func parserDidEndDocument(_ parser: Foundation.XMLParser)
+    {
+        if let node:XMLNode = rootNode
+        {
+            objectifyXML(node)
+        }
     }
 }

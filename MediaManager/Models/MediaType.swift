@@ -12,32 +12,51 @@ import UIKit
 
 enum MediaType
 {
-    case Book
-    case Game
-    case Movie
-    case Music
-    case Show
+    case book
+    case game
+    case movie
+    case music
+    case show
     
     
-    var defaultImage:UIImage
+    var name:String
+    {
+        var name:String?
+        
+        switch(self)
         {
-            let imagePostfix:String = "Grey"
-            var imagePrefix:String
-            
-            switch(self)
-            {
-            case Book:
-                imagePrefix = "Book"
-            case Game:
-                imagePrefix = "Game"
-            case Movie:
-                imagePrefix = "Movie"
-            case Music:
-                imagePrefix = "Music"
-            case Show:
-                imagePrefix = "Show"
-            }
-            
-            return UIImage(named: imagePrefix + imagePostfix)!
+        case .book:
+            name = "Book"
+        case .game:
+            name = "Game"
+        case .movie:
+            name = "Movie"
+        case .music:
+            name = "Music"
+        case .show:
+            name = "Show"
+        }
+        
+        return name!
+    }
+    
+    var defaultImageDataAsset:NSDataAsset
+    {
+        return self.greyImageDataAsset
+    }
+    
+    var blackImageDataAsset:NSDataAsset
+    {
+        return NSDataAsset(name: "\(self.name)Black")!
+    }
+    
+    var colorImageDataAsset:NSDataAsset
+    {
+        return NSDataAsset(name: "\(self.name)Color")!
+    }
+    
+    var greyImageDataAsset:NSDataAsset
+    {
+        return NSDataAsset(name: "\(self.name)Grey")!
     }
 }

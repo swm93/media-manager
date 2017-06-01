@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 
-class MediaViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class MediaViewController: UIViewController
 {
     @IBOutlet weak var mediaTable:UITableView!
     @IBOutlet weak var filterView:UIView!
@@ -26,7 +26,7 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    private var _mediaObjectTypes:[MediaType] {
+    internal var _mediaObjectTypes:[MediaType] {
         get {
             return mediaObjects.keys.sorted(by: {
                 return $0.name > $1.name
@@ -85,8 +85,12 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
         })
         
     }
-    
-    
+}
+
+
+
+extension MediaViewController : UITableViewDataSource
+{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath)
@@ -99,7 +103,7 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         titleLabel.text = mediaObject?.name
         subtitleLabel.text = ""
-        imageView.image = UIImage(data: mediaObject?.imageData ?? mediaType.defaultImageDataAsset.data)
+        imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData!) : mediaType.defaultImage
         
         imageView.layer.cornerRadius = imageView.frame.height / 2
         imageView.layer.masksToBounds = true
@@ -121,12 +125,6 @@ class MediaViewController: UIViewController, UITableViewDataSource, UITableViewD
     {
         return _mediaObjectTypes.count
     }
-    
-    
-//    func sectionIndexTitles(for tableView: UITableView) -> [String]?
-//    {
-//        return [MediaType.book.name, MediaType.game.name, MediaType.movie.name, MediaType.music.name, MediaType.show.name]
-//    }
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

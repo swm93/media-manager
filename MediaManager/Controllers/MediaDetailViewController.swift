@@ -188,6 +188,6 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     func createImage(for media:Media) -> UIImage
     {
         let mediaType:MediaType = type(of: media).type
-        return UIImage(data: media.imageData ?? mediaType.defaultImageDataAsset.data)!
+        return media.imageData != nil ? UIImage(data: media.imageData!)! : mediaType.defaultImage
     }
 }

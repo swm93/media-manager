@@ -19,9 +19,11 @@ enum MediaType
     case show
     
     
+    static let values:[MediaType] = [.book, .game, .movie, .music, .show]
+    
     var name:String
     {
-        var name:String?
+        var name:String
         
         switch(self)
         {
@@ -37,26 +39,41 @@ enum MediaType
             name = "Show"
         }
         
-        return name!
+        return name
     }
     
-    var defaultImageDataAsset:NSDataAsset
+    var mediaSubTypes:[MediaSubType]?
     {
-        return self.greyImageDataAsset
+        var subTypes:[MediaSubType]?
+        
+        switch(self)
+        {
+        case .music:
+            subTypes = [.artist, .album, .song]
+        default:
+            subTypes = nil
+        }
+        
+        return subTypes
     }
     
-    var blackImageDataAsset:NSDataAsset
+    var defaultImage:UIImage
     {
-        return NSDataAsset(name: "\(self.name)Black")!
+        return self.greyImage
     }
     
-    var colorImageDataAsset:NSDataAsset
+    var blackImage:UIImage
     {
-        return NSDataAsset(name: "\(self.name)Color")!
+        return UIImage(named: "\(self.name)Black")!
     }
     
-    var greyImageDataAsset:NSDataAsset
+    var colorImage:UIImage
     {
-        return NSDataAsset(name: "\(self.name)Grey")!
+        return UIImage(named: "\(self.name)Color")!
+    }
+    
+    var greyImage:UIImage
+    {
+        return UIImage(named: "\(self.name)Grey")!
     }
 }

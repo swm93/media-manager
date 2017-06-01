@@ -20,7 +20,7 @@ class SearchResult
     {
         get
         {
-            return image_ ?? UIImage(data: mediaType.defaultImageDataAsset.data)
+            return image_ ?? mediaType.defaultImage
         }
         set
         {

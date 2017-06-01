@@ -20,6 +20,7 @@
 		D2414AC91C60167400146CCE /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2414AC81C60167400146CCE /* CircularImageView.swift */; };
 		D2414ACB1C60721400146CCE /* MediaNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2414ACA1C60721400146CCE /* MediaNavigationController.swift */; };
 		D2459AC61C61D649003AEFDC /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2459AC51C61D649003AEFDC /* UIScrollViewExtension.swift */; };
+		D249E4A71EDFCFEE009A79D0 /* MediaSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E4A61EDFCFEE009A79D0 /* MediaSubType.swift */; };
 		D262042C1ED65ACC00AC31B0 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262042B1ED65ACC00AC31B0 /* ManagedObject.swift */; };
 		D262042E1ED65B2A00AC31B0 /* AlbumManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262042D1ED65B2A00AC31B0 /* AlbumManaged.swift */; };
 		D26204301ED65B6000AC31B0 /* BookManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262042F1ED65B6000AC31B0 /* BookManaged.swift */; };
@@ -83,6 +84,7 @@
 		D2414AC81C60167400146CCE /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
 		D2414ACA1C60721400146CCE /* MediaNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaNavigationController.swift; sourceTree = "<group>"; };
 		D2459AC51C61D649003AEFDC /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
+		D249E4A61EDFCFEE009A79D0 /* MediaSubType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSubType.swift; sourceTree = "<group>"; };
 		D262042B1ED65ACC00AC31B0 /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		D262042D1ED65B2A00AC31B0 /* AlbumManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumManaged.swift; sourceTree = "<group>"; };
 		D262042F1ED65B6000AC31B0 /* BookManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookManaged.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				D2219CA01C4EF9930017D4FB /* CoreData */,
 				D2B2BA231C6A5D6000BF1957 /* EntityType.swift */,
 				D2EEF7CD1C64831C0025B133 /* MediaType.swift */,
+				D249E4A61EDFCFEE009A79D0 /* MediaSubType.swift */,
 				D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */,
 				D2EEF7D31C66968E0025B133 /* ParserType.swift */,
 				D2EEF7CB1C647A1F0025B133 /* SearchResult.swift */,
@@ -509,6 +512,7 @@
 				D2B2BA291C6A71C400BF1957 /* TableCellRenderable.swift in Sources */,
 				D2EEF7CE1C64831C0025B133 /* MediaType.swift in Sources */,
 				D2AE8EB51EDD28D100A76BE4 /* PListManager.swift in Sources */,
+				D249E4A71EDFCFEE009A79D0 /* MediaSubType.swift in Sources */,
 				D2414AC91C60167400146CCE /* CircularImageView.swift in Sources */,
 				D22E43C31ED7B784006923E2 /* Media.swift in Sources */,
 				D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */,

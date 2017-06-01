@@ -108,7 +108,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             for (_, parser) in searchParsers
             {
                 parser.parse([
-                    "api_key": "",
                     "query": query
                     ], completionHandler: addSearchResults)
             }

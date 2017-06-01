@@ -9,16 +9,16 @@
 import Foundation
 import CoreData
 import UIKit
+import HMSegmentedControl
 
 
 class MediaViewController: UIViewController
 {
     @IBOutlet weak var mediaTable:UITableView!
-    @IBOutlet weak var filterView:UIView!
-    @IBOutlet weak var filterViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mediaFilter:HMSegmentedControl!
 
     
-    var mediaObjects:[MediaType: [Media]] = [MediaType: [Media]]()
+    var mediaObjects:[MediaType: [MediaSubType: [Media]]] = [MediaType: [MediaSubType: [Media]]]()
     {
         didSet
         {
@@ -26,11 +26,58 @@ class MediaViewController: UIViewController
         }
     }
     
-    internal var _mediaObjectTypes:[MediaType] {
-        get {
-            return mediaObjects.keys.sorted(by: {
-                return $0.name > $1.name
-            })
+    internal var _selectedMediaType:MediaType = .book
+    {
+        didSet
+        {
+            mediaTable.reloadData()
+        }
+    }
+    
+    internal var _mediaObjectSubTypes:[MediaSubType]
+    {
+        get
+        {
+            let mediaSubTypes = mediaObjects[_selectedMediaType]?.keys
+            var sortedSubTypes:[MediaSubType]
+            
+            if (mediaSubTypes == nil)
+            {
+                sortedSubTypes = [MediaSubType]()
+            }
+            else
+            {
+                sortedSubTypes = mediaSubTypes!.sorted(by: {
+                    return $0.name ?? "" > $1.name ?? ""
+                })
+            }
+            
+            return sortedSubTypes
+        }
+    }
+    
+    
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        mediaFilter.sectionTitles = MediaType.values.map { type in
+            return type.name
+        }
+        mediaFilter.backgroundColor = (parent as? UINavigationController)?.navigationBar.barTintColor
+        mediaFilter.selectionIndicatorHeight = 2.0
+        mediaFilter.selectionIndicatorLocation = .down
+        mediaFilter.selectionIndicatorColor = UIColor.white
+        mediaFilter.titleTextAttributes = [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
+            NSForegroundColorAttributeName: UIColor.white
+        ]
+//        mediaFilter.addTarget(self, action: { value in
+//            _selectedMediaType = value
+//        }, for: UIControlEventValueChanged)
+        mediaFilter.indexChangeBlock = { index in
+            self._selectedMediaType = MediaType.values[index]
         }
     }
     
@@ -39,7 +86,7 @@ class MediaViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        var mediaObjs:[MediaType: [Media]] = [MediaType: [Media]]()
+        var mediaObjs:[MediaType: [MediaSubType: [Media]]] = [MediaType: [MediaSubType: [Media]]]()
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
         let fetchRequest:NSFetchRequest<ArtistManaged> = NSFetchRequest(entityName: "Artist")
@@ -47,8 +94,13 @@ class MediaViewController: UIViewController
         do
         {
             let results:[Media] = try managedContext.fetch(fetchRequest)
-            //let musicResults:[MediaManaged] = results.map({ $0 })
-            mediaObjs[MediaType.music] = results
+            
+            if (mediaObjs[MediaType.music] == nil)
+            {
+                mediaObjs[MediaType.music] = [MediaSubType: [Media]]()
+            }
+            
+            mediaObjs[MediaType.music]![MediaSubType.artist] = results
             mediaObjects = mediaObjs
         }
         catch let error as NSError
@@ -67,23 +119,11 @@ class MediaViewController: UIViewController
             if let indexPath:IndexPath = mediaTable.indexPathForSelectedRow
             {
                 let destinationVC:MediaDetailViewController = segue.destination as! MediaDetailViewController
-                let mediaType:MediaType = _mediaObjectTypes[indexPath.section]
+                let mediaSubType:MediaSubType = _mediaObjectSubTypes[indexPath.section]
                 
-                destinationVC.mediaObject = mediaObjects[mediaType]?[indexPath.row]
+                destinationVC.mediaObject = mediaObjects[_selectedMediaType]?[mediaSubType]?[indexPath.row]
             }
         }
-    }
-    
-    
-    @IBAction func toggleFilterView()
-    {
-        filterViewTopConstraint.constant = (filterViewTopConstraint.constant == 0.0) ? -filterView.frame.height : 0.0
-        
-        UIView.animate(withDuration: 0.1, animations: { [weak self] in
-            self?.filterView.layoutIfNeeded()
-            self?.mediaTable.layoutIfNeeded()
-        })
-        
     }
 }
 
@@ -98,12 +138,12 @@ extension MediaViewController : UITableViewDataSource
         let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
         let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
         
-        let mediaType:MediaType = _mediaObjectTypes[indexPath.section]
-        let mediaObject:Media? = mediaObjects[mediaType]?[indexPath.row]
+        let mediaSubType:MediaSubType = _mediaObjectSubTypes[indexPath.section]
+        let mediaObject:Media? = mediaObjects[_selectedMediaType]?[mediaSubType]?[indexPath.row]
         
         titleLabel.text = mediaObject?.name
         subtitleLabel.text = ""
-        imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData!) : mediaType.defaultImage
+        imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData!) : _selectedMediaType.defaultImage
         
         imageView.layer.cornerRadius = imageView.frame.height / 2
         imageView.layer.masksToBounds = true
@@ -114,8 +154,8 @@ extension MediaViewController : UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        let mediaType:MediaType = _mediaObjectTypes[section]
-        let count:Int = mediaObjects[mediaType]?.count ?? 0
+        let mediaSubType:MediaSubType = _mediaObjectSubTypes[section]
+        let count:Int = mediaObjects[_selectedMediaType]?[mediaSubType]?.count ?? 0
         
         return count
     }
@@ -123,11 +163,11 @@ extension MediaViewController : UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        return _mediaObjectTypes.count
+        return _mediaObjectSubTypes.count
     }
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return _mediaObjectTypes[section].name
+        return _mediaObjectSubTypes[section].name
     }
 }

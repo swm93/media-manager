@@ -1,0 +1,6 @@
+framework module Pods_MediaManager {
+  umbrella header "Pods-MediaManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

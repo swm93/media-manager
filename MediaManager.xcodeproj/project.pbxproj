@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2640DC4F862AA0262868F299 /* Pods_MediaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */; };
 		D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */; };
 		D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */; };
 		D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA11C503FD60017D4FB /* XMLNode.swift */; };
@@ -68,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F57ADE2A29AD7E24AB2CE9 /* Pods-MediaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MediaManager/Pods-MediaManager.debug.xcconfig"; sourceTree = "<group>"; };
 		D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMSearchParser.swift; sourceTree = "<group>"; };
 		D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterizedURL.swift; path = ../Parsers/ParameterizedURL.swift; sourceTree = "<group>"; };
 		D2219CA11C503FD60017D4FB /* XMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 		D2EEF7CF1C652A560025B133 /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		D2EEF7D11C66939D0025B133 /* LastFMDetailParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMDetailParser.swift; sourceTree = "<group>"; };
 		D2EEF7D31C66968E0025B133 /* ParserType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserType.swift; sourceTree = "<group>"; };
+		F34D9348D09081EF42110C1B /* Pods-MediaManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediaManager/Pods-MediaManager.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2640DC4F862AA0262868F299 /* Pods_MediaManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +147,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1596CD708BD58475991296B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				50F57ADE2A29AD7E24AB2CE9 /* Pods-MediaManager.debug.xcconfig */,
+				F34D9348D09081EF42110C1B /* Pods-MediaManager.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		331EB6F284C817EC1F85DC7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D2219CA01C4EF9930017D4FB /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +234,8 @@
 				D2A7A8931C4D8FD800B21BEA /* MediaManagerTests */,
 				D2A7A89E1C4D8FD800B21BEA /* MediaManagerUITests */,
 				D2A7A87A1C4D8FD800B21BEA /* Products */,
+				1596CD708BD58475991296B6 /* Pods */,
+				331EB6F284C817EC1F85DC7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -298,9 +322,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2A7A8A41C4D8FD800B21BEA /* Build configuration list for PBXNativeTarget "MediaManager" */;
 			buildPhases = (
+				8FB21F68700F5B45631E66FA /* [CP] Check Pods Manifest.lock */,
 				D2A7A8751C4D8FD800B21BEA /* Sources */,
 				D2A7A8761C4D8FD800B21BEA /* Frameworks */,
 				D2A7A8771C4D8FD800B21BEA /* Resources */,
+				8590D06D5F9B58C4DE4F0821 /* [CP] Embed Pods Frameworks */,
+				2D71B5B8F88AD52F52BA1CB0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -421,6 +448,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2D71B5B8F88AD52F52BA1CB0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaManager/Pods-MediaManager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8590D06D5F9B58C4DE4F0821 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaManager/Pods-MediaManager-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FB21F68700F5B45631E66FA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2A7A8751C4D8FD800B21BEA /* Sources */ = {
@@ -607,6 +682,7 @@
 		};
 		D2A7A8A51C4D8FD800B21BEA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50F57ADE2A29AD7E24AB2CE9 /* Pods-MediaManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MediaManager/Info.plist;
@@ -619,6 +695,7 @@
 		};
 		D2A7A8A61C4D8FD800B21BEA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F34D9348D09081EF42110C1B /* Pods-MediaManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MediaManager/Info.plist;

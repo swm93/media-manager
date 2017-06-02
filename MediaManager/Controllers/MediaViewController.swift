@@ -73,9 +73,6 @@ class MediaViewController: UIViewController
             NSFontAttributeName: UIFont.systemFont(ofSize: 14),
             NSForegroundColorAttributeName: UIColor.white
         ]
-//        mediaFilter.addTarget(self, action: { value in
-//            _selectedMediaType = value
-//        }, for: UIControlEventValueChanged)
         mediaFilter.indexChangeBlock = { index in
             self._selectedMediaType = MediaType.values[index]
         }
@@ -123,6 +120,12 @@ class MediaViewController: UIViewController
                 
                 destinationVC.mediaObject = mediaObjects[_selectedMediaType]?[mediaSubType]?[indexPath.row]
             }
+        }
+        else if (segue.identifier == "MediaAddSegue")
+        {
+            let destinationVC:MediaEditViewController = segue.destination as! MediaEditViewController
+            
+            destinationVC.mediaType = _selectedMediaType
         }
     }
 }

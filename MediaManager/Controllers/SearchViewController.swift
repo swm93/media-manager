@@ -11,9 +11,14 @@ import CoreData
 import UIKit
 
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
+class SearchViewController: UIViewController
 {
+    @IBOutlet var searchBar:UISearchBar!
     @IBOutlet var searchTableView:UITableView!
+    
+    public var delegate:SearchDelegate?
+    
+    private var _currentQuery:String?
     
     var searchResults:[SearchResult] = [SearchResult]()
     {
@@ -36,24 +41,55 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     ]
     
     
-    @IBAction func dismissViewController()
+    
+    override func viewWillAppear(_ animated: Bool)
     {
-        dismiss(animated: true) {}
+        if let query:String = _currentQuery
+        {
+            searchBar.text = query
+        }
     }
     
     
-    func addSearchResults(_ results:[SearchResult])
+    func search(_ query:String)
+    {
+        _currentQuery = query
+        
+        searchResults.removeAll()
+        
+        for (_, parser) in searchParsers
+        {
+            parser.parse([
+                "query": query
+                ], completionHandler: addSearchResults)
+        }
+    }
+    
+    
+    @IBAction func cancel()
+    {
+        dismiss(animated: true)
+    }
+    
+    
+    internal func addSearchResults(_ results:[SearchResult])
     {
         searchResults += results
     }
     
-    func downloadSearchResultDetail(_ searchResult:SearchResult, completionHandler:@escaping ([ManagedObject]) -> Void)
+    
+    internal func downloadSearchResultDetail(_ searchResult:SearchResult, completionHandler:@escaping ([ManagedObject]) -> Void)
     {
         detailParsers[searchResult.parserType]?.parse([
             "query": searchResult.text
             ], completionHandler: completionHandler)
     }
-    
+}
+
+
+
+extension SearchViewController : UITableViewDataSource
+{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
@@ -68,7 +104,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         imageView.layer.cornerRadius = imageView.frame.height / 2
         imageView.layer.masksToBounds = true
-
+        
         return cell
     }
     
@@ -76,53 +112,47 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     {
         return searchResults.count
     }
-    
+}
+
+
+
+extension SearchViewController : UITableViewDelegate
+{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let searchResult:SearchResult = searchResults[indexPath.row]
-
+        
         downloadSearchResultDetail(searchResult)
         { [weak self] (mediaManaged:[ManagedObject]) -> Void in
-            let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-            let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
-                
-            do
+            if (!mediaManaged.isEmpty)
             {
-                try managedContext.save()
-                self?.dismissViewController()
+                self?.delegate?.didDownloadMedia(mediaManaged[0])
             }
-            catch let error
-            {
-                print("Could not save \(error)")
-            }
-        }
-        
-    }
-    
-    func textFieldShouldReturn(_ textField:UITextField) -> Bool
-    {
-        if let query:String = textField.text
-        {
-            searchResults.removeAll()
             
-            for (_, parser) in searchParsers
-            {
-                parser.parse([
-                    "query": query
-                    ], completionHandler: addSearchResults)
-            }
+            self?.dismiss(animated: true)
+        }
+    }
+}
+
+
+
+extension SearchViewController : UISearchBarDelegate
+{
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
+    {
+        if let query:String = searchBar.text
+        {
+            search(query)
         }
         
-        textField.resignFirstResponder()
+        searchBar.resignFirstResponder()
         
         return true
     }
     
-    func textFieldShouldClear(_ textField: UITextField) -> Bool
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         searchResults.removeAll()
-        
-        return true
     }
 }
 

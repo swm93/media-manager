@@ -32,6 +32,8 @@
 		D2778AF81C4DA49700BD2994 /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2778AF71C4DA49700BD2994 /* APIParser.swift */; };
 		D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */; };
 		D283B2231ECF426F007EE445 /* MediaDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283B2221ECF426F007EE445 /* MediaDetailCell.swift */; };
+		D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */; };
+		D2A6EB981EE133130033AD1E /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB971EE133130033AD1E /* SearchDelegate.swift */; };
 		D2A7A87D1C4D8FD800B21BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7A87C1C4D8FD800B21BEA /* AppDelegate.swift */; };
 		D2A7A87F1C4D8FD800B21BEA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7A87E1C4D8FD800B21BEA /* SearchViewController.swift */; };
 		D2A7A8821C4D8FD800B21BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A7A8801C4D8FD800B21BEA /* Main.storyboard */; };
@@ -96,6 +98,8 @@
 		D2778AF71C4DA49700BD2994 /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBSearchParser.swift; sourceTree = "<group>"; };
 		D283B2221ECF426F007EE445 /* MediaDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailCell.swift; sourceTree = "<group>"; };
+		D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditViewController.swift; sourceTree = "<group>"; };
+		D2A6EB971EE133130033AD1E /* SearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		D2A7A8791C4D8FD800B21BEA /* MediaManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A7A87C1C4D8FD800B21BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2A7A87E1C4D8FD800B21BEA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				D2414AC01C5B3F2300146CCE /* MediaViewController.swift */,
+				D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */,
 				D2414AC41C5F157D00146CCE /* MediaDetailViewController.swift */,
 				D2414ACA1C60721400146CCE /* MediaNavigationController.swift */,
 				D2A7A87E1C4D8FD800B21BEA /* SearchViewController.swift */,
@@ -314,6 +319,7 @@
 			children = (
 				D2B2BA281C6A71C400BF1957 /* TableCellRenderable.swift */,
 				D22E43C21ED7B784006923E2 /* Media.swift */,
+				D2A6EB971EE133130033AD1E /* SearchDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -518,6 +524,7 @@
 				D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */,
 				D2414AC51C5F157D00146CCE /* MediaDetailViewController.swift in Sources */,
 				D2778AF81C4DA49700BD2994 /* APIParser.swift in Sources */,
+				D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */,
 				D262042C1ED65ACC00AC31B0 /* ManagedObject.swift in Sources */,
 				D2219CA41C50A5400017D4FB /* XMLParser.swift in Sources */,
 				D2459AC61C61D649003AEFDC /* UIScrollViewExtension.swift in Sources */,
@@ -537,6 +544,7 @@
 				D26204381ED65BBE00AC31B0 /* SongManaged.swift in Sources */,
 				D2EEF7CA1C646F310025B133 /* TMDBParser.swift in Sources */,
 				D2A7A87D1C4D8FD800B21BEA /* AppDelegate.swift in Sources */,
+				D2A6EB981EE133130033AD1E /* SearchDelegate.swift in Sources */,
 				D262042E1ED65B2A00AC31B0 /* AlbumManaged.swift in Sources */,
 				D2B2BA241C6A5D6000BF1957 /* EntityType.swift in Sources */,
 				D283B2231ECF426F007EE445 /* MediaDetailCell.swift in Sources */,

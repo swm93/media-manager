@@ -12,5 +12,6 @@ import Foundation
 
 protocol SearchDelegate
 {
-    func didDownloadMedia(_ mediaManaged:ManagedObject)
+    func fetchSearchResults(_ query:String, completionHandler:@escaping ([SearchResult]) -> Void)
+    func fetchDetailResult(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject) -> Void)
 }

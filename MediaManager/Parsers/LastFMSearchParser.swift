@@ -94,11 +94,10 @@ class LastFMSearchParser : JSONParser<[SearchResult]>
                     if let t:String = primaryText
                     {
                         let result:SearchResult = SearchResult(
-                            mediaType: .music,
-                            parserType: .lastFM,
+                            detailParameters: [String: String](),
                             primaryText: t,
                             secondaryText: secondaryText,
-                            image: image
+                            image: image ?? MediaType.music.defaultImage
                         )
                         results.append(result)
                     }

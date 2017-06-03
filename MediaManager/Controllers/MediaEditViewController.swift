@@ -20,6 +20,8 @@ class MediaEditViewController : UIViewController
     
     public var mediaType:MediaType?
     
+    internal var _managedObject:ManagedObject?
+    
     
     
     override func viewWillAppear(_ animated: Bool)
@@ -79,6 +81,71 @@ class MediaEditViewController : UIViewController
 
 extension MediaEditViewController : SearchDelegate
 {
+    func fetchSearchResults(_ query:String, completionHandler:@escaping ([SearchResult]) -> Void)
+    {
+        if let type:MediaType = self.mediaType
+        {
+            var parser:APIParser<[SearchResult]>? = nil
+            
+            switch (type)
+            {
+            case .music:
+                parser = LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+                break
+                
+            case .game:
+                parser = IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
+                break
+                
+            default:
+                break
+            }
+            
+            if let p:APIParser<[SearchResult]> = parser
+            {
+                p.parse(["query": query], completionHandler: completionHandler)
+            }
+            else
+            {
+                let results:[SearchResult] = [SearchResult]()
+                completionHandler(results)
+            }
+        }
+    }
+    
+    
+    func fetchDetailResult(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject) -> Void)
+    {
+        if let type:MediaType = self.mediaType
+        {
+            var parser:APIParser<ManagedObject>? = nil
+            
+            switch (type)
+            {
+            case .music:
+                parser = LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+                break
+                
+            default:
+                break
+            }
+            
+            if let p:APIParser<ManagedObject> = parser
+            {
+                p.parse(searchResult.detailParameters)
+                { [weak self] (managedObject:ManagedObject) -> () in
+                    self?._managedObject = managedObject
+                    completionHandler(managedObject)
+                }
+            }
+            else
+            {
+                // TODO(scott): probably need to be able to pass nil to completetionHandler
+            }
+        }
+    }
+    
+    
     func didDownloadMedia(_ mediaManaged:ManagedObject)
     {
         

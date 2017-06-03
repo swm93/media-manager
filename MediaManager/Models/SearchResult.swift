@@ -10,31 +10,17 @@ import Foundation
 import UIKit
 
 
-class SearchResult
+struct SearchResult
 {
-    let mediaType:MediaType
-    let parserType:ParserType
-    
+    var detailParameters:[String: String]
     var primaryText:String
     var secondaryText:String?
     var image:UIImage?
-    {
-        get
-        {
-            return image_ ?? mediaType.defaultImage
-        }
-        set
-        {
-            image_ = newValue
-        }
-    }
-    private var image_:UIImage?
     
     
-    init(mediaType:MediaType, parserType:ParserType, primaryText:String, secondaryText:String?=nil, image:UIImage?=nil)
+    init(detailParameters:[String: String], primaryText:String, secondaryText:String?=nil, image:UIImage?=nil)
     {
-        self.mediaType = mediaType
-        self.parserType = parserType
+        self.detailParameters = detailParameters
         self.primaryText = primaryText
         self.secondaryText = secondaryText
         self.image = image

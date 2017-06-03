@@ -32,7 +32,7 @@ class APIParser<T> : NSObject
      - parameter parameters: ...
      - parameter completionHandler: ...
      */
-    func parse(_ parameters:[String: String], completionHandler:@escaping (T) -> Void)
+    func parse(_ parameters:[String: String], completionHandler:@escaping (T) -> ())
     {
         // fetch data at URL asynchronously if we are not already parsing
         if (!isParsing)

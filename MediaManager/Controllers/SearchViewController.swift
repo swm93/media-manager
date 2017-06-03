@@ -31,15 +31,6 @@ class SearchViewController: UIViewController
         }
     }
     
-    let searchParsers:[ParserType: APIParser<[SearchResult]>] = [
-        .lastFM: LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String),
-        .igdb: IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
-    ]
-    
-    let detailParsers:[ParserType: APIParser<ManagedObject>] = [
-        .lastFM: LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
-    ]
-    
     
     
     override func viewWillAppear(_ animated: Bool)
@@ -57,12 +48,7 @@ class SearchViewController: UIViewController
         
         searchResults.removeAll()
         
-        for (_, parser) in searchParsers
-        {
-            parser.parse([
-                "query": query
-                ], completionHandler: addSearchResults)
-        }
+        self.delegate?.fetchSearchResults(query, completionHandler: addSearchResults)
     }
     
     
@@ -75,14 +61,6 @@ class SearchViewController: UIViewController
     internal func addSearchResults(_ results:[SearchResult])
     {
         searchResults += results
-    }
-    
-    
-    internal func downloadSearchResultDetail(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject) -> Void)
-    {
-        detailParsers[searchResult.parserType]?.parse([
-            "query": searchResult.primaryText
-            ], completionHandler: completionHandler)
     }
 }
 
@@ -122,9 +100,8 @@ extension SearchViewController : UITableViewDelegate
     {
         let searchResult:SearchResult = searchResults[indexPath.row]
         
-        downloadSearchResultDetail(searchResult)
-        { [weak self] (mediaManaged:ManagedObject) -> Void in
-            self?.delegate?.didDownloadMedia(mediaManaged)
+        self.delegate?.fetchDetailResult(searchResult)
+        { [weak self] (mediaManaged:ManagedObject) -> () in
             self?.dismiss(animated: true)
         }
     }

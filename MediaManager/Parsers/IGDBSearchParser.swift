@@ -60,10 +60,10 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
                 if let t:String = text
                 {
                     let result:SearchResult = SearchResult(
-                        mediaType: .game,
-                        parserType: .igdb,
+                        detailParameters: [String: String](),
                         primaryText: t,
-                        image: image
+                        secondaryText: nil,
+                        image: image ?? MediaType.game.defaultImage
                     )
                     results.append(result)
                 }

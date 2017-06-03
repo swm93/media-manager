@@ -81,11 +81,10 @@ class TMDBParser: JSONParser<[SearchResult]>
                         if let t:String = text
                         {
                             let result:SearchResult = SearchResult(
-                                mediaType: .movie,
-                                parserType: .tmdb,
+                                detailParameters: [String: String](),
                                 primaryText: t,
                                 secondaryText: nil,
-                                image: image
+                                image: image ?? MediaType.movie.defaultImage
                             )
                             results.append(result)
                         }

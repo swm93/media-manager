@@ -40,12 +40,10 @@ class LastFMDetailParser : XMLParser<ManagedObject>
     
     override internal func objectifyXML(_ rootNode: XMLNode)
     {
-        var results:[ArtistManaged] = [ArtistManaged]()
+        let artist:ArtistManaged = ArtistManaged()
         
         if let artistNode:XMLNode = rootNode["artist"]?.first
         {
-            let artist:ArtistManaged = ArtistManaged()
-            
             if let name:String = artistNode["name"]?.first?.value
             {
                 artist.name = name
@@ -128,10 +126,8 @@ class LastFMDetailParser : XMLParser<ManagedObject>
                     }
                 }
             }
-            
-            results.append(artist)
         }
         
-        didFinishParsing(results)
+        didFinishParsing(artist)
     }
 }

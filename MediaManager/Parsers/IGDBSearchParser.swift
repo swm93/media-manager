@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class IGDBSearchParser: JSONParser<SearchResult>
+class IGDBSearchParser: JSONParser<[SearchResult]>
 {
     init(_ apiKey:String)
     {

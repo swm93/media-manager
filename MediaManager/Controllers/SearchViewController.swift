@@ -31,7 +31,7 @@ class SearchViewController: UIViewController
         }
     }
     
-    let searchParsers:[ParserType: APIParser<SearchResult>] = [
+    let searchParsers:[ParserType: APIParser<[SearchResult]>] = [
         .lastFM: LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String),
         .igdb: IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
     ]
@@ -78,7 +78,7 @@ class SearchViewController: UIViewController
     }
     
     
-    internal func downloadSearchResultDetail(_ searchResult:SearchResult, completionHandler:@escaping ([ManagedObject]) -> Void)
+    internal func downloadSearchResultDetail(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject) -> Void)
     {
         detailParsers[searchResult.parserType]?.parse([
             "query": searchResult.text
@@ -123,12 +123,8 @@ extension SearchViewController : UITableViewDelegate
         let searchResult:SearchResult = searchResults[indexPath.row]
         
         downloadSearchResultDetail(searchResult)
-        { [weak self] (mediaManaged:[ManagedObject]) -> Void in
-            if (!mediaManaged.isEmpty)
-            {
-                self?.delegate?.didDownloadMedia(mediaManaged[0])
-            }
-            
+        { [weak self] (mediaManaged:ManagedObject) -> Void in
+            self?.delegate?.didDownloadMedia(mediaManaged)
             self?.dismiss(animated: true)
         }
     }

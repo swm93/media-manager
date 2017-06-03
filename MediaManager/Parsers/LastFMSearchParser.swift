@@ -12,7 +12,7 @@ import UIKit
 //http://www.last.fm/api/auth?api_key=API_KEY
 //http://www.last.fm/api/auth?api_key=API_KEY
 //http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=ACDC&api_key=API_KEY
-class LastFMSearchParser : XMLParser<SearchResult>
+class LastFMSearchParser : XMLParser<[SearchResult]>
 {
     private let maxResults:Int = 5
     private let imageSizeOrder:[String] = [

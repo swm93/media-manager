@@ -12,19 +12,18 @@ import Foundation
 class XMLParser<T> : APIParser<T>, XMLParserDelegate
 {
     internal var rootNode:XMLNode? = nil
-    private var currentNode:XMLNode? = nil
+    internal var currentNode:XMLNode? = nil
     
-    private var parser:Foundation.XMLParser?
     
     
     override internal func parse(_ data:Data?, response:URLResponse?, error:Error?)
     {
         if let d:Data = data
         {
-            parser = Foundation.XMLParser(data: d)
-            parser!.delegate = self
+            let parser:Foundation.XMLParser = Foundation.XMLParser(data: d)
+            parser.delegate = self
             
-            parser!.parse()
+            parser.parse()
         }
     }
     
@@ -33,7 +32,7 @@ class XMLParser<T> : APIParser<T>, XMLParserDelegate
     {
         assert(false, "This method must be overridden")
     }
-    
+
     
     func parser(_ parser: Foundation.XMLParser, foundCharacters string: String)
     {

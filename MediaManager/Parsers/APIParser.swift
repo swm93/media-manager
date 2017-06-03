@@ -16,7 +16,7 @@ class APIParser<T> : NSObject
     internal var headers:[String: String]?
     
     private var isParsing:Bool = false
-    private var completionHandler:(([T]) -> ())? = nil
+    private var completionHandler:((T) -> ())? = nil
     
     
     init(_ parameterizedUrl:ParameterizedURL, _ headers:[String: String]? = nil)
@@ -32,7 +32,7 @@ class APIParser<T> : NSObject
      - parameter parameters: ...
      - parameter completionHandler: ...
      */
-    func parse(_ parameters:[String: String], completionHandler:@escaping ([T]) -> Void)
+    func parse(_ parameters:[String: String], completionHandler:@escaping (T) -> Void)
     {
         // fetch data at URL asynchronously if we are not already parsing
         if (!isParsing)
@@ -59,14 +59,14 @@ class APIParser<T> : NSObject
      
      - parameter object: The object that is produced by parsing the data found at URL provided.
     */
-    func didFinishParsing(_ results:[T])
+    func didFinishParsing(_ result:T)
     {
         // NOTE: completionHandler is expected to be defined at this point; however if it is not, fail gracefully.
-        if let handler:([T]) -> () = completionHandler
+        if let handler:(T) -> () = completionHandler
         {
-            print("Finished Parsing: Found \(results.count) results")
+            print("Finished Parsing URL: \(self.parameterizedUrl.url)")
             
-            handler(results)
+            handler(result)
         }
         else
         {
@@ -78,8 +78,7 @@ class APIParser<T> : NSObject
     }
     
     
-    // TODO: (Scott) return proper data
-    internal func parse(_ data:Data?, response:URLResponse?, error:Error?) -> ()
+    internal func parse(_ data:Data?, response:URLResponse?, error:Error?)
     {
         assert(false, "This method must be overridden")
     }

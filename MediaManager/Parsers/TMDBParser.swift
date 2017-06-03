@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class TMDBParser: JSONParser<SearchResult>
+class TMDBParser: JSONParser<[SearchResult]>
 {
     private let maxMediaResults:[MediaType: Int] = [
         .movie: 1,

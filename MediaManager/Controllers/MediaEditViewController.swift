@@ -14,10 +14,8 @@ import UIKit
 
 class MediaEditViewController : UIViewController
 {
-    @IBOutlet public var mediaSubTypeView:UIView!
     @IBOutlet public var titleTextField:UITextField!
     @IBOutlet public var imageView:UIImageView!
-    @IBOutlet public var mediaSubTypeSegmentedControl:UISegmentedControl!
     @IBOutlet public var tableView:UITableView!
     
     public var mediaType:MediaType?
@@ -33,29 +31,6 @@ class MediaEditViewController : UIViewController
         
         // setup media image
         imageView.image = mediaType?.defaultImage
-        
-        // setup media sub types segmented control
-        if let mediaSubTypes:[MediaSubType] = mediaType?.mediaSubTypes
-        {
-            var index:Int = 0
-            
-            mediaSubTypeSegmentedControl.removeAllSegments()
-            
-            for mediaSubType:MediaSubType in mediaSubTypes
-            {
-                mediaSubTypeSegmentedControl.insertSegment(withTitle: mediaSubType.name, at: index, animated: false)
-                index += 1
-            }
-            
-            mediaSubTypeSegmentedControl.selectedSegmentIndex = 0
-        }
-        else
-        {
-            mediaSubTypeView.removeFromSuperview()
-        }
-        
-        // TODO(scott): fix this
-        tableView.tableHeaderView!.sizeToFit()
     }
     
 

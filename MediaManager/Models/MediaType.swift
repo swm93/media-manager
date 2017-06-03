@@ -42,21 +42,6 @@ enum MediaType
         return name
     }
     
-    var mediaSubTypes:[MediaSubType]?
-    {
-        var subTypes:[MediaSubType]?
-        
-        switch(self)
-        {
-        case .music:
-            subTypes = [.artist, .album, .song]
-        default:
-            subTypes = nil
-        }
-        
-        return subTypes
-    }
-    
     var defaultImage:UIImage
     {
         return self.greyImage

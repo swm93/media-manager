@@ -18,41 +18,46 @@ class MediaViewController: UIViewController
     @IBOutlet weak var mediaFilter:HMSegmentedControl!
 
     
-    var mediaObjects:[MediaType: [MediaSubType: [Media]]] = [MediaType: [MediaSubType: [Media]]]()
+    var mediaObjects:[MediaType: [Media]] = [MediaType: [Media]]()
     {
         didSet
         {
+            // set _groupedMediaObjects
+            var groupedMediaObjects:[MediaType: [TableSection<Media>]] = [MediaType: [TableSection<Media>]]()
+            for (type, media) in mediaObjects
+            {
+                let sortedMedia:[Media] = media.sorted { $0.name < $1.name }
+                var tableSections:[TableSection<Media>] = [TableSection<Media>]()
+                for m in sortedMedia
+                {
+                    let firstChar:String = "\(m.name.characters.first ?? Character(""))"
+                    if (tableSections.count < 1 || tableSections[tableSections.count - 1].name != firstChar)
+                    {
+                        tableSections.append(TableSection<Media>(name: firstChar, objects: [Media]()))
+                    }
+                    
+                    tableSections[tableSections.count - 1].objects.append(m)
+                }
+                
+                groupedMediaObjects[type] = tableSections
+            }
+            
+            _groupedMediaObjects = groupedMediaObjects
+            
+            // reload the table
             mediaTable.reloadData()
         }
     }
+    
+    internal var _groupedMediaObjects:[MediaType: [TableSection<Media>]] = [MediaType: [TableSection<Media>]]()
+    
+    internal let _tableViewSectionHeaders:[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     internal var _selectedMediaType:MediaType = .book
     {
         didSet
         {
             mediaTable.reloadData()
-        }
-    }
-    
-    internal var _mediaObjectSubTypes:[MediaSubType]
-    {
-        get
-        {
-            let mediaSubTypes = mediaObjects[_selectedMediaType]?.keys
-            var sortedSubTypes:[MediaSubType]
-            
-            if (mediaSubTypes == nil)
-            {
-                sortedSubTypes = [MediaSubType]()
-            }
-            else
-            {
-                sortedSubTypes = mediaSubTypes!.sorted(by: {
-                    return $0.name ?? "" > $1.name ?? ""
-                })
-            }
-            
-            return sortedSubTypes
         }
     }
     
@@ -83,7 +88,6 @@ class MediaViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        var mediaObjs:[MediaType: [MediaSubType: [Media]]] = [MediaType: [MediaSubType: [Media]]]()
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
         let fetchRequest:NSFetchRequest<ArtistManaged> = NSFetchRequest(entityName: "Artist")
@@ -92,13 +96,7 @@ class MediaViewController: UIViewController
         {
             let results:[Media] = try managedContext.fetch(fetchRequest)
             
-            if (mediaObjs[MediaType.music] == nil)
-            {
-                mediaObjs[MediaType.music] = [MediaSubType: [Media]]()
-            }
-            
-            mediaObjs[MediaType.music]![MediaSubType.artist] = results
-            mediaObjects = mediaObjs
+            mediaObjects[MediaType.music] = results
         }
         catch let error as NSError
         {
@@ -116,9 +114,8 @@ class MediaViewController: UIViewController
             if let indexPath:IndexPath = mediaTable.indexPathForSelectedRow
             {
                 let destinationVC:MediaDetailViewController = segue.destination as! MediaDetailViewController
-                let mediaSubType:MediaSubType = _mediaObjectSubTypes[indexPath.section]
                 
-                destinationVC.mediaObject = mediaObjects[_selectedMediaType]?[mediaSubType]?[indexPath.row]
+                destinationVC.mediaObject = mediaObjects[_selectedMediaType]?[indexPath.row]
             }
         }
         else if (segue.identifier == "MediaAddSegue")
@@ -141,8 +138,7 @@ extension MediaViewController : UITableViewDataSource
         let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
         let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
         
-        let mediaSubType:MediaSubType = _mediaObjectSubTypes[indexPath.section]
-        let mediaObject:Media? = mediaObjects[_selectedMediaType]?[mediaSubType]?[indexPath.row]
+        let mediaObject:Media? = _groupedMediaObjects[_selectedMediaType]?[indexPath.section].objects[indexPath.row]
         
         titleLabel.text = mediaObject?.name
         subtitleLabel.text = ""
@@ -157,8 +153,7 @@ extension MediaViewController : UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        let mediaSubType:MediaSubType = _mediaObjectSubTypes[section]
-        let count:Int = mediaObjects[_selectedMediaType]?[mediaSubType]?.count ?? 0
+        let count:Int = _groupedMediaObjects[_selectedMediaType]?[section].objects.count ?? 0
         
         return count
     }
@@ -166,11 +161,17 @@ extension MediaViewController : UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        return _mediaObjectSubTypes.count
+        return _groupedMediaObjects[_selectedMediaType]?.count ?? 0
     }
     
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return _mediaObjectSubTypes[section].name
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        return _groupedMediaObjects[_selectedMediaType]?[section].name
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]?
+    {
+        return _tableViewSectionHeaders
     }
 }

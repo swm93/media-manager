@@ -59,7 +59,13 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
                 
                 if let t:String = text
                 {
-                    results.append(SearchResult(mediaType: .game, parserType: .igdb, text: t, image: image))
+                    let result:SearchResult = SearchResult(
+                        mediaType: .game,
+                        parserType: .igdb,
+                        primaryText: t,
+                        image: image
+                    )
+                    results.append(result)
                 }
             }
         }

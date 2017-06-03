@@ -81,7 +81,7 @@ class SearchViewController: UIViewController
     internal func downloadSearchResultDetail(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject) -> Void)
     {
         detailParsers[searchResult.parserType]?.parse([
-            "query": searchResult.text
+            "query": searchResult.primaryText
             ], completionHandler: completionHandler)
     }
 }
@@ -98,8 +98,8 @@ extension SearchViewController : UITableViewDataSource
         let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
         let searchResult:SearchResult = searchResults[indexPath.row]
         
-        titleLabel.text = searchResult.text
-        subtitleLabel.text = searchResult.mediaType.name
+        titleLabel.text = searchResult.primaryText
+        subtitleLabel.text = searchResult.secondaryText
         imageView.image = searchResult.image
         
         imageView.layer.cornerRadius = imageView.frame.height / 2

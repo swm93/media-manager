@@ -80,7 +80,14 @@ class TMDBParser: JSONParser<[SearchResult]>
                         
                         if let t:String = text
                         {
-                            results.append(SearchResult(mediaType: .movie, parserType: .tmdb, text: t, image: image))
+                            let result:SearchResult = SearchResult(
+                                mediaType: .movie,
+                                parserType: .tmdb,
+                                primaryText: t,
+                                secondaryText: nil,
+                                image: image
+                            )
+                            results.append(result)
                         }
                     }
                 }

@@ -15,7 +15,8 @@ class SearchResult
     let mediaType:MediaType
     let parserType:ParserType
     
-    var text:String
+    var primaryText:String
+    var secondaryText:String?
     var image:UIImage?
     {
         get
@@ -30,11 +31,12 @@ class SearchResult
     private var image_:UIImage?
     
     
-    init(mediaType:MediaType, parserType:ParserType, text:String, image:UIImage?=nil)
+    init(mediaType:MediaType, parserType:ParserType, primaryText:String, secondaryText:String?=nil, image:UIImage?=nil)
     {
         self.mediaType = mediaType
         self.parserType = parserType
-        self.text = text
+        self.primaryText = primaryText
+        self.secondaryText = secondaryText
         self.image = image
     }
 }

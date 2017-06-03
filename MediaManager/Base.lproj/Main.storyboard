@@ -17,7 +17,7 @@
                 <navigationController id="LoA-1D-FE6" customClass="MediaNavigationController" customModule="MediaManager" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Media" id="P08-cs-fKm"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="HTD-lV-4Xe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="HTD-lV-4Xe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -76,7 +76,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Id1-WJ-eY2" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Id1-WJ-eY2" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="6" width="52" height="52"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Id1-WJ-eY2" secondAttribute="height" multiplier="1:1" id="yzI-aG-pc3"/>
@@ -407,8 +407,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvh-mW-D9T">
-                                                <rect key="frame" x="337" y="0.0" width="30" height="68"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvh-mW-D9T">
+                                                <rect key="frame" x="337" y="8" width="30" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="q0G-au-0ay"/>
                                                 </constraints>
@@ -438,11 +438,13 @@
                                             <constraint firstAttribute="trailing" secondItem="gvh-mW-D9T" secondAttribute="trailing" constant="8" id="KZU-DD-5Gx"/>
                                             <constraint firstAttribute="bottom" secondItem="kNt-or-dzD" secondAttribute="bottom" constant="8" id="LAI-0b-8Lk"/>
                                             <constraint firstItem="BYr-AM-j7s" firstAttribute="leading" secondItem="kNt-or-dzD" secondAttribute="trailing" constant="8" id="Ljb-i9-Idn"/>
+                                            <constraint firstAttribute="bottom" secondItem="gvh-mW-D9T" secondAttribute="bottom" constant="8" id="UUH-Se-0ZD"/>
                                             <constraint firstItem="kNt-or-dzD" firstAttribute="leading" secondItem="jc3-lh-ckF" secondAttribute="leading" constant="8" id="UdH-8e-TZm"/>
                                             <constraint firstItem="kNt-or-dzD" firstAttribute="top" secondItem="jc3-lh-ckF" secondAttribute="top" constant="8" id="b74-6w-9Ex"/>
                                             <constraint firstAttribute="bottom" secondItem="BYr-AM-j7s" secondAttribute="bottom" constant="8" id="p9I-HJ-TYj"/>
                                             <constraint firstItem="gvh-mW-D9T" firstAttribute="leading" secondItem="BYr-AM-j7s" secondAttribute="trailing" constant="8" id="rxu-ai-peJ"/>
                                             <constraint firstAttribute="height" constant="68" id="sfq-5E-8lM"/>
+                                            <constraint firstItem="gvh-mW-D9T" firstAttribute="top" secondItem="jc3-lh-ckF" secondAttribute="top" constant="8" id="ulX-y2-A03"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cGA-aB-ASk">
@@ -548,7 +550,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-Ey-MeC" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-Ey-MeC" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="6" width="51" height="51"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="aMA-Ey-MeC" secondAttribute="height" multiplier="1:1" id="wLq-dC-tio"/>
@@ -693,7 +695,7 @@
                 <navigationController id="ASz-zL-gYs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="1vD-cM-GGC"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="tzD-2j-ee2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="tzD-2j-ee2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

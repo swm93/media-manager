@@ -16,11 +16,11 @@ class MediaEditViewController : UIViewController
 {
     @IBOutlet public var titleTextField:UITextField!
     @IBOutlet public var imageView:UIImageView!
-    @IBOutlet public var tableView:UITableView!
+    @IBOutlet public var tableViewContainer:UIView!
     
     public var mediaType:MediaType?
     
-    internal var _managedObject:ManagedObject?
+    internal var _managedObject:ManagedObject!
     
     
     
@@ -33,6 +33,80 @@ class MediaEditViewController : UIViewController
         
         // setup media image
         imageView.image = mediaType?.defaultImage
+        
+        // setup table view
+        var tableViewController:MediaEditTableViewController?
+        
+        switch(mediaType)
+        {
+        case .some(.book):
+            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "BookEditTableViewController") as! BookEditTableViewController
+            break
+            
+        case .some(.game):
+            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "GameEditTableViewController") as! GameEditTableViewController
+            break
+            
+        case .some(.movie):
+            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MovieEditTableViewController") as! MovieEditTableViewController
+            break
+            
+        case .some(.music):
+            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MusicEditTableViewController") as! MusicEditTableViewController
+            break
+            
+        case .some(.show):
+            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "ShowEditTableViewController") as! ShowEditTableViewController
+            break
+            
+        case .none:
+            tableViewController = nil
+            break
+        }
+
+//        switch (self._managedObject)
+//        {
+//        case is BookManaged:
+//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "BookEditTableViewController") as! BookEditTableViewController
+//            break
+//            
+//        case is GameManaged:
+//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "GameEditTableViewController") as! GameEditTableViewController
+//            break
+//            
+//        case is MovieManaged:
+//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MovieEditTableViewController") as! MovieEditTableViewController
+//            break
+//            
+//        case is ShowManaged:
+//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "ShowEditTableViewController") as! ShowEditTableViewController
+//            break
+//            
+//        case is SongManaged:
+//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MusicEditTableViewController") as! MusicEditTableViewController
+//            break
+//            
+//        default:
+//            tableViewController = nil
+//            break
+//        }
+        
+        tableViewController?.mediaObject = _managedObject
+//        _tableViewController = tableViewController
+        
+//        if let oldController:MediaEditTableViewController = oldValue
+//        {
+//            oldController.willMove(toParentViewController: nil)
+//            oldController.view.removeFromSuperview()
+//            oldController.removeFromParentViewController()
+//        }
+        
+        if let controller:MediaEditTableViewController = tableViewController
+        {
+            addChildViewController(controller)
+            self.tableViewContainer.addSubview(controller.view)
+            controller.didMove(toParentViewController: self)
+        }
     }
     
 
@@ -143,11 +217,5 @@ extension MediaEditViewController : SearchDelegate
                 // TODO(scott): probably need to be able to pass nil to completetionHandler
             }
         }
-    }
-    
-    
-    func didDownloadMedia(_ mediaManaged:ManagedObject)
-    {
-        
     }
 }

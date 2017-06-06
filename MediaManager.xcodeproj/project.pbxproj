@@ -44,6 +44,7 @@
 		D2A7A8A01C4D8FD800B21BEA /* MediaManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7A89F1C4D8FD800B21BEA /* MediaManagerUITests.swift */; };
 		D2AE8EB21EDD13CA00A76BE4 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2AE8EB11EDD13CA00A76BE4 /* Secrets.plist */; };
 		D2AE8EB51EDD28D100A76BE4 /* PListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE8EB41EDD28D100A76BE4 /* PListManager.swift */; };
+		D2B1DC2D1EE337AA00444FD7 /* IGDBDetailParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC2C1EE337AA00444FD7 /* IGDBDetailParser.swift */; };
 		D2B1DC301EE385BB00444FD7 /* MusicEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC2F1EE385BB00444FD7 /* MusicEditTableViewController.swift */; };
 		D2B1DC321EE3869A00444FD7 /* BookEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC311EE3869A00444FD7 /* BookEditTableViewController.swift */; };
 		D2B1DC341EE386A300444FD7 /* GameEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC331EE386A300444FD7 /* GameEditTableViewController.swift */; };
@@ -123,6 +124,7 @@
 		D2A7A8A11C4D8FD800B21BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2AE8EB11EDD13CA00A76BE4 /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		D2AE8EB41EDD28D100A76BE4 /* PListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PListManager.swift; sourceTree = "<group>"; };
+		D2B1DC2C1EE337AA00444FD7 /* IGDBDetailParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBDetailParser.swift; sourceTree = "<group>"; };
 		D2B1DC2F1EE385BB00444FD7 /* MusicEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicEditTableViewController.swift; sourceTree = "<group>"; };
 		D2B1DC311EE3869A00444FD7 /* BookEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookEditTableViewController.swift; sourceTree = "<group>"; };
 		D2B1DC331EE386A300444FD7 /* GameEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEditTableViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				D2EEF7CF1C652A560025B133 /* JSONParser.swift */,
 				D2219CA31C50A5400017D4FB /* XMLParser.swift */,
 				D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */,
+				D2B1DC2C1EE337AA00444FD7 /* IGDBDetailParser.swift */,
 				D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */,
 				D2EEF7D11C66939D0025B133 /* LastFMDetailParser.swift */,
 				D2EEF7C91C646F310025B133 /* TMDBParser.swift */,
@@ -552,6 +555,7 @@
 				D22E43C31ED7B784006923E2 /* Media.swift in Sources */,
 				D2B1DC3A1EE38E3B00444FD7 /* MediaEditTableViewController.swift in Sources */,
 				D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */,
+				D2B1DC2D1EE337AA00444FD7 /* IGDBDetailParser.swift in Sources */,
 				D2414AC51C5F157D00146CCE /* MediaDetailViewController.swift in Sources */,
 				D2778AF81C4DA49700BD2994 /* APIParser.swift in Sources */,
 				D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */,

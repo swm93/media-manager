@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2640DC4F862AA0262868F299 /* Pods_MediaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */; };
+		D20562561EE4ABAF007B8345 /* ParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20562551EE4ABAF007B8345 /* ParserDelegate.swift */; };
 		D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */; };
 		D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */; };
 		D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA11C503FD60017D4FB /* XMLNode.swift */; };
@@ -82,6 +83,7 @@
 /* Begin PBXFileReference section */
 		30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F57ADE2A29AD7E24AB2CE9 /* Pods-MediaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MediaManager/Pods-MediaManager.debug.xcconfig"; sourceTree = "<group>"; };
+		D20562551EE4ABAF007B8345 /* ParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserDelegate.swift; sourceTree = "<group>"; };
 		D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMSearchParser.swift; sourceTree = "<group>"; };
 		D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterizedURL.swift; path = ../Parsers/ParameterizedURL.swift; sourceTree = "<group>"; };
 		D2219CA11C503FD60017D4FB /* XMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */,
 				D2EEF7D11C66939D0025B133 /* LastFMDetailParser.swift */,
 				D2EEF7C91C646F310025B133 /* TMDBParser.swift */,
+				D20562551EE4ABAF007B8345 /* ParserDelegate.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2EEF7CC1C647A1F0025B133 /* SearchResult.swift in Sources */,
+				D20562561EE4ABAF007B8345 /* ParserDelegate.swift in Sources */,
 				D2EEF7D21C66939D0025B133 /* LastFMDetailParser.swift in Sources */,
 				D2A7A87F1C4D8FD800B21BEA /* SearchViewController.swift in Sources */,
 				D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */,

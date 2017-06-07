@@ -16,7 +16,7 @@ class XMLParser<T> : APIParser<T>, XMLParserDelegate
     
     
     
-    override internal func parse(_ data:Data?, response:URLResponse?, error:Error?)
+    override internal func objectifyData(_ data:Data?, response:URLResponse?, error:Error?)
     {
         if let d:Data = data
         {
@@ -28,7 +28,7 @@ class XMLParser<T> : APIParser<T>, XMLParserDelegate
     }
     
     
-    internal func objectifyXML(_ rootNode:XMLNode)
+    internal func objectifyXML(_ rootNode:XMLNode) -> T
     {
         assert(false, "This method must be overridden")
     }
@@ -77,7 +77,9 @@ class XMLParser<T> : APIParser<T>, XMLParserDelegate
     {
         if let node:XMLNode = rootNode
         {
-            objectifyXML(node)
+            let result:T = objectifyXML(node)
+            
+            didFinishParsing(result)
         }
     }
 }

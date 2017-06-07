@@ -33,9 +33,9 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
     }
     
     
-    override func objectifyJSON(_ json: Any)
+    override func objectifyJSON(_ json: Any) -> [SearchResult]
     {
-        var results:[SearchResult] = [SearchResult]()
+        var results:[SearchResult] = self.output ?? [SearchResult]()
         
         if let root:[[String: Any]] = json as? [[String: Any]]
         {
@@ -51,9 +51,10 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
                 {
                     imageUrl = cover["url"] as? String
                     
-                    if let url:String = imageUrl
+                    if let url:String = imageUrl,
+                       let imageData:Data = downloadImage(fromUrl: "http:\(url)")
                     {
-                        image = downloadImage(fromUrl: "http:\(url)")
+                        image = UIImage(data: imageData)
                     }
                 }
                 
@@ -70,6 +71,6 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
             }
         }
         
-        didFinishParsing(results)
+        return results
     }
 }

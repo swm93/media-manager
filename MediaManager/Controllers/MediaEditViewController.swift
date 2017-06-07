@@ -18,15 +18,20 @@ class MediaEditViewController : UIViewController
     @IBOutlet public var imageView:UIImageView!
     @IBOutlet public var tableViewContainer:UIView!
     
-    public var mediaType:MediaType?
-    
-    internal var _managedObject:ManagedObject!
+    public var mediaType:MediaType!
+    public var managedObject:ManagedObject?
     
     
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        // create managed object if one doesn't exist
+        if (self.managedObject == nil)
+        {
+            self.managedObject = self.createMedia(self.mediaType)
+        }
         
         // set transition style here so that it only applies on dismissal
         modalTransitionStyle = .crossDissolve
@@ -37,7 +42,7 @@ class MediaEditViewController : UIViewController
         // setup table view
         var tableViewController:MediaEditTableViewController?
         
-        switch(mediaType)
+        switch(self.mediaType)
         {
         case .some(.book):
             tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "BookEditTableViewController") as! BookEditTableViewController
@@ -64,43 +69,9 @@ class MediaEditViewController : UIViewController
             break
         }
 
-//        switch (self._managedObject)
-//        {
-//        case is BookManaged:
-//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "BookEditTableViewController") as! BookEditTableViewController
-//            break
-//            
-//        case is GameManaged:
-//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "GameEditTableViewController") as! GameEditTableViewController
-//            break
-//            
-//        case is MovieManaged:
-//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MovieEditTableViewController") as! MovieEditTableViewController
-//            break
-//            
-//        case is ShowManaged:
-//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "ShowEditTableViewController") as! ShowEditTableViewController
-//            break
-//            
-//        case is SongManaged:
-//            tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MusicEditTableViewController") as! MusicEditTableViewController
-//            break
-//            
-//        default:
-//            tableViewController = nil
-//            break
-//        }
         
-        tableViewController?.mediaObject = _managedObject
-//        _tableViewController = tableViewController
-        
-//        if let oldController:MediaEditTableViewController = oldValue
-//        {
-//            oldController.willMove(toParentViewController: nil)
-//            oldController.view.removeFromSuperview()
-//            oldController.removeFromParentViewController()
-//        }
-        
+        tableViewController?.mediaObject = managedObject
+
         if let controller:MediaEditTableViewController = tableViewController
         {
             addChildViewController(controller)
@@ -149,13 +120,59 @@ class MediaEditViewController : UIViewController
     {
         dismiss(animated: true)
     }
+    
+    
+    private func createMedia(_ mediaType:MediaType) -> ManagedObject
+    {
+        var managedObject:ManagedObject
+        
+        switch (mediaType)
+        {
+        case .book:
+            managedObject = BookManaged()
+            break
+            
+        case .game:
+            managedObject = GameManaged()
+            break
+            
+        case .movie:
+            managedObject = MovieManaged()
+            break
+            
+        case .music:
+            managedObject = SongManaged()
+            break
+            
+        case .show:
+            managedObject = ShowManaged()
+            break
+        }
+        
+        return managedObject
+    }
+}
+
+
+
+extension MediaEditViewController : ParserDelegate
+{
+    func getParseResultObject<T>() -> T?
+    {
+        if let managedObject:T = self.managedObject as? T
+        {
+            return managedObject
+        }
+        
+        return nil
+    }
 }
 
 
 
 extension MediaEditViewController : SearchDelegate
 {
-    func fetchSearchResults(_ query:String, completionHandler:@escaping ([SearchResult]) -> Void)
+    func fetchSearchResults(_ query:String, completionHandler:@escaping ([SearchResult]?) -> Void)
     {
         if let type:MediaType = self.mediaType
         {
@@ -188,11 +205,11 @@ extension MediaEditViewController : SearchDelegate
     }
     
     
-    func fetchDetailResult(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject) -> Void)
+    func fetchDetailResult(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject?) -> Void)
     {
         if let type:MediaType = self.mediaType
         {
-            var parser:APIParser<ManagedObject>? = nil
+            var parser:APIParser<ManagedObject>?
             
             switch (type)
             {
@@ -201,16 +218,14 @@ extension MediaEditViewController : SearchDelegate
                 break
                 
             default:
+                parser = nil
                 break
             }
             
             if let p:APIParser<ManagedObject> = parser
             {
-                p.parse(searchResult.detailParameters)
-                { [weak self] (managedObject:ManagedObject) -> () in
-                    self?._managedObject = managedObject
-                    completionHandler(managedObject)
-                }
+                p.delegate = self
+                p.parse(searchResult.detailParameters, completionHandler: completionHandler)
             }
             else
             {

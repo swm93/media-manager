@@ -11,14 +11,16 @@ import Foundation
 
 class JSONParser<T> : APIParser<T>
 {
-    override internal func parse(_ data:Data?, response:URLResponse?, error:Error?)
+    override internal func objectifyData(_ data:Data?, response:URLResponse?, error:Error?)
     {
         if let d:Data = data
         {
             do
             {
                 let json:Any = try JSONSerialization.jsonObject(with: d, options: .allowFragments)
-                objectifyJSON(json)
+                let result:T = objectifyJSON(json)
+                
+                didFinishParsing(result)
             }
             catch
             {
@@ -28,7 +30,7 @@ class JSONParser<T> : APIParser<T>
     }
     
     
-    internal func objectifyJSON(_ json:Any)
+    internal func objectifyJSON(_ json:Any) -> T
     {
         assert(false, "This method must be overridden")
     }

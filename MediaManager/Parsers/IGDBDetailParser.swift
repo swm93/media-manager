@@ -33,37 +33,8 @@ class IGDBDetailParser: JSONParser<ManagedObject>
     }
     
     
-    override func objectifyJSON(_ json: Any, result:inout ManagedObject?)
+    override func objectifyJSON(_ json: Any) -> ManagedObject
     {
-//        var results:[SearchResult] = [SearchResult]()
-//        
-//        if let root:[[String: Any]] = json as? [[String: Any]]
-//        {
-//            for result:[String: Any] in root
-//            {
-//                var text:String? = nil
-//                var image:UIImage? = nil
-//                var imageUrl:String? = nil
-//                
-//                text = result["name"] as? String
-//                
-//                if let cover:[String: Any] = result["cover"] as? [String: Any]
-//                {
-//                    imageUrl = cover["url"] as? String
-//                    
-//                    if let url:String = imageUrl
-//                    {
-//                        image = downloadImage(fromUrl: "http:\(url)")
-//                    }
-//                }
-//                
-//                if let t:String = text
-//                {
-//                    results.append(SearchResult(mediaType: .game, parserType: .igdb, text: t, image: image))
-//                }
-//            }
-//        }
-//        
-//        didFinishParsing(results)
+        assert(false, "This method is not implemented")
     }
 }

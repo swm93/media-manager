@@ -38,9 +38,9 @@ class TMDBParser: JSONParser<[SearchResult]>
     }
     
     
-    override func objectifyJSON(_ json: Any)
+    override func objectifyJSON(_ json: Any) -> [SearchResult]
     {
-        var results:[SearchResult] = [SearchResult]()
+        var results:[SearchResult] = self.output ?? [SearchResult]()
         
         if let root:[String: Any] = json as? [String: Any]
         {
@@ -73,9 +73,10 @@ class TMDBParser: JSONParser<[SearchResult]>
                         }
                         
                         
-                        if let relImagePath:String = jsonResult["poster_path"] as? String
+                        if let relImagePath:String = jsonResult["poster_path"] as? String,
+                           let imageData:Data = downloadImage(fromUrl: relImagePath)
                         {
-                            image = downloadImage(fromUrl: relImagePath)
+                            image = UIImage(data: imageData)
                         }
                         
                         if let t:String = text
@@ -93,6 +94,6 @@ class TMDBParser: JSONParser<[SearchResult]>
             }
         }
         
-        didFinishParsing(results)
+        return results
     }
 }

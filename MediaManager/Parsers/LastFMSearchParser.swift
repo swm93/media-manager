@@ -39,9 +39,9 @@ class LastFMSearchParser : JSONParser<[SearchResult]>
     }
 
     
-    override internal func objectifyJSON(_ json: Any)
+    override internal func objectifyJSON(_ json: Any) -> [SearchResult]
     {
-        var results:[SearchResult] = [SearchResult]()
+        var results:[SearchResult] = self.output ?? [SearchResult]()
         
         if let rootObj:[String: Any] = json as? [String: Any]
         {
@@ -51,10 +51,14 @@ class LastFMSearchParser : JSONParser<[SearchResult]>
             {
                 for tObj:[String: Any] in trackObj
                 {
+                    var identifier:String? = nil
                     var primaryText:String? = nil
                     var secondaryText:String? = nil
                     var image:UIImage? = nil
                     var imageUrl:String? = nil
+                    
+                    // get identifier
+                    identifier = tObj["mbid"] as? String
                     
                     // get primary text
                     primaryText = tObj["name"] as? String
@@ -85,16 +89,18 @@ class LastFMSearchParser : JSONParser<[SearchResult]>
                             }
                         }
                         
-                        if let url:String = imageUrl
+                        if let url:String = imageUrl,
+                           let imageData:Data = downloadImage(fromUrl: url)
                         {
-                            image = downloadImage(fromUrl: url)
+                            image = UIImage(data: imageData)
                         }
                     }
                     
-                    if let t:String = primaryText
+                    if let i:String = identifier,
+                       let t:String = primaryText
                     {
                         let result:SearchResult = SearchResult(
-                            detailParameters: [String: String](),
+                            detailParameters: ["mbid": i],
                             primaryText: t,
                             secondaryText: secondaryText,
                             image: image ?? MediaType.music.defaultImage
@@ -105,6 +111,6 @@ class LastFMSearchParser : JSONParser<[SearchResult]>
             }
         }
         
-        didFinishParsing(results)
+        return results
     }
 }

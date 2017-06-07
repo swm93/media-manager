@@ -11,123 +11,102 @@ import CoreData
 import UIKit
 
 
-class LastFMDetailParser : XMLParser<ManagedObject>
+class LastFMDetailParser : JSONParser<ManagedObject>
 {
-    private let imageSizeOrder:[String] = [
-        "small",
+    private let imageSizePreference:[String] = [
+        "mega",
+        "extralarge",
+        "large",
+        "medium",
+        "small"
+    ]
+    private let thumbnailSizePreference:[String] = [
         "medium",
         "large",
         "extralarge",
-        "mega"
-    ]
-    private let preferredImageSizes:[String: String] = [
-        "image": "mega",
-        "thumbnail": "medium"
+        "mega",
+        "small"
     ]
     
     
     init(_ apiKey:String)
     {
         let parameterizedUrl:ParameterizedURL = ParameterizedURL(
-            url: "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={query}&api_key={api_key}",
+            url: "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid={mbid}&api_key={api_key}&format=json",
             defaultParameters: ["api_key": apiKey],
-            requiredParameterNames: ["query"]
+            requiredParameterNames: ["mbid"]
         )
         
         super.init(parameterizedUrl)
     }
     
     
-    override internal func objectifyXML(_ rootNode: XMLNode)
+    override internal func objectifyJSON(_ json: Any) -> ManagedObject
     {
-        let artist:ArtistManaged = ArtistManaged()
+        var result:SongManaged = (self.output as? SongManaged) ?? SongManaged()
         
-        if let artistNode:XMLNode = rootNode["artist"]?.first
+        if let rootObj:[String: Any] = json as? [String: Any],
+           let trackObj:[String: Any] = rootObj["track"] as? [String: Any]
         {
-            if let name:String = artistNode["name"]?.first?.value
+            if let name:String = trackObj["name"] as? String
             {
-                artist.name = name
-            }
-            if let summary:String = artistNode["bio"]?.first?["content"]?.first?.value
-            {
-                artist.summary = summary
+                result.name = name
             }
             
-            if let tagNodes:[XMLNode] = artistNode["tags"]?.first?["tag"]
+            if let artistObj:[String: Any] = trackObj["artist"] as? [String: Any],
+               let artistName:String = artistObj["name"] as? String
             {
-                for tagNode:XMLNode in tagNodes
-                {
-                    if let genreName:String = tagNode["name"]?.first?.value
-                    {
-                        let genre:GenreManaged = GenreManaged()
-                        genre.name = genreName.capitalized
-
-                        artist.addGenre(genre)
-                    }
-                }
+                
             }
             
-            if let imageNodes:[XMLNode] = artistNode["image"]
+            if let albumObj:[String: Any] = trackObj["album"] as? [String: Any]
             {
-                var urls:[String: String?] = ["image": nil, "thumbnail": nil]
-                var sizeUrlMap:[String: String] = [String: String]()
-                var sizeDiffs:[String: Int] = ["image": -1, "thumbnail": -1]
-                
-                for imageNode:XMLNode in imageNodes
+                if let albumName:String = albumObj["name"] as? String
                 {
-                    if let size:String = imageNode.attributes["size"]
-                    {
-                        sizeUrlMap[size] = imageNode.value
-                    }
-                }
-                
-                for (size, url) in sizeUrlMap
-                {
-                    if (!imageSizeOrder.contains(size))
-                    {
-                        continue
-                    }
                     
-                    for (type, preferredSize) in preferredImageSizes
+                }
+                
+                if let albumImageObj:[[String: Any]] = albumObj["image"] as? [[String: Any]]
+                {
+                    var imageUrl:String? = nil
+                    var thumbnailUrl:String? = nil
+                    var sizeUrlMap:[String: String] = [String: String]()
+                    
+                    for iObj:[String: Any] in albumImageObj
                     {
-                        let newSizeDiff:Int = abs(imageSizeOrder.index(of: size)! - imageSizeOrder.index(of: preferredSize)!)
-                        
-                        if (newSizeDiff < sizeDiffs[type]! || sizeDiffs[type]! == -1)
+                        if let size:String = iObj["size"] as? String,
+                           let url:String = iObj["#text"] as? String
                         {
-                            sizeDiffs[type] = newSizeDiff
-                            urls[type] = url
+                            sizeUrlMap[size] = url
                         }
                     }
                     
-                    if (sizeDiffs["image"]! == 0 && sizeDiffs["thumbnail"]! == 0)
+                    for sizePreference in self.imageSizePreference
                     {
-                        break
-                    }
-                }
-                
-                for (type, url) in urls
-                {
-                    if let u:String = url
-                    {
-                        if let image:UIImage = downloadImage(fromUrl: u)
+                        if let preferredUrl:String = sizeUrlMap[sizePreference]
                         {
-                            if let imageData:Data = UIImagePNGRepresentation(image)
-                            {
-                                if (type == "image")
-                                {
-                                    artist.imageData = imageData
-                                }
-                                else if (type == "thumbnail")
-                                {
-                                    artist.thumbnail = imageData
-                                }
-                            }
+                            imageUrl = preferredUrl
+                            break
                         }
+                    }
+                    
+                    for sizePreference in self.thumbnailSizePreference
+                    {
+                        if let preferredUrl:String = sizeUrlMap[sizePreference]
+                        {
+                            thumbnailUrl = preferredUrl
+                            break
+                        }
+                    }
+                    
+                    if let url:String = imageUrl
+                    {
+                        result.imageData = downloadImage(fromUrl: url)
                     }
                 }
             }
         }
         
-        didFinishParsing(artist)
+        return result
     }
 }

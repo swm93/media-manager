@@ -58,9 +58,12 @@ class SearchViewController: UIViewController
     }
     
     
-    internal func addSearchResults(_ results:[SearchResult])
+    internal func addSearchResults(_ results:[SearchResult]?)
     {
-        searchResults += results
+        if let r:[SearchResult] = results
+        {
+            searchResults += r
+        }
     }
 }
 
@@ -101,8 +104,11 @@ extension SearchViewController : UITableViewDelegate
         let searchResult:SearchResult = searchResults[indexPath.row]
         
         self.delegate?.fetchDetailResult(searchResult)
-        { [weak self] (mediaManaged:ManagedObject) -> () in
-            self?.dismiss(animated: true)
+        { [weak self] (mediaManaged:ManagedObject?) -> () in
+            DispatchQueue.main.async
+            {
+                self?.dismiss(animated: true)
+            }
         }
     }
 }

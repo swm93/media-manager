@@ -12,11 +12,14 @@ import UIKit
 
 class APIParser<T> : NSObject
 {
+    public var delegate:ParserDelegate?
+    
     internal var parameterizedUrl:ParameterizedURL
     internal var headers:[String: String]?
+    internal var output:T? = nil
     
     private var isParsing:Bool = false
-    private var completionHandler:((T) -> ())? = nil
+    private var completionHandler:((T?) -> ())? = nil
     
     
     init(_ parameterizedUrl:ParameterizedURL, _ headers:[String: String]? = nil)
@@ -32,15 +35,16 @@ class APIParser<T> : NSObject
      - parameter parameters: ...
      - parameter completionHandler: ...
      */
-    func parse(_ parameters:[String: String], completionHandler:@escaping (T) -> ())
+    func parse(_ parameters:[String: String], output:T? = nil, completionHandler:@escaping (T?) -> ())
     {
         // fetch data at URL asynchronously if we are not already parsing
         if (!isParsing)
         {
             let request:URLRequest = getUrlRequest(parameters)
-            fetchData(request, completionHandler: parse)
+            fetchData(request, completionHandler: objectifyData)
             
             self.isParsing = true
+            self.output = output
             self.completionHandler = completionHandler
             
             print("Parsing URL: \(request.url!)")
@@ -59,10 +63,10 @@ class APIParser<T> : NSObject
      
      - parameter object: The object that is produced by parsing the data found at URL provided.
     */
-    func didFinishParsing(_ result:T)
+    func didFinishParsing(_ result:T?)
     {
         // NOTE: completionHandler is expected to be defined at this point; however if it is not, fail gracefully.
-        if let handler:(T) -> () = completionHandler
+        if let handler:(T?) -> () = completionHandler
         {
             print("Finished Parsing URL: \(self.parameterizedUrl.url)")
             
@@ -70,7 +74,7 @@ class APIParser<T> : NSObject
         }
         else
         {
-            print("ERROR: Bad code path; completion handler should be defined")
+            assert(false, "Bad code path; completion handler should be defined")
         }
         
         isParsing = false
@@ -78,25 +82,22 @@ class APIParser<T> : NSObject
     }
     
     
-    internal func parse(_ data:Data?, response:URLResponse?, error:Error?)
+    internal func objectifyData(_ data:Data?, response:URLResponse?, error:Error?)
     {
         assert(false, "This method must be overridden")
     }
     
     
-    internal func downloadImage(fromUrl urlName:String) -> UIImage?
+    internal func downloadImage(fromUrl urlName:String) -> Data?
     {
-        var image:UIImage? = nil
+        var data:Data? = nil
         
         if let url:URL = URL(string: urlName)
         {
-            if let data:Data = try? Data(contentsOf: url)
-            {
-                image = UIImage(data: data)
-            }
+            data = try? Data(contentsOf: url)
         }
         
-        return image
+        return data
     }
     
     

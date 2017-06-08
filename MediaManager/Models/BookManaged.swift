@@ -6,28 +6,27 @@
 //  Copyright © 2017 Scott Mielcarski. All rights reserved.
 //
 
+import CoreData
 import Foundation
 import UIKit
 
 
 
-class BookManaged : ManagedObject, Media
+class BookManaged : NSManagedObject, ManagedObject, Media
 {
+    static let entityName:String = "Book"
+    
     @NSManaged var name:String
     @NSManaged var imageData:Data?
-    @NSManaged var publishedBy:String?
-    @NSManaged var publishedDate:Date?
-
+    @NSManaged var datePublished:Date?
+    @NSManaged var genres:Set<GenreManaged>
+    @NSManaged var authors:Set<AuthorManaged>
     
-    static var type:MediaType {
-        get {
+    static var type:MediaType
+    {
+        get
+        {
             return .book
         }
-    }
-    
-    
-    convenience init()
-    {
-        self.init(entityType: .Book)
     }
 }

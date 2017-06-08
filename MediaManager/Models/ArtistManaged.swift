@@ -6,43 +6,49 @@
 //  Copyright © 2016 Scott Mielcarski. All rights reserved.
 //
 
+import CoreData
 import Foundation
 import UIKit
 
 
 
-class ArtistManaged : ManagedObject, Media
+class ArtistManaged : NSManagedObject, ManagedObject
 {
+    static let entityName:String = "Artist"
+    
     @NSManaged var name:String
     @NSManaged var imageData:Data?
-    @NSManaged var thumbnail:Data?
     @NSManaged var summary:String?
-    @NSManaged var genres:NSSet
+    @NSManaged var albums:Set<AlbumManaged>?
     
-    static var type:MediaType {
-        get {
-            return .music
+    var genres:Set<GenreManaged>
+    {
+        get
+        {
+            var result:Set<GenreManaged>
+            
+            if let a:Set<AlbumManaged> = albums
+            {
+                result = Set<GenreManaged>(a.flatMap({ $0.genres }))
+            }
+            else
+            {
+                result = Set<GenreManaged>()
+            }
+            
+            return result
         }
     }
     
-    
-    var image:UIImage {
-        get {
+    var image:UIImage
+    {
+        get
+        {
             return UIImage(data: imageData!)!
         }
-        set {
-            
+        set
+        {
+            imageData = UIImagePNGRepresentation(newValue)
         }
-    }
-    
-    
-    convenience init()
-    {
-        self.init(entityType: .Artist)
-    }
-    
-    func addGenre(_ genre: GenreManaged)
-    {
-        self.mutableSetValue(forKey: "genres").add(genre)
     }
 }

@@ -20,13 +20,6 @@ class LastFMDetailParser : JSONParser<ManagedObject>
         "medium",
         "small"
     ]
-    private let thumbnailSizePreference:[String] = [
-        "medium",
-        "large",
-        "extralarge",
-        "mega",
-        "small"
-    ]
     
     
     init(_ apiKey:String)
@@ -43,7 +36,7 @@ class LastFMDetailParser : JSONParser<ManagedObject>
     
     override internal func objectifyJSON(_ json: Any) -> ManagedObject
     {
-        var result:SongManaged = (self.output as? SongManaged) ?? SongManaged()
+        let result:SongManaged = (self.output as? SongManaged) ?? SongManaged()
         
         if let rootObj:[String: Any] = json as? [String: Any],
            let trackObj:[String: Any] = rootObj["track"] as? [String: Any]
@@ -56,7 +49,7 @@ class LastFMDetailParser : JSONParser<ManagedObject>
             if let artistObj:[String: Any] = trackObj["artist"] as? [String: Any],
                let artistName:String = artistObj["name"] as? String
             {
-                
+                let artists:[ArtistManaged] = ManagedObjectManager.getBy(attribute: "name", value: artistName as String)
             }
             
             if let albumObj:[String: Any] = trackObj["album"] as? [String: Any]
@@ -69,7 +62,6 @@ class LastFMDetailParser : JSONParser<ManagedObject>
                 if let albumImageObj:[[String: Any]] = albumObj["image"] as? [[String: Any]]
                 {
                     var imageUrl:String? = nil
-                    var thumbnailUrl:String? = nil
                     var sizeUrlMap:[String: String] = [String: String]()
                     
                     for iObj:[String: Any] in albumImageObj
@@ -86,15 +78,6 @@ class LastFMDetailParser : JSONParser<ManagedObject>
                         if let preferredUrl:String = sizeUrlMap[sizePreference]
                         {
                             imageUrl = preferredUrl
-                            break
-                        }
-                    }
-                    
-                    for sizePreference in self.thumbnailSizePreference
-                    {
-                        if let preferredUrl:String = sizeUrlMap[sizePreference]
-                        {
-                            thumbnailUrl = preferredUrl
                             break
                         }
                     }

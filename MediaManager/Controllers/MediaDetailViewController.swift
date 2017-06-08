@@ -83,7 +83,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
         {
             data = [
                 "bio": artist.summary ?? "",
-                "genres": (artist.genres.flatMap { genre in (genre as? GenreManaged)?.name }).joined(separator: ", ")
+                "genres": (artist.genres.flatMap({ $0.name })).joined(separator: ", ")
             ]
         }
         

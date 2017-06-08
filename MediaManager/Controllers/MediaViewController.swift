@@ -90,7 +90,7 @@ class MediaViewController: UIViewController
         
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
-        let fetchRequest:NSFetchRequest<ArtistManaged> = NSFetchRequest(entityName: "Artist")
+        let fetchRequest:NSFetchRequest<SongManaged> = NSFetchRequest(entityName: "Song")
         
         do
         {

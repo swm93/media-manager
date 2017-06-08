@@ -6,26 +6,26 @@
 //  Copyright © 2017 Scott Mielcarski. All rights reserved.
 //
 
+import CoreData
 import Foundation
 import UIKit
 
 
 
-class ShowManaged : ManagedObject, Media
+class ShowManaged : NSManagedObject, ManagedObject, Media
 {
+    static let entityName:String = "Show"
+    
     @NSManaged var name:String
     @NSManaged var imageData:Data?
-    
-    
-    static var type:MediaType {
-        get {
+    @NSManaged var dateReleased:Date?
+    @NSManaged var genres:Set<GenreManaged>
+
+    static var type:MediaType
+    {
+        get
+        {
             return .show
         }
-    }
-    
-    
-    convenience init()
-    {
-        self.init(entityType: .Show)
     }
 }

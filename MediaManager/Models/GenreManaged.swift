@@ -6,17 +6,14 @@
 //  Copyright © 2017 Scott Mielcarski. All rights reserved.
 //
 
+import CoreData
 import Foundation
 
 
 
-class GenreManaged : ManagedObject
+class GenreManaged : NSManagedObject, ManagedObject
 {
+    static let entityName:String = "Genre"
+    
     @NSManaged var name:String
-    
-    
-    convenience init()
-    {
-        self.init(entityType: .Genre)
-    }
 }

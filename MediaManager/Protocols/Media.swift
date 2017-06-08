@@ -17,4 +17,5 @@ protocol Media
     
     var name:String { get }
     var imageData:Data? { get }
+    var genres:Set<GenreManaged> { get }
 }

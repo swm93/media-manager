@@ -6,26 +6,19 @@
 //  Copyright © 2017 Scott Mielcarski. All rights reserved.
 //
 
+import CoreData
 import Foundation
 import UIKit
 
 
 
-class AlbumManaged : ManagedObject, Media
+class AlbumManaged : NSManagedObject, ManagedObject
 {
+    static let entityName:String = "Album"
+    
     @NSManaged var name:String
     @NSManaged var imageData:Data?
-    
-    
-    static var type:MediaType {
-        get {
-            return .music
-        }
-    }
-    
-    
-    convenience init()
-    {
-        self.init(entityType: .Album)
-    }
+    @NSManaged var dateReleased:Date?
+    @NSManaged var artist:ArtistManaged?
+    @NSManaged var genres:Set<GenreManaged>
 }

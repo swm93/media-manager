@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2640DC4F862AA0262868F299 /* Pods_MediaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */; };
 		D20562561EE4ABAF007B8345 /* ParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20562551EE4ABAF007B8345 /* ParserDelegate.swift */; };
+		D20562581EE8DD44007B8345 /* AuthorManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20562571EE8DD44007B8345 /* AuthorManaged.swift */; };
+		D205625A1EE8DE15007B8345 /* PlatformManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20562591EE8DE15007B8345 /* PlatformManaged.swift */; };
+		D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */; };
 		D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */; };
 		D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */; };
 		D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA11C503FD60017D4FB /* XMLNode.swift */; };
@@ -53,7 +56,6 @@
 		D2B1DC381EE386BC00444FD7 /* ShowEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC371EE386BC00444FD7 /* ShowEditTableViewController.swift */; };
 		D2B1DC3A1EE38E3B00444FD7 /* MediaEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC391EE38E3B00444FD7 /* MediaEditTableViewController.swift */; };
 		D2B1DC3C1EE39EF600444FD7 /* MediaEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */; };
-		D2B2BA241C6A5D6000BF1957 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2BA231C6A5D6000BF1957 /* EntityType.swift */; };
 		D2B2BA291C6A71C400BF1957 /* TableCellRenderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2BA281C6A71C400BF1957 /* TableCellRenderable.swift */; };
 		D2EEF7CA1C646F310025B133 /* TMDBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7C91C646F310025B133 /* TMDBParser.swift */; };
 		D2EEF7CC1C647A1F0025B133 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7CB1C647A1F0025B133 /* SearchResult.swift */; };
@@ -84,6 +86,9 @@
 		30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F57ADE2A29AD7E24AB2CE9 /* Pods-MediaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MediaManager/Pods-MediaManager.debug.xcconfig"; sourceTree = "<group>"; };
 		D20562551EE4ABAF007B8345 /* ParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserDelegate.swift; sourceTree = "<group>"; };
+		D20562571EE8DD44007B8345 /* AuthorManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorManaged.swift; sourceTree = "<group>"; };
+		D20562591EE8DE15007B8345 /* PlatformManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformManaged.swift; sourceTree = "<group>"; };
+		D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectManager.swift; sourceTree = "<group>"; };
 		D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMSearchParser.swift; sourceTree = "<group>"; };
 		D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterizedURL.swift; path = ../Parsers/ParameterizedURL.swift; sourceTree = "<group>"; };
 		D2219CA11C503FD60017D4FB /* XMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
@@ -134,7 +139,6 @@
 		D2B1DC371EE386BC00444FD7 /* ShowEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEditTableViewController.swift; sourceTree = "<group>"; };
 		D2B1DC391EE38E3B00444FD7 /* MediaEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditTableViewController.swift; sourceTree = "<group>"; };
 		D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditCell.swift; sourceTree = "<group>"; };
-		D2B2BA231C6A5D6000BF1957 /* EntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		D2B2BA281C6A71C400BF1957 /* TableCellRenderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellRenderable.swift; sourceTree = "<group>"; };
 		D2EEF7C91C646F310025B133 /* TMDBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBParser.swift; sourceTree = "<group>"; };
 		D2EEF7CB1C647A1F0025B133 /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
@@ -194,10 +198,12 @@
 				D262042B1ED65ACC00AC31B0 /* ManagedObject.swift */,
 				D262042D1ED65B2A00AC31B0 /* AlbumManaged.swift */,
 				D2219CA51C50ACF40017D4FB /* ArtistManaged.swift */,
+				D20562571EE8DD44007B8345 /* AuthorManaged.swift */,
 				D262042F1ED65B6000AC31B0 /* BookManaged.swift */,
 				D26204311ED65B7800AC31B0 /* GameManaged.swift */,
 				D26204391ED65BDF00AC31B0 /* GenreManaged.swift */,
 				D26204331ED65B9100AC31B0 /* MovieManaged.swift */,
+				D20562591EE8DE15007B8345 /* PlatformManaged.swift */,
 				D26204351ED65BA700AC31B0 /* ShowManaged.swift */,
 				D26204371ED65BBE00AC31B0 /* SongManaged.swift */,
 			);
@@ -232,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				D2219CA01C4EF9930017D4FB /* CoreData */,
-				D2B2BA231C6A5D6000BF1957 /* EntityType.swift */,
 				D2EEF7CD1C64831C0025B133 /* MediaType.swift */,
 				D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */,
 				D2EEF7D31C66968E0025B133 /* ParserType.swift */,
@@ -332,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				D2AE8EB41EDD28D100A76BE4 /* PListManager.swift */,
+				D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -548,6 +554,7 @@
 			files = (
 				D2EEF7CC1C647A1F0025B133 /* SearchResult.swift in Sources */,
 				D20562561EE4ABAF007B8345 /* ParserDelegate.swift in Sources */,
+				D205625A1EE8DE15007B8345 /* PlatformManaged.swift in Sources */,
 				D2EEF7D21C66939D0025B133 /* LastFMDetailParser.swift in Sources */,
 				D2A7A87F1C4D8FD800B21BEA /* SearchViewController.swift in Sources */,
 				D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */,
@@ -565,10 +572,12 @@
 				D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */,
 				D262042C1ED65ACC00AC31B0 /* ManagedObject.swift in Sources */,
 				D2219CA41C50A5400017D4FB /* XMLParser.swift in Sources */,
+				D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */,
 				D2B1DC381EE386BC00444FD7 /* ShowEditTableViewController.swift in Sources */,
 				D2B1DC341EE386A300444FD7 /* GameEditTableViewController.swift in Sources */,
 				D2459AC61C61D649003AEFDC /* UIScrollViewExtension.swift in Sources */,
 				D2EEF7D01C652A560025B133 /* JSONParser.swift in Sources */,
+				D20562581EE8DD44007B8345 /* AuthorManaged.swift in Sources */,
 				D2414AC11C5B3F2300146CCE /* MediaViewController.swift in Sources */,
 				D262043A1ED65BDF00AC31B0 /* GenreManaged.swift in Sources */,
 				D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */,
@@ -588,7 +597,6 @@
 				D2A7A87D1C4D8FD800B21BEA /* AppDelegate.swift in Sources */,
 				D2A6EB981EE133130033AD1E /* SearchDelegate.swift in Sources */,
 				D262042E1ED65B2A00AC31B0 /* AlbumManaged.swift in Sources */,
-				D2B2BA241C6A5D6000BF1957 /* EntityType.swift in Sources */,
 				D2B1DC361EE386AF00444FD7 /* MovieEditTableViewController.swift in Sources */,
 				D283B2231ECF426F007EE445 /* MediaDetailCell.swift in Sources */,
 				D2B1DC321EE3869A00444FD7 /* BookEditTableViewController.swift in Sources */,

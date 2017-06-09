@@ -14,18 +14,11 @@ import UIKit
 
 class AuthorManaged : NSManagedObject, ManagedObject
 {
-    static let entityName:String = "Author"
-    
-    @NSManaged var name:String
-    @NSManaged var imageData:Data?
-    @NSManaged var biography:String?
-    @NSManaged var books:Set<BookManaged>
-    
-    var genres:Set<GenreManaged>
+    var genres:NSSet
     {
         get
         {
-            return Set<GenreManaged>(books.flatMap({ $0.genres }))
+            return NSSet(array: books?.flatMap({ ($0 as! BookManaged).genres }) ?? [GenreManaged]())
         }
     }
     
@@ -33,11 +26,11 @@ class AuthorManaged : NSManagedObject, ManagedObject
     {
         get
         {
-            return UIImage(data: imageData!)!
+            return UIImage(data: imageData! as Data)!
         }
         set
         {
-            imageData = UIImagePNGRepresentation(newValue)
+            imageData = (UIImagePNGRepresentation(newValue) as NSData?)
         }
     }
 }

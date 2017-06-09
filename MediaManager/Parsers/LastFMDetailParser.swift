@@ -49,7 +49,7 @@ class LastFMDetailParser : JSONParser<ManagedObject>
             if let artistObj:[String: Any] = trackObj["artist"] as? [String: Any],
                let artistName:String = artistObj["name"] as? String
             {
-                let artists:[ArtistManaged] = ManagedObjectManager.getBy(attribute: "name", value: artistName as String)
+                let artists:[ArtistManaged] = ManagedObjectManager.getBy(fetchRequest: ArtistManaged.fetchRequest(), attribute: "name", value: artistName as String)
             }
             
             if let albumObj:[String: Any] = trackObj["album"] as? [String: Any]
@@ -84,7 +84,8 @@ class LastFMDetailParser : JSONParser<ManagedObject>
                     
                     if let url:String = imageUrl
                     {
-                        result.imageData = downloadImage(fromUrl: url)
+                        // TODO(scott): set this on album
+                        //result.imageData = downloadImage(fromUrl: url)
                     }
                 }
             }

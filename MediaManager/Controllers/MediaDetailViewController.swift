@@ -83,7 +83,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
         {
             data = [
                 "bio": artist.summary ?? "",
-                "genres": (artist.genres.flatMap({ $0.name })).joined(separator: ", ")
+                "genres": (artist.genres.flatMap({ ($0 as! GenreManaged).name })).joined(separator: ", ")
             ]
         }
         
@@ -188,6 +188,6 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     func createImage(for media:Media) -> UIImage
     {
         let mediaType:MediaType = type(of: media).type
-        return media.imageData != nil ? UIImage(data: media.imageData!)! : mediaType.defaultImage
+        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : mediaType.defaultImage
     }
 }

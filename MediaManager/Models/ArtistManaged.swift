@@ -14,26 +14,19 @@ import UIKit
 
 class ArtistManaged : NSManagedObject, ManagedObject
 {
-    static let entityName:String = "Artist"
-    
-    @NSManaged var name:String
-    @NSManaged var imageData:Data?
-    @NSManaged var summary:String?
-    @NSManaged var albums:Set<AlbumManaged>?
-    
-    var genres:Set<GenreManaged>
+    var genres:NSSet
     {
         get
         {
-            var result:Set<GenreManaged>
+            var result:NSSet
             
-            if let a:Set<AlbumManaged> = albums
+            if let a:NSSet = albums
             {
-                result = Set<GenreManaged>(a.flatMap({ $0.genres }))
+                result = NSSet(array: a.flatMap({ ($0 as! AlbumManaged).genres }))
             }
             else
             {
-                result = Set<GenreManaged>()
+                result = NSSet()
             }
             
             return result
@@ -44,11 +37,11 @@ class ArtistManaged : NSManagedObject, ManagedObject
     {
         get
         {
-            return UIImage(data: imageData!)!
+            return UIImage(data: imageData! as Data)!
         }
         set
         {
-            imageData = UIImagePNGRepresentation(newValue)
+            imageData = (UIImagePNGRepresentation(newValue) as NSData?)
         }
     }
 }

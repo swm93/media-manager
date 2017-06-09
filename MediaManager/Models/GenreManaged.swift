@@ -12,8 +12,4 @@ import Foundation
 
 
 class GenreManaged : NSManagedObject, ManagedObject
-{
-    static let entityName:String = "Genre"
-    
-    @NSManaged var name:String
-}
+{}

@@ -14,41 +14,22 @@ import UIKit
 
 class SongManaged : NSManagedObject, ManagedObject, Media
 {
-    static let entityName:String = "Show"
-    
-    @NSManaged var name:String
-    @NSManaged var trackNumber:Int16
-    @NSManaged var duration:Int16
-    @NSManaged var album:AlbumManaged?
-    
-    var imageData:Data?
+    var imageData: NSData?
     {
         get
         {
             return self.album?.imageData
         }
-        set
-        {
-            album?.imageData = newValue
-        }
     }
- 
-    var artist:ArtistManaged?
+
+    var genres:NSSet?
     {
         get
         {
-            return self.album?.artist
+            return self.album?.genres
         }
     }
     
-    var genres:Set<GenreManaged>
-    {
-        get
-        {
-            return self.album?.genres ?? Set<GenreManaged>()
-        }
-    }
-
     static var type:MediaType
     {
         get

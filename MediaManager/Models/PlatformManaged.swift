@@ -13,17 +13,4 @@ import UIKit
 
 
 class PlatformManaged : NSManagedObject, ManagedObject
-{
-    static let entityName:String = "Platform"
-    
-    @NSManaged var name:String
-    @NSManaged var games:Set<GameManaged>
-    
-    var genres:Set<GenreManaged>
-    {
-        get
-        {
-            return Set<GenreManaged>(games.flatMap({ $0.genres }))
-        }
-    }
-}
+{}

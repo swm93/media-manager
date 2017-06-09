@@ -19,7 +19,7 @@ class MediaEditViewController : UIViewController
     @IBOutlet public var tableViewContainer:UIView!
     
     public var mediaType:MediaType!
-    public var managedObject:ManagedObject?
+    public var managedObject:(ManagedObject & Media)?
     
     
     
@@ -122,9 +122,15 @@ class MediaEditViewController : UIViewController
     }
     
     
-    private func createMedia(_ mediaType:MediaType) -> ManagedObject
+    @IBAction func nameTextFieldChanged()
     {
-        var managedObject:ManagedObject
+        managedObject?.name = titleTextField.text
+    }
+    
+    
+    private func createMedia(_ mediaType:MediaType) -> ManagedObject & Media
+    {
+        var managedObject:ManagedObject & Media
         
         switch (mediaType)
         {

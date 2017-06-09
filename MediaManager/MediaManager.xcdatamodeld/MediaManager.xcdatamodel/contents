@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Album" representedClassName=".AlbumManaged" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Album" representedClassName="AlbumManaged" syncable="YES" codeGenerationType="category">
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -8,73 +8,94 @@
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="albums" inverseEntity="Genre" syncable="YES"/>
         <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="album" inverseEntity="Song" syncable="YES"/>
     </entity>
-    <entity name="Artist" representedClassName=".ArtistManaged" syncable="YES">
+    <entity name="Artist" representedClassName="ArtistManaged" syncable="YES" codeGenerationType="category">
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="artist" inverseEntity="Album" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
-    <entity name="Author" syncable="YES">
+    <entity name="Author" representedClassName="AuthorManaged" syncable="YES" codeGenerationType="category">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="authors" inverseEntity="Book" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
-    <entity name="Book" representedClassName=".BookManaged" syncable="YES">
+    <entity name="Book" representedClassName="BookManaged" syncable="YES" codeGenerationType="category">
         <attribute name="datePublished" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Author" inverseName="books" inverseEntity="Author" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="books" inverseEntity="Genre" syncable="YES"/>
     </entity>
-    <entity name="Game" representedClassName=".GameManaged" syncable="YES">
+    <entity name="Game" representedClassName="GameManaged" syncable="YES" codeGenerationType="category">
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="esrbRating" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="games" inverseEntity="Genre" syncable="YES"/>
         <relationship name="platforms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Platform" inverseName="games" inverseEntity="Platform" syncable="YES"/>
     </entity>
-    <entity name="Genre" representedClassName=".GenreManaged" syncable="YES">
+    <entity name="Genre" representedClassName="GenreManaged" syncable="YES" codeGenerationType="category">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="genres" inverseEntity="Album" syncable="YES"/>
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="genres" inverseEntity="Book" syncable="YES"/>
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="genres" inverseEntity="Game" syncable="YES"/>
         <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="genres" inverseEntity="Movie" syncable="YES"/>
         <relationship name="shows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Show" inverseName="genres" inverseEntity="Show" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
-    <entity name="Movie" representedClassName=".MovieManaged" syncable="YES">
+    <entity name="Movie" representedClassName="MovieManaged" syncable="YES" codeGenerationType="category">
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="movies" inverseEntity="Genre" syncable="YES"/>
     </entity>
-    <entity name="Platform" syncable="YES">
+    <entity name="Platform" representedClassName="PlatformManaged" syncable="YES" codeGenerationType="category">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="platforms" inverseEntity="Game" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
-    <entity name="Show" representedClassName=".ShowManaged" syncable="YES">
+    <entity name="Show" representedClassName="ShowManaged" syncable="YES" codeGenerationType="category">
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="shows" inverseEntity="Genre" syncable="YES"/>
     </entity>
-    <entity name="Song" representedClassName=".SongManaged" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    <entity name="Song" representedClassName="SongManaged" syncable="YES" codeGenerationType="category">
+        <attribute name="duration" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="trackNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album" syncable="YES"/>
+        <attribute name="trackNumber" optional="YES" attributeType="Integer 16" minValueString="1" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Album" positionX="-353" positionY="-133" width="128" height="135"/>
-        <element name="Artist" positionX="-522" positionY="-135" width="128" height="103"/>
-        <element name="Author" positionX="-695" positionY="17" width="128" height="103"/>
-        <element name="Book" positionX="-522" positionY="18" width="128" height="30"/>
-        <element name="Game" positionX="-522" positionY="146" width="128" height="133"/>
-        <element name="Genre" positionX="7" positionY="32" width="128" height="133"/>
-        <element name="Movie" positionX="-522" positionY="297" width="128" height="103"/>
-        <element name="Platform" positionX="-693" positionY="144" width="128" height="73"/>
-        <element name="Show" positionX="-522" positionY="387" width="128" height="103"/>
+        <element name="Album" positionX="-353" positionY="-133" width="128" height="133"/>
+        <element name="Artist" positionX="-522" positionY="-135" width="128" height="105"/>
+        <element name="Author" positionX="-695" positionY="17" width="128" height="105"/>
+        <element name="Book" positionX="-522" positionY="18" width="128" height="120"/>
+        <element name="Game" positionX="-522" positionY="146" width="128" height="148"/>
+        <element name="Genre" positionX="7" positionY="32" width="128" height="135"/>
+        <element name="Movie" positionX="-522" positionY="297" width="128" height="105"/>
+        <element name="Platform" positionX="-693" positionY="144" width="128" height="75"/>
+        <element name="Show" positionX="-522" positionY="387" width="128" height="105"/>
         <element name="Song" positionX="-182" positionY="-135" width="128" height="103"/>
     </elements>
 </model>

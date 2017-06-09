@@ -26,11 +26,11 @@ class MediaViewController: UIViewController
             var groupedMediaObjects:[MediaType: [TableSection<Media>]] = [MediaType: [TableSection<Media>]]()
             for (type, media) in mediaObjects
             {
-                let sortedMedia:[Media] = media.sorted { $0.name < $1.name }
+                let sortedMedia:[Media] = media.sorted { $0.name! < $1.name! }
                 var tableSections:[TableSection<Media>] = [TableSection<Media>]()
                 for m in sortedMedia
                 {
-                    let firstChar:String = "\(m.name.characters.first ?? Character(""))"
+                    let firstChar:String = "\(m.name?.characters.first ?? Character(""))"
                     if (tableSections.count < 1 || tableSections[tableSections.count - 1].name != firstChar)
                     {
                         tableSections.append(TableSection<Media>(name: firstChar, objects: [Media]()))
@@ -88,20 +88,8 @@ class MediaViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
-        let fetchRequest:NSFetchRequest<SongManaged> = NSFetchRequest(entityName: "Song")
-        
-        do
-        {
-            let results:[Media] = try managedContext.fetch(fetchRequest)
-            
-            mediaObjects[MediaType.music] = results
-        }
-        catch let error as NSError
-        {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
+        let results:[SongManaged] = ManagedObjectManager.all(fetchRequest: SongManaged.fetchRequest())
+        mediaObjects[MediaType.music] = results
     }
     
     
@@ -142,7 +130,7 @@ extension MediaViewController : UITableViewDataSource
         
         titleLabel.text = mediaObject?.name
         subtitleLabel.text = ""
-        imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData!) : _selectedMediaType.defaultImage
+        imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData! as Data) : _selectedMediaType.defaultImage
         
         imageView.layer.cornerRadius = imageView.frame.height / 2
         imageView.layer.masksToBounds = true

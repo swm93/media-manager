@@ -13,12 +13,4 @@ import UIKit
 
 
 class AlbumManaged : NSManagedObject, ManagedObject
-{
-    static let entityName:String = "Album"
-    
-    @NSManaged var name:String
-    @NSManaged var imageData:Data?
-    @NSManaged var dateReleased:Date?
-    @NSManaged var artist:ArtistManaged?
-    @NSManaged var genres:Set<GenreManaged>
-}
+{}

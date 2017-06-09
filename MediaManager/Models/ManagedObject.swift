@@ -11,6 +11,4 @@ import Foundation
 
 
 protocol ManagedObject
-{
-    static var entityName:String { get }
-}
+{}

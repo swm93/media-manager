@@ -14,14 +14,6 @@ import UIKit
 
 class GameManaged : NSManagedObject, ManagedObject, Media
 {
-    static let entityName:String = "Game"
-    
-    @NSManaged var name:String
-    @NSManaged var imageData:Data?
-    @NSManaged var summary:String?
-    @NSManaged var esrbRating:String?
-    @NSManaged var genres:Set<GenreManaged>
-    
     static var type:MediaType
     {
         get

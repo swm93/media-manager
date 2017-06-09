@@ -15,7 +15,7 @@ protocol Media
 {
     static var type:MediaType { get }
     
-    var name:String { get }
-    var imageData:Data? { get }
-    var genres:Set<GenreManaged> { get }
+    var name:String? { get set }
+    var imageData:NSData? { get }
+    var genres:NSSet? { get }
 }

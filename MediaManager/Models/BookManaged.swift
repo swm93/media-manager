@@ -14,14 +14,6 @@ import UIKit
 
 class BookManaged : NSManagedObject, ManagedObject, Media
 {
-    static let entityName:String = "Book"
-    
-    @NSManaged var name:String
-    @NSManaged var imageData:Data?
-    @NSManaged var datePublished:Date?
-    @NSManaged var genres:Set<GenreManaged>
-    @NSManaged var authors:Set<AuthorManaged>
-    
     static var type:MediaType
     {
         get

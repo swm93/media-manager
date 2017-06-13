@@ -20,7 +20,7 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
             defaultParameters: [
                 "page": "0",
                 "limit": "5",
-                "fields": "name,cover"
+                "fields": "id,name,cover"
             ],
             requiredParameterNames: ["query"]
         )
@@ -41,12 +41,18 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
         {
             for result:[String: Any] in root
             {
-                var text:String? = nil
+                var identifier:Int64? = nil
+                var primaryText:String? = nil
                 var image:UIImage? = nil
                 var imageUrl:String? = nil
                 
-                text = result["name"] as? String
+                // get identifier
+                identifier = result["id"] as? Int64
                 
+                // get primary text
+                primaryText = result["name"] as? String
+                
+                // get image
                 if let cover:[String: Any] = result["cover"] as? [String: Any]
                 {
                     imageUrl = cover["url"] as? String
@@ -58,10 +64,11 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
                     }
                 }
                 
-                if let t:String = text
+                if let i:Int64 = identifier,
+                   let t:String = primaryText
                 {
                     let result:SearchResult = SearchResult(
-                        detailParameters: [String: String](),
+                        detailParameters: ["id": String(i)],
                         primaryText: t,
                         secondaryText: nil,
                         image: image ?? MediaType.game.defaultImage

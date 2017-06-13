@@ -16,13 +16,11 @@ class IGDBDetailParser: JSONParser<ManagedObject>
     init(_ apiKey:String)
     {
         let parameterizedUrl:ParameterizedURL = ParameterizedURL(
-            url: "https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields={fields}&limit={limit}&offset={page}&search={query}",
+            url: "https://igdbcom-internet-game-database-v1.p.mashape.com/games/{id}?fields={fields}",
             defaultParameters: [
-                "page": "0",
-                "limit": "5",
-                "fields": "name,cover"
+                "fields": "name,summary,cover,first_release_date"
             ],
-            requiredParameterNames: ["query"]
+            requiredParameterNames: ["id"]
         )
         let headers:[String: String] = [
             "X-Mashape-Key": apiKey,
@@ -35,6 +33,44 @@ class IGDBDetailParser: JSONParser<ManagedObject>
     
     override func objectifyJSON(_ json: Any) -> ManagedObject
     {
-        assert(false, "This method is not implemented")
+        let result:GameManaged = (self.output as? GameManaged) ?? GameManaged()
+        
+        if let root:[[String: Any]] = json as? [[String: Any]]
+        {
+            for resultObj:[String: Any] in root
+            {
+                // get name
+                if let name = resultObj["name"] as? String
+                {
+                    result.name = name
+                }
+                
+                // get summary
+                if let summary = resultObj["summary"] as? String
+                {
+                    result.summary = summary
+                }
+                
+                // get date released
+                if let dateReleased = resultObj["first_release_date"] as? Int64
+                {
+                    result.dateReleased = NSDate(timeIntervalSince1970: TimeInterval(dateReleased))
+                }
+                
+                // get image
+                if let cover:[String: Any] = resultObj["cover"] as? [String: Any]
+                {
+                    let imageUrl = cover["url"] as? String
+                    
+                    if let url:String = imageUrl,
+                       let imageData:Data = downloadImage(fromUrl: "http:\(url)")
+                    {
+                        //result.imageData = imageData
+                    }
+                }
+            }
+        }
+        
+        return result
     }
 }

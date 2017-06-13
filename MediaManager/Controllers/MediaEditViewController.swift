@@ -223,6 +223,10 @@ extension MediaEditViewController : SearchDelegate
                 parser = LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
                 break
                 
+            case .game:
+                parser = IGDBDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+                break
+                
             default:
                 parser = nil
                 break

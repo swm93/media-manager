@@ -33,7 +33,7 @@ class ManagedObjectManager
     {
         var results:[T]
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
+        let managedContext:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         
         do
         {

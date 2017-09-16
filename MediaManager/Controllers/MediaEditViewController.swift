@@ -102,11 +102,11 @@ class MediaEditViewController : UIViewController
     @IBAction func save()
     {
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext
+        //let managedContext:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         
         do
         {
-            try managedContext.save()
+            try appDelegate.saveContext()
             dismiss(animated: true)
         }
         catch let error
@@ -118,6 +118,9 @@ class MediaEditViewController : UIViewController
     
     @IBAction func cancel()
     {
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        appDelegate.persistentContainer.viewContext.rollback()
         dismiss(animated: true)
     }
     
@@ -130,28 +133,29 @@ class MediaEditViewController : UIViewController
     
     private func createMedia(_ mediaType:MediaType) -> ManagedObject & Media
     {
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
         var managedObject:ManagedObject & Media
         
         switch (mediaType)
         {
         case .book:
-            managedObject = BookManaged()
+            managedObject = BookManaged(context: appDelegate.persistentContainer.viewContext)
             break
             
         case .game:
-            managedObject = GameManaged()
+            managedObject = GameManaged(context: appDelegate.persistentContainer.viewContext)
             break
             
         case .movie:
-            managedObject = MovieManaged()
+            managedObject = MovieManaged(context: appDelegate.persistentContainer.viewContext)
             break
             
         case .music:
-            managedObject = SongManaged()
+            managedObject = SongManaged(context: appDelegate.persistentContainer.viewContext)
             break
             
         case .show:
-            managedObject = ShowManaged()
+            managedObject = ShowManaged(context: appDelegate.persistentContainer.viewContext)
             break
         }
         

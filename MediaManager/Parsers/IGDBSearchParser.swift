@@ -35,7 +35,7 @@ class IGDBSearchParser: JSONParser<[SearchResult]>
     
     override func objectifyJSON(_ json: Any) -> [SearchResult]
     {
-        var results:[SearchResult] = self.output ?? [SearchResult]()
+        var results:[SearchResult] = [SearchResult]()
         
         if let root:[[String: Any]] = json as? [[String: Any]]
         {

@@ -18,22 +18,22 @@ class MediaViewController: UIViewController
     @IBOutlet weak var mediaFilter:HMSegmentedControl!
 
     
-    var mediaObjects:[MediaType: [Media]] = [MediaType: [Media]]()
+    var mediaObjects:[MediaType: [ManagedMedia]] = [MediaType: [ManagedMedia]]()
     {
         didSet
         {
             // set _groupedMediaObjects
-            var groupedMediaObjects:[MediaType: [TableSection<Media>]] = [MediaType: [TableSection<Media>]]()
+            var groupedMediaObjects:[MediaType: [TableSection<ManagedMedia>]] = [MediaType: [TableSection<ManagedMedia>]]()
             for (type, media) in mediaObjects
             {
-                let sortedMedia:[Media] = media.sorted { $0.name! < $1.name! }
-                var tableSections:[TableSection<Media>] = [TableSection<Media>]()
+                let sortedMedia:[ManagedMedia] = media.sorted { $0.name! < $1.name! }
+                var tableSections:[TableSection<ManagedMedia>] = [TableSection<ManagedMedia>]()
                 for m in sortedMedia
                 {
                     let firstChar:String = "\(m.name?.characters.first ?? Character(""))"
                     if (tableSections.count < 1 || tableSections[tableSections.count - 1].name != firstChar)
                     {
-                        tableSections.append(TableSection<Media>(name: firstChar, objects: [Media]()))
+                        tableSections.append(TableSection<ManagedMedia>(name: firstChar, objects: [ManagedMedia]()))
                     }
                     
                     tableSections[tableSections.count - 1].objects.append(m)
@@ -49,7 +49,7 @@ class MediaViewController: UIViewController
         }
     }
     
-    internal var _groupedMediaObjects:[MediaType: [TableSection<Media>]] = [MediaType: [TableSection<Media>]]()
+    internal var _groupedMediaObjects:[MediaType: [TableSection<ManagedMedia>]] = [MediaType: [TableSection<ManagedMedia>]]()
     
     internal let _tableViewSectionHeaders:[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
@@ -97,20 +97,25 @@ class MediaViewController: UIViewController
     {
         super.prepare(for: segue, sender: sender)
         
-        if (segue.identifier == "MediaDetailSegue")
+        switch (segue.identifier)
         {
+        case .some("MediaDetailSegue"):
             if let indexPath:IndexPath = mediaTable.indexPathForSelectedRow
             {
                 let destinationVC:MediaDetailViewController = segue.destination as! MediaDetailViewController
                 
-                destinationVC.mediaObject = mediaObjects[_selectedMediaType]?[indexPath.row]
+                destinationVC.mediaObject = _groupedMediaObjects[_selectedMediaType]?[indexPath.section].objects[indexPath.row]
             }
-        }
-        else if (segue.identifier == "MediaAddSegue")
-        {
-            let destinationVC:MediaEditViewController = segue.destination as! MediaEditViewController
+            break
             
-            destinationVC.mediaType = _selectedMediaType
+        case .some("MediaSearchSegue"):
+            let navigationVC: UINavigationController = segue.destination as! UINavigationController
+            let destinationVC: SearchViewController = navigationVC.viewControllers.first as! SearchViewController
+            destinationVC.mediaType = self._selectedMediaType
+            break
+            
+        default:
+            break
         }
     }
 }
@@ -126,7 +131,7 @@ extension MediaViewController : UITableViewDataSource
         let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
         let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
         
-        let mediaObject:Media? = _groupedMediaObjects[_selectedMediaType]?[indexPath.section].objects[indexPath.row]
+        let mediaObject:ManagedMedia? = _groupedMediaObjects[_selectedMediaType]?[indexPath.section].objects[indexPath.row]
         
         titleLabel.text = mediaObject?.name
         subtitleLabel.text = ""

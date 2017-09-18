@@ -13,11 +13,11 @@ import UIKit
 
 class MediaEditTableViewController : UITableViewController
 {
-    var mediaObject:ManagedObject!
+    var mediaObject:ManagedMedia!
     
     
     
-    convenience init(mediaObject:ManagedObject)
+    convenience init(mediaObject:ManagedMedia)
     {
         self.init()
         

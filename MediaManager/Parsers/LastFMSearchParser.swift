@@ -41,7 +41,7 @@ class LastFMSearchParser : JSONParser<[SearchResult]>
     
     override internal func objectifyJSON(_ json: Any) -> [SearchResult]
     {
-        var results:[SearchResult] = self.output ?? [SearchResult]()
+        var results:[SearchResult] = [SearchResult]()
         
         if let rootObj:[String: Any] = json as? [String: Any]
         {

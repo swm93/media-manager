@@ -12,7 +12,7 @@ import UIKit
 
 
 
-class SongManaged : NSManagedObject, ManagedObject, Media
+class SongManaged : NSManagedObject, ManagedMedia
 {
     var imageData: NSData?
     {

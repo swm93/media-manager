@@ -12,5 +12,5 @@ import Foundation
 
 protocol ParserDelegate
 {
-    
+    func getParseResultObject<T>() -> T?
 }

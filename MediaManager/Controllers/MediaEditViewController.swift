@@ -14,12 +14,12 @@ import UIKit
 
 class MediaEditViewController : UIViewController
 {
-    @IBOutlet public var titleTextField:UITextField!
+    @IBOutlet public var nameTextField:UITextField!
     @IBOutlet public var imageView:UIImageView!
     @IBOutlet public var tableViewContainer:UIView!
     
     public var mediaType:MediaType!
-    public var managedObject:(ManagedObject & Media)?
+    public var managedObject:ManagedMedia!
     
     
     
@@ -27,17 +27,13 @@ class MediaEditViewController : UIViewController
     {
         super.viewWillAppear(animated)
         
-        // create managed object if one doesn't exist
-        if (self.managedObject == nil)
-        {
-            self.managedObject = self.createMedia(self.mediaType)
-        }
-        
         // set transition style here so that it only applies on dismissal
         modalTransitionStyle = .crossDissolve
         
+        self.nameTextField.text = self.managedObject.name
+        
         // setup media image
-        imageView.image = mediaType?.defaultImage
+        imageView.image = self.createImage(for: self.managedObject)
         
         // setup table view
         var tableViewController:MediaEditTableViewController?
@@ -80,29 +76,16 @@ class MediaEditViewController : UIViewController
         }
     }
     
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    
+    private func createImage(for media: ManagedMedia) -> UIImage
     {
-        super.prepare(for: segue, sender: sender)
-        
-        if (segue.identifier == "SearchSegue")
-        {
-            let destinationVC:SearchViewController = segue.destination as! SearchViewController
-            
-            destinationVC.delegate = self
-            
-            if let query:String = titleTextField.text
-            {
-                destinationVC.search(query)
-            }
-        }
+        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : type(of: media).type.defaultImage
     }
     
     
     @IBAction func save()
     {
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        //let managedContext:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         
         do
         {
@@ -127,124 +110,6 @@ class MediaEditViewController : UIViewController
     
     @IBAction func nameTextFieldChanged()
     {
-        managedObject?.name = titleTextField.text
-    }
-    
-    
-    private func createMedia(_ mediaType:MediaType) -> ManagedObject & Media
-    {
-        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        var managedObject:ManagedObject & Media
-        
-        switch (mediaType)
-        {
-        case .book:
-            managedObject = BookManaged(context: appDelegate.persistentContainer.viewContext)
-            break
-            
-        case .game:
-            managedObject = GameManaged(context: appDelegate.persistentContainer.viewContext)
-            break
-            
-        case .movie:
-            managedObject = MovieManaged(context: appDelegate.persistentContainer.viewContext)
-            break
-            
-        case .music:
-            managedObject = SongManaged(context: appDelegate.persistentContainer.viewContext)
-            break
-            
-        case .show:
-            managedObject = ShowManaged(context: appDelegate.persistentContainer.viewContext)
-            break
-        }
-        
-        return managedObject
-    }
-}
-
-
-
-extension MediaEditViewController : ParserDelegate
-{
-    func getParseResultObject<T>() -> T?
-    {
-        if let managedObject:T = self.managedObject as? T
-        {
-            return managedObject
-        }
-        
-        return nil
-    }
-}
-
-
-
-extension MediaEditViewController : SearchDelegate
-{
-    func fetchSearchResults(_ query:String, completionHandler:@escaping ([SearchResult]?) -> Void)
-    {
-        if let type:MediaType = self.mediaType
-        {
-            var parser:APIParser<[SearchResult]>? = nil
-            
-            switch (type)
-            {
-            case .music:
-                parser = LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
-                break
-                
-            case .game:
-                parser = IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
-                break
-                
-            default:
-                break
-            }
-            
-            if let p:APIParser<[SearchResult]> = parser
-            {
-                p.parse(["query": query], completionHandler: completionHandler)
-            }
-            else
-            {
-                let results:[SearchResult] = [SearchResult]()
-                completionHandler(results)
-            }
-        }
-    }
-    
-    
-    func fetchDetailResult(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject?) -> Void)
-    {
-        if let type:MediaType = self.mediaType
-        {
-            var parser:APIParser<ManagedObject>?
-            
-            switch (type)
-            {
-            case .music:
-                parser = LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
-                break
-                
-            case .game:
-                parser = IGDBDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
-                break
-                
-            default:
-                parser = nil
-                break
-            }
-            
-            if let p:APIParser<ManagedObject> = parser
-            {
-                p.delegate = self
-                p.parse(searchResult.detailParameters, completionHandler: completionHandler)
-            }
-            else
-            {
-                // TODO(scott): probably need to be able to pass nil to completetionHandler
-            }
-        }
+        managedObject?.name = self.nameTextField.text
     }
 }

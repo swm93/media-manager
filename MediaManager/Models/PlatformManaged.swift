@@ -12,5 +12,5 @@ import UIKit
 
 
 
-class PlatformManaged : NSManagedObject, ManagedObject
+class PlatformManaged : NSManagedObject
 {}

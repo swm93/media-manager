@@ -12,9 +12,9 @@ import UIKit
 
 
 
-class ArtistManaged : NSManagedObject, ManagedObject
+class ArtistManaged : NSManagedObject, ManagedMedia
 {
-    var genres:NSSet
+    var genres:NSSet?
     {
         get
         {
@@ -33,15 +33,11 @@ class ArtistManaged : NSManagedObject, ManagedObject
         }
     }
     
-    var image:UIImage
+    static var type:MediaType
     {
         get
         {
-            return UIImage(data: imageData! as Data)!
-        }
-        set
-        {
-            imageData = (UIImagePNGRepresentation(newValue) as NSData?)
+            return .music
         }
     }
 }

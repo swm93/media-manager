@@ -16,7 +16,6 @@ class APIParser<T> : NSObject
     
     internal var parameterizedUrl:ParameterizedURL
     internal var headers:[String: String]?
-    internal var output:T? = nil
     
     private var isParsing:Bool = false
     private var completionHandler:((T?) -> ())? = nil
@@ -35,7 +34,7 @@ class APIParser<T> : NSObject
      - parameter parameters: ...
      - parameter completionHandler: ...
      */
-    func parse(_ parameters:[String: String], output:T? = nil, completionHandler:@escaping (T?) -> ())
+    func parse(_ parameters:[String: String], completionHandler:@escaping (T?) -> ())
     {
         // fetch data at URL asynchronously if we are not already parsing
         if (!isParsing)
@@ -44,7 +43,6 @@ class APIParser<T> : NSObject
             fetchData(request, completionHandler: objectifyData)
             
             self.isParsing = true
-            self.output = output
             self.completionHandler = completionHandler
             
             print("Parsing URL: \(request.url!)")

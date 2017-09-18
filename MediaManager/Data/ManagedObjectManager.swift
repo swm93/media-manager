@@ -21,7 +21,7 @@ class ManagedObjectManager
     
     
     public static func getBy<T:NSManagedObject, U:CVarArg>(fetchRequest:NSFetchRequest<T>, attribute:String, value:U) -> [T]
-        where T:ManagedObject
+        where T:ManagedMedia
     {
         fetchRequest.predicate = NSPredicate(format: "%K = %@", attribute, value)
         

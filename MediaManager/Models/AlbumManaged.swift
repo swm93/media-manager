@@ -12,5 +12,13 @@ import UIKit
 
 
 
-class AlbumManaged : NSManagedObject, ManagedObject
-{}
+class AlbumManaged : NSManagedObject, ManagedMedia
+{
+    static var type:MediaType
+    {
+        get
+        {
+            return .music
+        }
+    }
+}

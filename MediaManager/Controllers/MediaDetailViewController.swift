@@ -46,7 +46,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     @IBOutlet weak var imageMaxHeightConstraint:NSLayoutConstraint!
     
 
-    var mediaObject:Media?
+    var mediaObject:ManagedMedia!
     var data:[String: String]?
     {
         willSet(newValue)
@@ -83,7 +83,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
         {
             data = [
                 "bio": artist.summary ?? "",
-                "genres": (artist.genres.flatMap({ ($0 as! GenreManaged).name })).joined(separator: ", ")
+                "genres": artist.genres?.flatMap({ ($0 as! GenreManaged).name }).joined(separator: ", ") ?? ""
             ]
         }
         
@@ -92,11 +92,21 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
         cornerRadiusAnimation.fillMode = kCAFillModeForwards
         cornerRadiusAnimation.isRemovedOnCompletion = true
 
-        imageView.image = createImage(for: mediaObject!)
-        titleLabel.text = mediaObject!.name
+        imageView.image = self.createImage(for: self.mediaObject)
+        titleLabel.text = mediaObject.name
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140.0
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if (segue.identifier == "EditSegue")
+        {
+            let destinationVC: MediaEditViewController = segue.destination as! MediaEditViewController
+            destinationVC.managedObject = self.mediaObject
+        }
     }
     
     
@@ -185,9 +195,8 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     }
     
     
-    func createImage(for media:Media) -> UIImage
+    func createImage(for media: ManagedMedia) -> UIImage
     {
-        let mediaType:MediaType = type(of: media).type
-        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : mediaType.defaultImage
+        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : type(of: media).type.defaultImage
     }
 }

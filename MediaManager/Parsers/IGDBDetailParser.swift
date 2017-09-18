@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class IGDBDetailParser: JSONParser<ManagedObject>
+class IGDBDetailParser: JSONParser<ManagedMedia>
 {
     init(_ apiKey:String)
     {
@@ -31,9 +31,9 @@ class IGDBDetailParser: JSONParser<ManagedObject>
     }
     
     
-    override func objectifyJSON(_ json: Any) -> ManagedObject
+    override func objectifyJSON(_ json: Any) -> ManagedMedia
     {
-        let result:GameManaged = (self.output as? GameManaged) ?? GameManaged()
+        let result:GameManaged = self.delegate?.getParseResultObject() ?? GameManaged()
         
         if let root:[[String: Any]] = json as? [[String: Any]]
         {

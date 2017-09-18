@@ -13,5 +13,5 @@ import Foundation
 protocol SearchDelegate
 {
     func fetchSearchResults(_ query:String, completionHandler:@escaping ([SearchResult]?) -> Void)
-    func fetchDetailResult(_ searchResult:SearchResult, completionHandler:@escaping (ManagedObject?) -> Void)
+    func fetchDetailResult(_ searchResult:SearchResult, completionHandler:@escaping (ManagedMedia?) -> Void)
 }

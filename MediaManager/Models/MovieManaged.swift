@@ -12,7 +12,7 @@ import UIKit
 
 
 
-class MovieManaged : NSManagedObject, ManagedObject, Media
+class MovieManaged : NSManagedObject, ManagedMedia
 {
     static var type:MediaType
     {

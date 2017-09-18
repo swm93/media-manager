@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 
-class LastFMDetailParser : JSONParser<ManagedObject>
+class LastFMDetailParser : JSONParser<ManagedMedia>
 {
     private let imageSizePreference:[String] = [
         "mega",
@@ -25,7 +25,7 @@ class LastFMDetailParser : JSONParser<ManagedObject>
     init(_ apiKey:String)
     {
         let parameterizedUrl:ParameterizedURL = ParameterizedURL(
-            url: "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid={mbid}&api_key={api_key}&format=json",
+            url: "http://ws.audioscrobbler.com/2.0/?method=track.getinfo&mbid={mbid}&api_key={api_key}&format=json",
             defaultParameters: ["api_key": apiKey],
             requiredParameterNames: ["mbid"]
         )
@@ -34,9 +34,9 @@ class LastFMDetailParser : JSONParser<ManagedObject>
     }
     
     
-    override internal func objectifyJSON(_ json: Any) -> ManagedObject
+    override internal func objectifyJSON(_ json: Any) -> ManagedMedia
     {
-        let result:SongManaged = (self.output as? SongManaged) ?? SongManaged()
+        let result:SongManaged = self.delegate?.getParseResultObject() ?? SongManaged()
         
         if let rootObj:[String: Any] = json as? [String: Any],
            let trackObj:[String: Any] = rootObj["track"] as? [String: Any]

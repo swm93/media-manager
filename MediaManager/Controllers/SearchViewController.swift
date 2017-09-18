@@ -16,9 +16,13 @@ class SearchViewController: UIViewController
     @IBOutlet var searchBar:UISearchBar!
     @IBOutlet var searchTableView:UITableView!
     
-    public var delegate:SearchDelegate?
+    public var mediaType: MediaType!
     
-    private var _currentQuery:String?
+    internal var _selectedMedia: ManagedMedia?
+    internal  var _debouncedSearch: (() -> ())!
+    
+    private var _searchParser: APIParser<[SearchResult]>!
+    private var _detailParser: APIParser<ManagedMedia>!
     
     var searchResults:[SearchResult] = [SearchResult]()
     {
@@ -33,28 +37,104 @@ class SearchViewController: UIViewController
     
     
     
-    override func viewWillAppear(_ animated: Bool)
+    required init?(coder aDecoder: NSCoder)
     {
-        if let query:String = _currentQuery
+        super.init(coder: aDecoder)
+        
+        self._debouncedSearch = debounce(interval: 400, queue: DispatchQueue.main, action: {
+            self.fetchSearchResults(completionHandler: self.addSearchResults)
+        })
+    }
+    
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        switch (self.mediaType as MediaType)
         {
-            searchBar.text = query
+        case .music:
+            self._searchParser = LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+            self._detailParser = LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+            break
+            
+        case .game:
+            self._searchParser = IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
+            self._detailParser = IGDBDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+            break
+            
+        default:
+            break
         }
     }
     
     
-    func search(_ query:String)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        _currentQuery = query
+        super.prepare(for: segue, sender: sender)
         
-        searchResults.removeAll()
-        
-        self.delegate?.fetchSearchResults(query, completionHandler: addSearchResults)
+        if (segue.identifier == "MediaCreateSegue")
+        {
+            let destinationVC: MediaEditViewController = segue.destination as! MediaEditViewController
+            destinationVC.mediaType = self.mediaType
+            destinationVC.managedObject = self._selectedMedia ?? self.createMedia()
+            
+            self._selectedMedia = nil
+        }
     }
     
     
-    @IBAction func cancel()
+    internal func fetchSearchResults(completionHandler: @escaping ([SearchResult]?) -> Void)
     {
-        dismiss(animated: true)
+        if let query: String = searchBar.text,
+           let p: APIParser<[SearchResult]> = self._searchParser
+        {
+            p.parse(["query": query], completionHandler: completionHandler)
+        }
+    }
+    
+    
+    internal func fetchDetailResult(_ searchResult: SearchResult, completionHandler: @escaping (ManagedMedia?) -> Void)
+    {
+        if let p: APIParser<ManagedMedia> = self._detailParser
+        {
+            p.delegate = self
+            p.parse(searchResult.detailParameters, completionHandler: completionHandler)
+        }
+    }
+    
+    
+    internal func createMedia() -> ManagedMedia
+    {
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        var managedObject:ManagedMedia
+        
+        switch (self.mediaType as MediaType)
+        {
+        case .book:
+            managedObject = BookManaged(context: appDelegate.persistentContainer.viewContext)
+            break
+            
+        case .game:
+            managedObject = GameManaged(context: appDelegate.persistentContainer.viewContext)
+            break
+            
+        case .movie:
+            managedObject = MovieManaged(context: appDelegate.persistentContainer.viewContext)
+            break
+            
+        case .music:
+            managedObject = SongManaged(context: appDelegate.persistentContainer.viewContext)
+            break
+            
+        case .show:
+            managedObject = ShowManaged(context: appDelegate.persistentContainer.viewContext)
+            break
+        }
+        
+        managedObject.name = self.searchBar.text
+        
+        return managedObject
     }
     
     
@@ -62,8 +142,14 @@ class SearchViewController: UIViewController
     {
         if let r:[SearchResult] = results
         {
-            searchResults += r
+            searchResults = r
         }
+    }
+    
+    
+    @IBAction func cancel()
+    {
+        dismiss(animated: true)
     }
 }
 
@@ -73,25 +159,35 @@ extension SearchViewController : UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
-        let titleLabel:UILabel = cell.viewWithTag(1) as! UILabel
-        let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
-        let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
-        let searchResult:SearchResult = searchResults[indexPath.row]
-        
-        titleLabel.text = searchResult.primaryText
-        subtitleLabel.text = searchResult.secondaryText
-        imageView.image = searchResult.image
-        
-        imageView.layer.cornerRadius = imageView.frame.height / 2
-        imageView.layer.masksToBounds = true
+        var cell:UITableViewCell
+        if (indexPath.row == 0)
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "NewCell", for: indexPath)
+        }
+        else
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
+            let titleLabel:UILabel = cell.viewWithTag(1) as! UILabel
+            let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
+            let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
+            let searchResult:SearchResult = searchResults[indexPath.row - 1]
+            
+            titleLabel.text = searchResult.primaryText
+            subtitleLabel.text = searchResult.secondaryText
+            imageView.image = searchResult.image
+            
+            imageView.layer.cornerRadius = imageView.frame.height / 2
+            imageView.layer.masksToBounds = true
+        }
         
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return searchResults.count
+        // add one to searchResults count for "New" cell
+        return searchResults.count + 1
     }
 }
 
@@ -101,13 +197,17 @@ extension SearchViewController : UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let searchResult:SearchResult = searchResults[indexPath.row]
-        
-        self.delegate?.fetchDetailResult(searchResult)
-        { [weak self] (mediaManaged:ManagedObject?) -> () in
-            DispatchQueue.main.async
-            {
-                self?.dismiss(animated: true)
+        if (indexPath.row != 0)
+        {
+            let searchResult:SearchResult = searchResults[indexPath.row - 1]
+            
+            self.fetchDetailResult(searchResult)
+            { [weak self] (mediaManaged:ManagedMedia?) -> () in
+                DispatchQueue.main.async
+                {
+                    self?._selectedMedia = mediaManaged
+                    self?.performSegue(withIdentifier: "MediaCreateSegue", sender: self)
+                }
             }
         }
     }
@@ -117,21 +217,28 @@ extension SearchViewController : UITableViewDelegate
 
 extension SearchViewController : UISearchBarDelegate
 {
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
-        if let query:String = searchBar.text
+        if (searchBar.text != nil)
         {
-            search(query)
+            self._debouncedSearch()
         }
-        
-        searchBar.resignFirstResponder()
-        
-        return true
     }
     
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         searchResults.removeAll()
+    }
+}
+
+
+
+extension SearchViewController : ParserDelegate
+{
+    func getParseResultObject<T>() -> T?
+    {
+        return self.createMedia() as? T
     }
 }
 

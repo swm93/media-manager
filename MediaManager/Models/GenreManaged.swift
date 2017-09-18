@@ -11,5 +11,5 @@ import Foundation
 
 
 
-class GenreManaged : NSManagedObject, ManagedObject
+class GenreManaged : NSManagedObject
 {}

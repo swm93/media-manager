@@ -12,7 +12,7 @@ import UIKit
 
 
 
-class BookManaged : NSManagedObject, ManagedObject, Media
+class BookManaged : NSManagedObject, ManagedMedia
 {
     static var type:MediaType
     {

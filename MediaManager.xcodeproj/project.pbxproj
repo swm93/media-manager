@@ -12,7 +12,8 @@
 		D20562581EE8DD44007B8345 /* AuthorManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20562571EE8DD44007B8345 /* AuthorManaged.swift */; };
 		D205625A1EE8DE15007B8345 /* PlatformManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20562591EE8DE15007B8345 /* PlatformManaged.swift */; };
 		D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */; };
-		D20696BD1F6F3FF400979DDA /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696BC1F6F3FF400979DDA /* Debounce.swift */; };
+		D20696BD1F6F3FF400979DDA /* DebounceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */; };
+		D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C01F6F673A00979DDA /* TimeUtility.swift */; };
 		D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */; };
 		D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */; };
 		D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA11C503FD60017D4FB /* XMLNode.swift */; };
@@ -89,7 +90,8 @@
 		D20562571EE8DD44007B8345 /* AuthorManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorManaged.swift; sourceTree = "<group>"; };
 		D20562591EE8DE15007B8345 /* PlatformManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformManaged.swift; sourceTree = "<group>"; };
 		D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectManager.swift; sourceTree = "<group>"; };
-		D20696BC1F6F3FF400979DDA /* Debounce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
+		D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebounceUtility.swift; sourceTree = "<group>"; };
+		D20696C01F6F673A00979DDA /* TimeUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtility.swift; sourceTree = "<group>"; };
 		D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMSearchParser.swift; sourceTree = "<group>"; };
 		D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterizedURL.swift; path = ../Parsers/ParameterizedURL.swift; sourceTree = "<group>"; };
 		D2219CA11C503FD60017D4FB /* XMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
@@ -195,7 +197,8 @@
 		D20696BB1F6F3FD700979DDA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				D20696BC1F6F3FF400979DDA /* Debounce.swift */,
+				D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */,
+				D20696C01F6F673A00979DDA /* TimeUtility.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				D2EEF7D01C652A560025B133 /* JSONParser.swift in Sources */,
 				D20562581EE8DD44007B8345 /* AuthorManaged.swift in Sources */,
 				D2414AC11C5B3F2300146CCE /* MediaViewController.swift in Sources */,
+				D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */,
 				D262043A1ED65BDF00AC31B0 /* GenreManaged.swift in Sources */,
 				D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */,
 				D26204301ED65B6000AC31B0 /* BookManaged.swift in Sources */,
@@ -606,7 +610,7 @@
 				D262042E1ED65B2A00AC31B0 /* AlbumManaged.swift in Sources */,
 				D2B1DC361EE386AF00444FD7 /* MovieEditTableViewController.swift in Sources */,
 				D283B2231ECF426F007EE445 /* MediaDetailCell.swift in Sources */,
-				D20696BD1F6F3FF400979DDA /* Debounce.swift in Sources */,
+				D20696BD1F6F3FF400979DDA /* DebounceUtility.swift in Sources */,
 				D2B1DC321EE3869A00444FD7 /* BookEditTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

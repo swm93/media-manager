@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 import UIKit
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
@@ -46,25 +47,27 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     @IBOutlet weak var imageMaxHeightConstraint:NSLayoutConstraint!
     
 
-    var mediaObject:ManagedMedia!
-    var data:[String: String]?
+    var mediaObject: ManagedMedia!
     {
         willSet(newValue)
         {
-            if let newData:[String: String] = newValue
+            var cellData: [(label: String, value: String)]
+            
+            if let managedObject: NSManagedObject = newValue as? NSManagedObject
             {
-                orderedKeys = newData.keys.sorted()
+                cellData = self.getCellData(managedObject: managedObject)
             }
             else
             {
-                orderedKeys = nil
+                cellData = [(label: String, value: String)]()
             }
             
-            tableView.reloadData()
+            self._cellData = cellData
         }
     }
-    private var orderedKeys:[String]?
 
+    private var _cellData: [(label: String, value: String)]!
+    
     private let animationDuration:TimeInterval = 0.3
     private let headerHeightBounds:(min: CGFloat, max: CGFloat) = (min: 64.0, max: 160.0)
     private let cornerRadiusAnimation:CABasicAnimation = CABasicAnimation(keyPath: "cornerRadius")
@@ -78,15 +81,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        if let artist: ArtistManaged = mediaObject as? ArtistManaged
-        {
-            data = [
-                "bio": artist.summary ?? "",
-                "genres": artist.genres?.flatMap({ ($0 as! GenreManaged).name }).joined(separator: ", ") ?? ""
-            ]
-        }
-        
+
         cornerRadiusAnimation.duration = animationDuration
         cornerRadiusAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         cornerRadiusAnimation.fillMode = kCAFillModeForwards
@@ -110,15 +105,50 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     }
     
     
+    private func getCellData(managedObject: NSManagedObject, keyPrefix: String? = nil) -> [(label: String, value: String)]
+    {
+        var result: [(label: String, value: String)] = [(label: String, value: String)]()
+        let managedObjectData: [String: Any] = managedObject.dictionaryWithValues(forKeys: Array(managedObject.entity.propertiesByName.keys))
+        
+        for (key, value) in managedObjectData
+        {
+            if (keyPrefix == nil && key.caseInsensitiveCompare("name") == ComparisonResult.orderedSame)
+            {
+                continue
+            }
+            
+            let label: String = "\(keyPrefix ?? "")\(key)".uppercased()
+            
+            switch (value)
+            {
+            case let valueStr as String:
+                result.append((label: label, value: valueStr))
+                break
+                
+            case let valueInt as Int:
+                let cellValue: String = secondsToString(seconds: valueInt / 1000)
+                result.append((label: label, value: cellValue))
+                break
+                
+            case let valueManaged as NSManagedObject:
+                result += self.getCellData(managedObject: valueManaged, keyPrefix: "\(key) ")
+                break
+                
+            default:
+                break
+            }
+        }
+        
+        return result
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        let data: (label: String, value: String) = self._cellData[indexPath.row]
         let cell:MediaDetailCell = tableView.dequeueReusableCell(withIdentifier: "MediaDetailCell", for: indexPath) as! MediaDetailCell
-        
-        if let key:String = orderedKeys?[indexPath.row]
-        {
-            cell.titleLabel.text = key.uppercased()
-            cell.contentLabel.text = data?[key]
-        }
+        cell.titleLabel.text = data.label
+        cell.contentLabel.text = data.value
         
         return cell
     }
@@ -126,7 +156,7 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return data?.count ?? 0
+        return self._cellData.count
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView)

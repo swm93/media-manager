@@ -76,7 +76,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Id1-WJ-eY2" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Id1-WJ-eY2" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="6" width="52" height="52"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Id1-WJ-eY2" secondAttribute="height" multiplier="1:1" id="yzI-aG-pc3"/>
@@ -368,11 +368,11 @@
                         <viewControllerLayoutGuide type="bottom" id="E96-8t-mmE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tBU-87-nVK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fnR-6C-av3">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jc3-lh-ckF">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
@@ -386,7 +386,7 @@
                                                     <action selector="nameTextFieldChanged" destination="ouj-bn-q6F" eventType="editingChanged" id="cZg-iW-fss"/>
                                                 </connections>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kNt-or-dzD" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kNt-or-dzD" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="52" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="kNt-or-dzD" secondAttribute="height" multiplier="1:1" id="iQv-nC-4va"/>
@@ -439,12 +439,12 @@
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="Fc8-K8-evU"/>
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="1DH-up-rSs">
                             <connections>
-                                <action selector="cancel" destination="ouj-bn-q6F" id="9k5-8E-e91"/>
+                                <action selector="cancel" destination="ouj-bn-q6F" id="Fa9-Yg-pXc"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="nxN-2Q-LJn">
                             <connections>
-                                <action selector="save" destination="ouj-bn-q6F" id="RRa-GN-beB"/>
+                                <action selector="save" destination="ouj-bn-q6F" id="FYw-bV-BbG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1552,7 +1552,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-Ey-MeC" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-Ey-MeC" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="47.5" height="47.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="aMA-Ey-MeC" secondAttribute="height" multiplier="1:1" id="wLq-dC-tio"/>
@@ -1719,7 +1719,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Zxx-O7-UgT"/>
+        <segue reference="yvQ-4H-k9g"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

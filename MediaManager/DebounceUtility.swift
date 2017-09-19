@@ -1,5 +1,5 @@
 //
-//  Debounce.swift
+//  DebounceUtility.swift
 //  MediaManager
 //
 //  Created by Scott Mielcarski on 2017-09-17.

@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A812FC234F48B94BCDA13AC5C3534C /* HMSegmentedControl-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A60B762A017035F2E553810DE176E93 /* HMSegmentedControl-dummy.m */; };
 		08B8CE2D77440FF932DEE8609A96AABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
 		2325BB8ED8892303FE9BCF68448EC94C /* HMSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 422BDC9C6123942761D5E0D896917488 /* HMSegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		24C5ECBD884823490C4167F40B3F5AEB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2770B482BFE91273C8560623F1422C /* QuartzCore.framework */; };
 		2783A89B7A418C644E008383404B5CA0 /* HMSegmentedControl-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7AD363978D053D998F33619B64AD5BC /* HMSegmentedControl-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A5A45B669B751225D80097F69FC7109 /* Pods-MediaManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D0D0EB779D102EF1F876A4F6C0BE292 /* Pods-MediaManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		731D0A294A013C3D95DAE18BD8BBC7AC /* HMSegmentedControl-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A60B762A017035F2E553810DE176E93 /* HMSegmentedControl-dummy.m */; };
 		7677256385EF6CE6DA0728F340A8BE50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
 		B3782FEBB2F9905B05F44A1A273AC4C3 /* Pods-MediaManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4F751A48062BF3659F2857566C7BAD /* Pods-MediaManager-dummy.m */; };
-		B7CB384BF88B421713036A70A9BCAEDD /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FC171FEF35266CA040CF7D5D7740E472 /* HMSegmentedControl.m */; };
+		D0A632E14D79123E050BE21FAF8C0312 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FC171FEF35266CA040CF7D5D7740E472 /* HMSegmentedControl.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,7 +198,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8668A63F70CDBE548BD2FE7AB28FD686 /* Build configuration list for PBXNativeTarget "HMSegmentedControl" */;
 			buildPhases = (
-				8348D47C5324F7D73F7D3938E0D6B724 /* Sources */,
+				488FB3A93E9DCF591E0AE42AD7338BBD /* Sources */,
 				E2B834EA7E1D35E47CB49A8EA5911A8F /* Frameworks */,
 				4D4E54874AA429EE053EC752BB9937D5 /* Headers */,
 			);
@@ -257,20 +257,20 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		488FB3A93E9DCF591E0AE42AD7338BBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08A812FC234F48B94BCDA13AC5C3534C /* HMSegmentedControl-dummy.m in Sources */,
+				D0A632E14D79123E050BE21FAF8C0312 /* HMSegmentedControl.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6AE488D2EEA24D55FF81B548123AC78B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B3782FEBB2F9905B05F44A1A273AC4C3 /* Pods-MediaManager-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8348D47C5324F7D73F7D3938E0D6B724 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				731D0A294A013C3D95DAE18BD8BBC7AC /* HMSegmentedControl-dummy.m in Sources */,
-				B7CB384BF88B421713036A70A9BCAEDD /* HMSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

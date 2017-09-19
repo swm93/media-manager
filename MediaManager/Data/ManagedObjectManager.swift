@@ -29,7 +29,7 @@ class ManagedObjectManager
     }
     
     
-    private static func fetch<T:NSManagedObject>(_ fetchRequest:NSFetchRequest<T>) -> [T]
+    public static func fetch<T:NSManagedObject>(_ fetchRequest:NSFetchRequest<T>) -> [T]
     {
         var results:[T]
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate

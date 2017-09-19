@@ -9,33 +9,10 @@
 import Foundation
 import CoreData
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 
 
-class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate
+class MediaDetailViewController : UIViewController
 {
     @IBOutlet weak var headerView:UIView!
     @IBOutlet weak var imageView:CircularImageView!
@@ -66,32 +43,32 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
         }
     }
 
-    private var _cellData: [(label: String, value: String)]!
+    internal var _cellData: [(label: String, value: String)]!
     
-    private let animationDuration:TimeInterval = 0.3
-    private let headerHeightBounds:(min: CGFloat, max: CGFloat) = (min: 64.0, max: 160.0)
-    private let cornerRadiusAnimation:CABasicAnimation = CABasicAnimation(keyPath: "cornerRadius")
+    internal let _animationDuration:TimeInterval = 0.3
+    internal let _headerHeightBounds:(min: CGFloat, max: CGFloat) = (min: 64.0, max: 160.0)
+    internal let _cornerRadiusAnimation:CABasicAnimation = CABasicAnimation(keyPath: "cornerRadius")
     
-    private let minScrollOffset:CGFloat = 16.0
-    private var lastScrollOffset:CGFloat?
-    private var deltaScrollOffset:CGFloat?
-    private var totalDeltaScrollOffset:CGFloat?
+    internal let _minScrollOffset:CGFloat = 16.0
+    internal var _lastScrollOffset:CGFloat?
+    internal var _deltaScrollOffset:CGFloat?
+    internal var _totalDeltaScrollOffset:CGFloat?
 
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        cornerRadiusAnimation.duration = animationDuration
-        cornerRadiusAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        cornerRadiusAnimation.fillMode = kCAFillModeForwards
-        cornerRadiusAnimation.isRemovedOnCompletion = true
+        self._cornerRadiusAnimation.duration = self._animationDuration
+        self._cornerRadiusAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        self._cornerRadiusAnimation.fillMode = kCAFillModeForwards
+        self._cornerRadiusAnimation.isRemovedOnCompletion = true
 
-        imageView.image = self.createImage(for: self.mediaObject)
-        titleLabel.text = mediaObject.name
+        self.imageView.image = self.createImage(for: self.mediaObject)
+        self.titleLabel.text = self.mediaObject.name
         
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 140.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 140.0
     }
     
     
@@ -143,6 +120,16 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     }
     
     
+    private func createImage(for media: ManagedMedia) -> UIImage
+    {
+        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : type(of: media).type.defaultImage
+    }
+}
+
+
+
+extension MediaDetailViewController : UITableViewDataSource
+{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let data: (label: String, value: String) = self._cellData[indexPath.row]
@@ -158,75 +145,78 @@ class MediaDetailViewController : UIViewController, UIScrollViewDelegate, UITabl
     {
         return self._cellData.count
     }
-    
+}
+
+
+
+extension MediaDetailViewController : UIScrollViewDelegate
+{
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
     {
-        lastScrollOffset = scrollView.contentOffset.y
-        totalDeltaScrollOffset = 0.0
+        self._lastScrollOffset = scrollView.contentOffset.y
+        self._totalDeltaScrollOffset = 0.0
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
     {
-        let diffToMin:CGFloat = headerView.frame.height - headerHeightBounds.min
-        let diffToMax:CGFloat = headerHeightBounds.max - headerView.frame.height
-        let useDiff:Bool = (scrollView.isScrolledTop || scrollView.isScrolledBottom || totalDeltaScrollOffset != nil && abs(totalDeltaScrollOffset!) < minScrollOffset)
+        let diffToMin:CGFloat = self.headerView.frame.height - self._headerHeightBounds.min
+        let diffToMax:CGFloat = self._headerHeightBounds.max - self.headerView.frame.height
+        let useDiff:Bool = (
+            scrollView.isScrolledTop ||
+            scrollView.isScrolledBottom ||
+            self._totalDeltaScrollOffset != nil && abs(self._totalDeltaScrollOffset!) < self._minScrollOffset
+        )
         var cornerRadiusToValue:CGFloat = 0.0
         
-        if ((useDiff && diffToMin < diffToMax) || (!useDiff  && deltaScrollOffset > 0))
+        if ((useDiff && diffToMin < diffToMax) || (!useDiff  && (self._deltaScrollOffset ?? 0) > 0))
         {
             // animate to min height header
-            headerHeightConstraint.constant = headerHeightBounds.min
+            self.headerHeightConstraint.constant = self._headerHeightBounds.min
             cornerRadiusToValue = imageMinHeightConstraint.constant / 2
         }
         else
         {
             // animate to max height header
-            headerHeightConstraint.constant = headerHeightBounds.max
-            cornerRadiusToValue = imageMaxHeightConstraint.constant / 2
+            self.headerHeightConstraint.constant = self._headerHeightBounds.max
+            cornerRadiusToValue = self.imageMaxHeightConstraint.constant / 2
         }
         
-        cornerRadiusAnimation.toValue = cornerRadiusToValue
-        cornerRadiusAnimation.fromValue = min(imageView.frame.height, imageView.frame.width) / 2
-        imageView.layer.add(cornerRadiusAnimation, forKey: "cornerRadius")
+        self._cornerRadiusAnimation.toValue = cornerRadiusToValue
+        self._cornerRadiusAnimation.fromValue = min(self.imageView.frame.height, self.imageView.frame.width) / 2
+        self.imageView.layer.add(self._cornerRadiusAnimation, forKey: "cornerRadius")
         
-        UIView.animate(withDuration: animationDuration, animations: { [weak self] in
+        UIView.animate(withDuration: self._animationDuration, animations: { [weak self] in
             self?.tableView.layoutIfNeeded()
             self?.headerView.layoutIfNeeded()
         })
         
         
-        lastScrollOffset = nil
-        deltaScrollOffset = nil
-        totalDeltaScrollOffset = nil
+        self._lastScrollOffset = nil
+        self._deltaScrollOffset = nil
+        self._totalDeltaScrollOffset = nil
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        if let lastOffset:CGFloat = lastScrollOffset
+        if let lastOffset:CGFloat = self._lastScrollOffset
         {
             let newOffset:CGFloat = scrollView.contentOffset.y
             let deltaOffset:CGFloat = newOffset - lastOffset
-            let totalDeltaOffset:CGFloat = (totalDeltaScrollOffset ?? 0.0) + deltaOffset
+            let totalDeltaOffset:CGFloat = (self._totalDeltaScrollOffset ?? 0.0) + deltaOffset
             
-            if (abs(totalDeltaOffset) > minScrollOffset)
+            if (abs(totalDeltaOffset) > self._minScrollOffset)
             {
-                let testHeight:CGFloat = headerView.frame.size.height - deltaOffset
-                let newHeight:CGFloat = max(headerHeightBounds.min, min(headerHeightBounds.max, testHeight))
+                let testHeight:CGFloat = self.headerView.frame.size.height - deltaOffset
+                let newHeight:CGFloat = max(self._headerHeightBounds.min, min(self._headerHeightBounds.max, testHeight))
                 if (newHeight != headerView.frame.size.height)
                 {
-                    headerHeightConstraint.constant = newHeight
-                    headerView.layoutIfNeeded()
+                    self.headerHeightConstraint.constant = newHeight
+                    self.headerView.layoutIfNeeded()
                 }
             }
-            lastScrollOffset = newOffset
-            deltaScrollOffset = deltaOffset
-            totalDeltaScrollOffset = totalDeltaOffset
+            self._lastScrollOffset = newOffset
+            self._deltaScrollOffset = deltaOffset
+            self._totalDeltaScrollOffset = totalDeltaOffset
         }
-    }
-    
-    
-    func createImage(for media: ManagedMedia) -> UIImage
-    {
-        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : type(of: media).type.defaultImage
     }
 }

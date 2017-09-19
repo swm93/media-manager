@@ -90,7 +90,9 @@ class MediaEditViewController : UIViewController
         do
         {
             try appDelegate.saveContext()
-            dismiss(animated: true)
+            
+            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
         }
         catch let error
         {
@@ -104,7 +106,9 @@ class MediaEditViewController : UIViewController
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
         appDelegate.persistentContainer.viewContext.rollback()
-        dismiss(animated: true)
+        
+        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
     
     

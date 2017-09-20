@@ -126,15 +126,15 @@ extension MediaViewController : UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath)
-        let titleLabel:UILabel = cell.viewWithTag(1) as! UILabel
-        let subtitleLabel:UILabel = cell.viewWithTag(2) as! UILabel
-        let imageView:UIImageView = cell.viewWithTag(3) as! UIImageView
-        
-        let mediaObject:ManagedMedia? = _groupedMediaObjects[_selectedMediaType]?[indexPath.section].objects[indexPath.row]
+        let mediaObject: ManagedMedia? = _groupedMediaObjects[_selectedMediaType]?[indexPath.section].objects[indexPath.row]
+        let cellIdentifier: String = mediaObject?.primaryText == nil ? "MediaSingleLineCell" : "MediaDoubleLineCell"
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let titleLabel: UILabel = cell.viewWithTag(1) as! UILabel
+        let subtitleLabel: UILabel? = cell.viewWithTag(2) as? UILabel
+        let imageView: UIImageView = cell.viewWithTag(3) as! UIImageView
         
         titleLabel.text = mediaObject?.name
-        subtitleLabel.text = mediaObject?.primaryText
+        subtitleLabel?.text = mediaObject?.primaryText
         imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData! as Data) : _selectedMediaType.defaultImage
         
         imageView.layer.cornerRadius = imageView.frame.height / 2

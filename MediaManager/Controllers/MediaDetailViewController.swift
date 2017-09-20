@@ -23,25 +23,6 @@ class MediaDetailViewController : UIViewController
     
 
     public var mediaObject: ManagedMedia!
-    {
-        willSet(newValue)
-        {
-            var cellData: [(label: String, value: String)]
-            
-            if let managedObject: NSManagedObject = newValue as? NSManagedObject
-            {
-                cellData = self.getCellData(managedObject: managedObject)
-            }
-            else
-            {
-                cellData = [(label: String, value: String)]()
-            }
-            
-            self._cellData = cellData
-        }
-    }
-
-    internal var _cellData: [(label: String, value: String)]!
     
     private var _yearFormatter: DateFormatter
     

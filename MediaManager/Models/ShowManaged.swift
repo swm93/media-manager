@@ -21,4 +21,21 @@ class ShowManaged : NSManagedObject, ManagedMedia
             return .show
         }
     }
+    
+    var primaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+        
+    }
+    
+    var secondaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+    }
 }

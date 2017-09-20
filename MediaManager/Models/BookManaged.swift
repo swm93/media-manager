@@ -21,4 +21,21 @@ class BookManaged : NSManagedObject, ManagedMedia
             return .book
         }
     }
+    
+    var primaryText: String?
+    {
+        get
+        {
+            return self.authors?.flatMap({ ($0 as? AuthorManaged)?.name }).joined(separator: ", ")
+        }
+        
+    }
+    
+    var secondaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+    }
 }

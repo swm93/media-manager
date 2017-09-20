@@ -18,7 +18,6 @@ class MediaEditViewController : UIViewController
     @IBOutlet public var imageView:UIImageView!
     @IBOutlet public var tableViewContainer:UIView!
     
-    public var mediaType:MediaType!
     public var managedObject:ManagedMedia!
     
     
@@ -36,32 +35,31 @@ class MediaEditViewController : UIViewController
         imageView.image = self.createImage(for: self.managedObject)
         
         // setup table view
-        var tableViewController:MediaEditTableViewController?
+        var tableViewController:MediaEditTableViewController? = nil
         
-        switch(self.mediaType)
+        switch(self.managedObject)
         {
-        case .some(.book):
+        case is BookManaged:
             tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "BookEditTableViewController") as! BookEditTableViewController
             break
             
-        case .some(.game):
+        case is GameManaged:
             tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "GameEditTableViewController") as! GameEditTableViewController
             break
             
-        case .some(.movie):
+        case is MovieManaged:
             tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MovieEditTableViewController") as! MovieEditTableViewController
             break
             
-        case .some(.music):
+        case is SongManaged:
             tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "MusicEditTableViewController") as! MusicEditTableViewController
             break
             
-        case .some(.show):
+        case is ShowManaged:
             tableViewController = self.storyboard!.instantiateViewController(withIdentifier: "ShowEditTableViewController") as! ShowEditTableViewController
             break
             
-        case .none:
-            tableViewController = nil
+        default:
             break
         }
 
@@ -91,8 +89,8 @@ class MediaEditViewController : UIViewController
         {
             try appDelegate.saveContext()
             
-            self.navigationController?.popViewController(animated: true)
             self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
         catch let error
         {
@@ -107,8 +105,8 @@ class MediaEditViewController : UIViewController
         
         appDelegate.persistentContainer.viewContext.rollback()
         
-        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     

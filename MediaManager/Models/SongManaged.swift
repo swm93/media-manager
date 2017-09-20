@@ -37,4 +37,29 @@ class SongManaged : NSManagedObject, ManagedMedia
             return .music
         }
     }
+    
+    var primaryText: String?
+    {
+        get
+        {
+            return self.album?.artist?.name
+        }
+        
+    }
+    
+    var secondaryText: String?
+    {
+        get
+        {
+            return self.album?.name
+        }
+    }
+    
+    var dateReleased: NSDate?
+    {
+        get
+        {
+            return self.album?.dateReleased
+        }
+    }
 }

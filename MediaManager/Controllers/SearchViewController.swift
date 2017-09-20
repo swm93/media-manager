@@ -76,7 +76,6 @@ class SearchViewController: UIViewController
         if (segue.identifier == "MediaCreateSegue")
         {
             let destinationVC: MediaEditViewController = segue.destination as! MediaEditViewController
-            destinationVC.mediaType = self.mediaType
             destinationVC.managedObject = self._selectedMedia ?? self.createMedia()
             
             self._selectedMedia = nil

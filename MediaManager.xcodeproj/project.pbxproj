@@ -14,6 +14,12 @@
 		D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */; };
 		D20696BD1F6F3FF400979DDA /* DebounceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */; };
 		D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C01F6F673A00979DDA /* TimeUtility.swift */; };
+		D20696C81F71D92900979DDA /* MediaDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */; };
+		D20696CA1F71D93600979DDA /* BookDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */; };
+		D20696CC1F71D94E00979DDA /* GameDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */; };
+		D20696CE1F71D95D00979DDA /* MovieDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696CD1F71D95D00979DDA /* MovieDetailTableViewController.swift */; };
+		D20696D01F71D96800979DDA /* MusicDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696CF1F71D96800979DDA /* MusicDetailTableViewController.swift */; };
+		D20696D21F71D97600979DDA /* ShowDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696D11F71D97600979DDA /* ShowDetailTableViewController.swift */; };
 		D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */; };
 		D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */; };
 		D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA11C503FD60017D4FB /* XMLNode.swift */; };
@@ -92,6 +98,12 @@
 		D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectManager.swift; sourceTree = "<group>"; };
 		D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebounceUtility.swift; sourceTree = "<group>"; };
 		D20696C01F6F673A00979DDA /* TimeUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtility.swift; sourceTree = "<group>"; };
+		D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailTableViewController.swift; sourceTree = "<group>"; };
+		D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailTableViewController.swift; sourceTree = "<group>"; };
+		D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetailTableViewController.swift; sourceTree = "<group>"; };
+		D20696CD1F71D95D00979DDA /* MovieDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailTableViewController.swift; sourceTree = "<group>"; };
+		D20696CF1F71D96800979DDA /* MusicDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicDetailTableViewController.swift; sourceTree = "<group>"; };
+		D20696D11F71D97600979DDA /* ShowDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDetailTableViewController.swift; sourceTree = "<group>"; };
 		D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMSearchParser.swift; sourceTree = "<group>"; };
 		D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterizedURL.swift; path = ../Parsers/ParameterizedURL.swift; sourceTree = "<group>"; };
 		D2219CA11C503FD60017D4FB /* XMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
@@ -203,6 +215,19 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		D20696C61F71D90800979DDA /* DetailControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */,
+				D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */,
+				D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */,
+				D20696CD1F71D95D00979DDA /* MovieDetailTableViewController.swift */,
+				D20696CF1F71D96800979DDA /* MusicDetailTableViewController.swift */,
+				D20696D11F71D97600979DDA /* ShowDetailTableViewController.swift */,
+			);
+			path = DetailControllers;
+			sourceTree = "<group>";
+		};
 		D2219CA01C4EF9930017D4FB /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +287,7 @@
 		D2778AFF1C4DB53700BD2994 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D20696C61F71D90800979DDA /* DetailControllers */,
 				D2B1DC2E1EE385A400444FD7 /* EditControllers */,
 				D2414AC01C5B3F2300146CCE /* MediaViewController.swift */,
 				D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */,
@@ -566,9 +592,12 @@
 				D2EEF7CC1C647A1F0025B133 /* SearchResult.swift in Sources */,
 				D20562561EE4ABAF007B8345 /* ParserDelegate.swift in Sources */,
 				D205625A1EE8DE15007B8345 /* PlatformManaged.swift in Sources */,
+				D20696CA1F71D93600979DDA /* BookDetailTableViewController.swift in Sources */,
 				D2EEF7D21C66939D0025B133 /* LastFMDetailParser.swift in Sources */,
 				D2A7A87F1C4D8FD800B21BEA /* SearchViewController.swift in Sources */,
 				D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */,
+				D20696D01F71D96800979DDA /* MusicDetailTableViewController.swift in Sources */,
+				D20696C81F71D92900979DDA /* MediaDetailTableViewController.swift in Sources */,
 				D2B2BA291C6A71C400BF1957 /* TableCellRenderable.swift in Sources */,
 				D2EEF7CE1C64831C0025B133 /* MediaType.swift in Sources */,
 				D2A6EB9A1EE2617E0033AD1E /* TableSection.swift in Sources */,
@@ -592,12 +621,15 @@
 				D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */,
 				D262043A1ED65BDF00AC31B0 /* GenreManaged.swift in Sources */,
 				D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */,
+				D20696D21F71D97600979DDA /* ShowDetailTableViewController.swift in Sources */,
 				D26204301ED65B6000AC31B0 /* BookManaged.swift in Sources */,
 				D2B1DC3C1EE39EF600444FD7 /* MediaEditCell.swift in Sources */,
 				D2219CA61C50ACF40017D4FB /* ArtistManaged.swift in Sources */,
 				D26204321ED65B7800AC31B0 /* GameManaged.swift in Sources */,
 				D2EEF7D41C66968E0025B133 /* ParserType.swift in Sources */,
 				D2414ACB1C60721400146CCE /* MediaNavigationController.swift in Sources */,
+				D20696CC1F71D94E00979DDA /* GameDetailTableViewController.swift in Sources */,
+				D20696CE1F71D95D00979DDA /* MovieDetailTableViewController.swift in Sources */,
 				D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */,
 				D2A7A8851C4D8FD800B21BEA /* MediaManager.xcdatamodeld in Sources */,
 				D26204341ED65B9100AC31B0 /* MovieManaged.swift in Sources */,

@@ -13,6 +13,5 @@ import UIKit
 
 class MediaDetailCell : UITableViewCell
 {
-    @IBOutlet var titleLabel:UILabel!
-    @IBOutlet var contentLabel:UILabel!
+    @IBOutlet var contentLabel: UILabel!
 }

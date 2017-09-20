@@ -1,8 +1,8 @@
 //
-//  MediaEditTableViewController.swift
+//  MediaDetailTableViewController.swift
 //  MediaManager
 //
-//  Created by Scott Mielcarski on 2017-06-03.
+//  Created by Scott Mielcarski on 2017-09-19.
 //  Copyright © 2017 Scott Mielcarski. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class MediaEditTableViewController : UITableViewController
+class MediaDetailTableViewController : UITableViewController
 {
     public var mediaObject: ManagedMedia!
     public var dateFormat: String = "yyyy-MM-dd"

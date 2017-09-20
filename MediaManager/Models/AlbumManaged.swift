@@ -21,4 +21,21 @@ class AlbumManaged : NSManagedObject, ManagedMedia
             return .music
         }
     }
+    
+    var primaryText: String?
+    {
+        get
+        {
+            return self.artist?.name
+        }
+    
+    }
+    
+    var secondaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+    }
 }

@@ -40,4 +40,29 @@ class ArtistManaged : NSManagedObject, ManagedMedia
             return .music
         }
     }
+    
+    var primaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+        
+    }
+    
+    var secondaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+    }
+    
+    var dateReleased: NSDate?
+    {
+        get
+        {
+            return nil
+        }
+    }
 }

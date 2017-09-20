@@ -29,4 +29,29 @@ class AuthorManaged : NSManagedObject, ManagedMedia
             return .book
         }
     }
+    
+    var primaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+        
+    }
+    
+    var secondaryText: String?
+    {
+        get
+        {
+            return nil
+        }
+    }
+    
+    var dateReleased: NSDate?
+    {
+        get
+        {
+            return nil
+        }
+    }
 }

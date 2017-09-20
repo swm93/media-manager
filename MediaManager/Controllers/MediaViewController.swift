@@ -134,7 +134,7 @@ extension MediaViewController : UITableViewDataSource
         let mediaObject:ManagedMedia? = _groupedMediaObjects[_selectedMediaType]?[indexPath.section].objects[indexPath.row]
         
         titleLabel.text = mediaObject?.name
-        subtitleLabel.text = ""
+        subtitleLabel.text = mediaObject?.primaryText
         imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData! as Data) : _selectedMediaType.defaultImage
         
         imageView.layer.cornerRadius = imageView.frame.height / 2

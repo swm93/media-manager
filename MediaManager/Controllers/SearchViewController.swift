@@ -60,7 +60,7 @@ class SearchViewController: UIViewController
             
         case .game:
             self._searchParser = IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
-            self._detailParser = IGDBDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+            self._detailParser = IGDBDetailParser(PListManager("Secrets")["igdb_api_key"] as! String)
             break
             
         default:

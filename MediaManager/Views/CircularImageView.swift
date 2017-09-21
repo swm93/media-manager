@@ -25,6 +25,7 @@ class CircularImageView : UIImageView
         }
     }
     
+    
     @IBInspectable var borderColor:UIColor?
     {
         get
@@ -37,27 +38,6 @@ class CircularImageView : UIImageView
         }
     }
     
-    override var image: UIImage?
-    {
-        willSet(newValue)
-        {
-            if let size: CGSize = newValue?.size
-            {
-                var contentMode: UIViewContentMode
-                
-                if (size.width < self.frame.width && size.height < self.frame.height)
-                {
-                    contentMode = .center
-                }
-                else
-                {
-                    contentMode = .scaleAspectFill
-                }
-                
-                self.contentMode = contentMode
-            }
-        }
-    }
     
     override func layoutSubviews()
     {

@@ -41,11 +41,21 @@ class MediaDetailViewController : UIViewController
     {
         super.viewDidLoad()
 
-        self.imageView.image = self.createImage(for: self.mediaObject)
         self.titleLabel.text = self.mediaObject.name
         self.primarySubtitleLabel.text = self.mediaObject.primaryText
         self.secondarySubtitleLabel.text = self.mediaObject.secondaryText
         self.yearLabel.text = self.getYearText(for: self.mediaObject)
+        
+        if let imageData: Data = mediaObject?.imageData as Data?
+        {
+            self.imageView.image = UIImage(data: imageData)
+            self.imageView.contentMode = .scaleAspectFill
+        }
+        else
+        {
+            self.imageView.image = type(of: self.mediaObject!).type.defaultImage
+            self.imageView.contentMode = .center
+        }
         
         // setup table view
         var tableViewController: MediaDetailTableViewController? = nil
@@ -95,12 +105,6 @@ class MediaDetailViewController : UIViewController
             let destinationVC: MediaEditViewController = segue.destination as! MediaEditViewController
             destinationVC.managedObject = self.mediaObject
         }
-    }
-    
-    
-    private func createImage(for media: ManagedMedia) -> UIImage
-    {
-        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : type(of: media).type.defaultImage
     }
     
     

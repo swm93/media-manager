@@ -191,10 +191,17 @@ extension MediaViewController : UITableViewDataSource
         
         titleLabel.text = mediaObject?.name
         subtitleLabel?.text = mediaObject?.primaryText
-        imageView.image = mediaObject?.imageData != nil ? UIImage(data: mediaObject!.imageData! as Data) : _selectedMediaType.defaultImage
         
-        imageView.layer.cornerRadius = imageView.frame.height / 2
-        imageView.layer.masksToBounds = true
+        if let imageData: Data = mediaObject?.imageData as Data?
+        {
+            imageView.image = UIImage(data: imageData)
+            imageView.contentMode = .scaleAspectFill
+        }
+        else
+        {
+            imageView.image = _selectedMediaType.defaultImage
+            imageView.contentMode = .center
+        }
         
         return cell
     }
@@ -258,11 +265,5 @@ extension MediaViewController : UITableViewDelegate
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
         return true
-    }
-    
-    
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool
-    {
-        return false
     }
 }

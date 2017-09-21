@@ -173,10 +173,17 @@ extension SearchViewController : UITableViewDataSource
             
             titleLabel.text = searchResult.primaryText
             subtitleLabel.text = searchResult.secondaryText
-            imageView.image = searchResult.image
             
-            imageView.layer.cornerRadius = imageView.frame.height / 2
-            imageView.layer.masksToBounds = true
+            if let image: UIImage = searchResult.image
+            {
+                imageView.image = image
+                imageView.contentMode = .scaleAspectFill
+            }
+            else
+            {
+                imageView.image = self.mediaType.defaultImage
+                imageView.contentMode = .center
+            }
         }
         
         return cell

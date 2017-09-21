@@ -32,7 +32,16 @@ class MediaEditViewController : UIViewController
         self.nameTextField.text = self.managedObject.name
         
         // setup media image
-        imageView.image = self.createImage(for: self.managedObject)
+        if let imageData: Data = self.managedObject?.imageData as Data?
+        {
+            self.imageView.image = UIImage(data: imageData)
+            self.imageView.contentMode = .scaleAspectFill
+        }
+        else
+        {
+            self.imageView.image = type(of: self.managedObject!).type.defaultImage
+            self.imageView.contentMode = .center
+        }
         
         // setup table view
         var tableViewController:MediaEditTableViewController? = nil
@@ -72,12 +81,6 @@ class MediaEditViewController : UIViewController
             self.tableViewContainer.addSubview(controller.view)
             controller.didMove(toParentViewController: self)
         }
-    }
-    
-    
-    private func createImage(for media: ManagedMedia) -> UIImage
-    {
-        return media.imageData != nil ? UIImage(data: media.imageData! as Data)! : type(of: media).type.defaultImage
     }
     
     

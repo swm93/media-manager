@@ -43,9 +43,6 @@ class MediaViewController: UIViewController
             }
             
             _groupedMediaObjects = groupedMediaObjects
-            
-            // reload the table
-            mediaTable.reloadData()
         }
     }
     
@@ -88,8 +85,13 @@ class MediaViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        let results:[SongManaged] = ManagedObjectManager.all(fetchRequest: SongManaged.fetchRequest())
-        mediaObjects[MediaType.music] = results
+        mediaObjects[MediaType.book] = ManagedObjectManager.all(fetchRequest: BookManaged.fetchRequest())
+        mediaObjects[MediaType.game] = ManagedObjectManager.all(fetchRequest: GameManaged.fetchRequest())
+        mediaObjects[MediaType.movie] = ManagedObjectManager.all(fetchRequest: MovieManaged.fetchRequest())
+        mediaObjects[MediaType.music] = ManagedObjectManager.all(fetchRequest: SongManaged.fetchRequest())
+        mediaObjects[MediaType.show] = ManagedObjectManager.all(fetchRequest: ShowManaged.fetchRequest())
+        
+        self.mediaTable.reloadData()
     }
     
     
@@ -116,6 +118,60 @@ class MediaViewController: UIViewController
             
         default:
             break
+        }
+    }
+    
+    
+    @IBAction public func editMediaTable(_ sender: AnyObject)
+    {
+        if let barButton: UIBarButtonItem = sender as? UIBarButtonItem
+        {
+            barButton.title = self.mediaTable.isEditing ? "Edit" : "Done"
+        }
+        
+        self.mediaTable.setEditing(!self.mediaTable.isEditing, animated: true)
+    }
+    
+    
+    internal func tableView(_ tableView: UITableView, deleteCellAt indexPath: IndexPath)
+    {
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let media: ManagedMedia? = self._groupedMediaObjects[self._selectedMediaType]?[indexPath.section].objects?[indexPath.row]
+        
+        if let managedObject: NSManagedObject = media as! NSManagedObject?
+        {
+            appDelegate.persistentContainer.viewContext.delete(managedObject)
+            
+            do
+            {
+                try appDelegate.saveContext()
+                
+                var i: Int = 0
+                for obj: ManagedMedia in self.mediaObjects[self._selectedMediaType]!
+                {
+                    let managedObj: NSManagedObject? = obj as? NSManagedObject
+                    if (managedObj == managedObject)
+                    {
+                        self.mediaObjects[self._selectedMediaType]?.remove(at: i)
+                        break
+                    }
+                    
+                    i += 1
+                }
+                
+                if (tableView.numberOfRows(inSection: indexPath.section) == 1)
+                {
+                    tableView.deleteSections([indexPath.section], with: .fade)
+                }
+                else
+                {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+            catch let error
+            {
+                print("Could not delete \(error)")
+            }
         }
     }
 }
@@ -163,8 +219,50 @@ extension MediaViewController : UITableViewDataSource
         return _groupedMediaObjects[_selectedMediaType]?[section].name
     }
     
+    
     func sectionIndexTitles(for tableView: UITableView) -> [String]?
     {
         return _tableViewSectionHeaders
+    }
+}
+
+
+extension MediaViewController : UITableViewDelegate
+{
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        switch (editingStyle)
+        {
+        case .delete:
+            self.tableView(tableView, deleteCellAt: indexPath)
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+    {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete")
+        { action, index in
+            self.tableView(tableView, deleteCellAt: indexPath)
+        }
+        deleteAction.backgroundColor = .red
+        
+        return [deleteAction]
+    }
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return true
+    }
+    
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool
+    {
+        return false
     }
 }

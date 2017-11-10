@@ -78,8 +78,7 @@ class LastFMDetailParser : JSONParser<ManagedMedia>
                         let releaseDateFormatter: DateFormatter = DateFormatter()
                         releaseDateFormatter.dateFormat = "d MMM yyyy, HH:mm"
                         
-                        let date: NSDate? = releaseDateFormatter.date(from: releaseDate) as NSDate?
-                        result.album?.dateReleased = date
+                        result.album?.dateReleased = releaseDateFormatter.date(from: releaseDate)
                     }
                     
                     if let albumImageObj:[[String: Any]] = albumObj["image"] as? [[String: Any]]
@@ -88,7 +87,7 @@ class LastFMDetailParser : JSONParser<ManagedMedia>
                         
                         if let data: Data = downloadImage(fromUrl: albumImageUrl)
                         {
-                            album!.imageData = NSData(data: data)
+                            album!.imageData = data
                         }
                     }
                     
@@ -111,7 +110,7 @@ class LastFMDetailParser : JSONParser<ManagedMedia>
                             
                             if let data: Data = downloadImage(fromUrl: artistImageUrl)
                             {
-                                artist!.imageData = NSData(data: data)
+                                artist!.imageData = data
                             }
                         }
                         

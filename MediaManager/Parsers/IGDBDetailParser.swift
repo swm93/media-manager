@@ -54,7 +54,8 @@ class IGDBDetailParser: JSONParser<ManagedMedia>
                 // get date released
                 if let dateReleased: Int64 = resultObj["first_release_date"] as? Int64
                 {
-                    result.dateReleased = NSDate(timeIntervalSince1970: TimeInterval(dateReleased / 1000))
+                    
+                    result.dateReleased = Date(timeIntervalSince1970: TimeInterval(dateReleased / 1000))
                 }
                 
                 // get image
@@ -65,7 +66,7 @@ class IGDBDetailParser: JSONParser<ManagedMedia>
                     if let url: String = imageUrl,
                        let imageData: Data = downloadImage(fromUrl: "http:\(url)")
                     {
-                        result.imageData = NSData(data: imageData)
+                        result.imageData = imageData
                     }
                 }
             }

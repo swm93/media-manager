@@ -8,14 +8,15 @@
 
 import UIKit
 import CoreData
+import SafariServices
+
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
 {
-
     var window: UIWindow?
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
         // Override point for customization after application launch.
@@ -59,6 +60,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
+    {
+        var handled: Bool = false
+        
+        let spotify: Spotify = Spotify.shared
+        if (spotify.canHandle(url))
+        {
+            spotify.respond(to: url)
+            handled = true
+        }
+        
+        return handled
     }
 
     // MARK: - Core Data stack

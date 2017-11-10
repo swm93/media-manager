@@ -58,7 +58,7 @@ class ArtistManaged : NSManagedObject, ManagedMedia
         }
     }
     
-    var dateReleased: NSDate?
+    var dateReleased: Date?
     {
         get
         {

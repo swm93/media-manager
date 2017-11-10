@@ -14,6 +14,8 @@
 		D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */; };
 		D20696BD1F6F3FF400979DDA /* DebounceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */; };
 		D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C01F6F673A00979DDA /* TimeUtility.swift */; };
+		D20696C31F71C77200979DDA /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20696C21F71C77200979DDA /* HeaderView.xib */; };
+		D20696C51F71C79700979DDA /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C41F71C79700979DDA /* HeaderView.swift */; };
 		D20696C81F71D92900979DDA /* MediaDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */; };
 		D20696CA1F71D93600979DDA /* BookDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */; };
 		D20696CC1F71D94E00979DDA /* GameDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */; };
@@ -42,6 +44,12 @@
 		D2778AF81C4DA49700BD2994 /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2778AF71C4DA49700BD2994 /* APIParser.swift */; };
 		D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */; };
 		D283B2231ECF426F007EE445 /* MediaDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283B2221ECF426F007EE445 /* MediaDetailCell.swift */; };
+		D28A90401FB39CCD002F35F0 /* LabelDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A903F1FB39CCD002F35F0 /* LabelDetailCell.swift */; };
+		D28A90421FB3B4F0002F35F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90411FB3B4E3002F35F0 /* AVFoundation.framework */; };
+		D28A90461FB3B72E002F35F0 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90431FB3B72E002F35F0 /* SpotifyMetadata.framework */; };
+		D28A90471FB3B72E002F35F0 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90441FB3B72E002F35F0 /* SpotifyAuthentication.framework */; };
+		D28A90481FB3B72E002F35F0 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90451FB3B72E002F35F0 /* SpotifyAudioPlayback.framework */; };
+		D28A904F1FB3CF27002F35F0 /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A904E1FB3CF27002F35F0 /* Spotify.swift */; };
 		D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */; };
 		D2A6EB981EE133130033AD1E /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB971EE133130033AD1E /* SearchDelegate.swift */; };
 		D2A6EB9A1EE2617E0033AD1E /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB991EE2617E0033AD1E /* TableSection.swift */; };
@@ -63,8 +71,18 @@
 		D2B1DC381EE386BC00444FD7 /* ShowEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC371EE386BC00444FD7 /* ShowEditTableViewController.swift */; };
 		D2B1DC3A1EE38E3B00444FD7 /* MediaEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC391EE38E3B00444FD7 /* MediaEditTableViewController.swift */; };
 		D2B1DC3C1EE39EF600444FD7 /* MediaEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */; };
+		D2B267C71FB3E3F700E319E3 /* MediaDetailControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B267C61FB3E3F700E319E3 /* MediaDetailControlsViewController.swift */; };
 		D2B2BA291C6A71C400BF1957 /* TableCellRenderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2BA281C6A71C400BF1957 /* TableCellRenderable.swift */; };
-		D2EEF7CA1C646F310025B133 /* TMDBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7C91C646F310025B133 /* TMDBParser.swift */; };
+		D2BDCF381FB430C900941717 /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDCF371FB430C900941717 /* EditCell.swift */; };
+		D2BDCF3A1FB4365E00941717 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDCF391FB4365E00941717 /* EditViewController.swift */; };
+		D2CC2E7F1FB5146200DCC5BD /* EditStringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E7E1FB5146200DCC5BD /* EditStringCell.swift */; };
+		D2CC2E811FB51C1E00DCC5BD /* EditTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E801FB51C1E00DCC5BD /* EditTextCell.swift */; };
+		D2CC2E831FB51C3400DCC5BD /* EditDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E821FB51C3400DCC5BD /* EditDateCell.swift */; };
+		D2CC2E851FB51C3D00DCC5BD /* EditTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E841FB51C3D00DCC5BD /* EditTimeCell.swift */; };
+		D2CC2E871FB51C4500DCC5BD /* EditNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E861FB51C4500DCC5BD /* EditNumberCell.swift */; };
+		D2CC2E891FB51C6C00DCC5BD /* EditStringArrayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E881FB51C6C00DCC5BD /* EditStringArrayCell.swift */; };
+		D2E5B0C41FB4F1390075FA97 /* NSManagedObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E5B0C31FB4F1390075FA97 /* NSManagedObjectExtension.swift */; };
+		D2EEF7CA1C646F310025B133 /* TMDBSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7C91C646F310025B133 /* TMDBSearchParser.swift */; };
 		D2EEF7CC1C647A1F0025B133 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7CB1C647A1F0025B133 /* SearchResult.swift */; };
 		D2EEF7CE1C64831C0025B133 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7CD1C64831C0025B133 /* MediaType.swift */; };
 		D2EEF7D01C652A560025B133 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7CF1C652A560025B133 /* JSONParser.swift */; };
@@ -98,6 +116,8 @@
 		D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectManager.swift; sourceTree = "<group>"; };
 		D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebounceUtility.swift; sourceTree = "<group>"; };
 		D20696C01F6F673A00979DDA /* TimeUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtility.swift; sourceTree = "<group>"; };
+		D20696C21F71C77200979DDA /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		D20696C41F71C79700979DDA /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailTableViewController.swift; sourceTree = "<group>"; };
 		D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailTableViewController.swift; sourceTree = "<group>"; };
 		D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +146,13 @@
 		D2778AF71C4DA49700BD2994 /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBSearchParser.swift; sourceTree = "<group>"; };
 		D283B2221ECF426F007EE445 /* MediaDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailCell.swift; sourceTree = "<group>"; };
+		D28A903F1FB39CCD002F35F0 /* LabelDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDetailCell.swift; sourceTree = "<group>"; };
+		D28A90411FB3B4E3002F35F0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D28A90431FB3B72E002F35F0 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		D28A90441FB3B72E002F35F0 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		D28A90451FB3B72E002F35F0 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
+		D28A904C1FB3B820002F35F0 /* MediaManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediaManager-Bridging-Header.h"; sourceTree = "<group>"; };
+		D28A904E1FB3CF27002F35F0 /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 		D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditViewController.swift; sourceTree = "<group>"; };
 		D2A6EB971EE133130033AD1E /* SearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		D2A6EB991EE2617E0033AD1E /* TableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
@@ -153,8 +180,18 @@
 		D2B1DC371EE386BC00444FD7 /* ShowEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEditTableViewController.swift; sourceTree = "<group>"; };
 		D2B1DC391EE38E3B00444FD7 /* MediaEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditTableViewController.swift; sourceTree = "<group>"; };
 		D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditCell.swift; sourceTree = "<group>"; };
+		D2B267C61FB3E3F700E319E3 /* MediaDetailControlsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailControlsViewController.swift; sourceTree = "<group>"; };
 		D2B2BA281C6A71C400BF1957 /* TableCellRenderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellRenderable.swift; sourceTree = "<group>"; };
-		D2EEF7C91C646F310025B133 /* TMDBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBParser.swift; sourceTree = "<group>"; };
+		D2BDCF371FB430C900941717 /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
+		D2BDCF391FB4365E00941717 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		D2CC2E7E1FB5146200DCC5BD /* EditStringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStringCell.swift; sourceTree = "<group>"; };
+		D2CC2E801FB51C1E00DCC5BD /* EditTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextCell.swift; sourceTree = "<group>"; };
+		D2CC2E821FB51C3400DCC5BD /* EditDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateCell.swift; sourceTree = "<group>"; };
+		D2CC2E841FB51C3D00DCC5BD /* EditTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimeCell.swift; sourceTree = "<group>"; };
+		D2CC2E861FB51C4500DCC5BD /* EditNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNumberCell.swift; sourceTree = "<group>"; };
+		D2CC2E881FB51C6C00DCC5BD /* EditStringArrayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStringArrayCell.swift; sourceTree = "<group>"; };
+		D2E5B0C31FB4F1390075FA97 /* NSManagedObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtension.swift; sourceTree = "<group>"; };
+		D2EEF7C91C646F310025B133 /* TMDBSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBSearchParser.swift; sourceTree = "<group>"; };
 		D2EEF7CB1C647A1F0025B133 /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		D2EEF7CD1C64831C0025B133 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		D2EEF7CF1C652A560025B133 /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
@@ -168,7 +205,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28A90421FB3B4F0002F35F0 /* AVFoundation.framework in Frameworks */,
+				D28A90471FB3B72E002F35F0 /* SpotifyAuthentication.framework in Frameworks */,
+				D28A90461FB3B72E002F35F0 /* SpotifyMetadata.framework in Frameworks */,
 				2640DC4F862AA0262868F299 /* Pods_MediaManager.framework in Frameworks */,
+				D28A90481FB3B72E002F35F0 /* SpotifyAudioPlayback.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +242,10 @@
 		331EB6F284C817EC1F85DC7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D28A90411FB3B4E3002F35F0 /* AVFoundation.framework */,
+				D28A90451FB3B72E002F35F0 /* SpotifyAudioPlayback.framework */,
+				D28A90441FB3B72E002F35F0 /* SpotifyAuthentication.framework */,
+				D28A90431FB3B72E002F35F0 /* SpotifyMetadata.framework */,
 				30952C242F386B3F96A1F781 /* Pods_MediaManager.framework */,
 			);
 			name = Frameworks;
@@ -210,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */,
+				D28A904E1FB3CF27002F35F0 /* Spotify.swift */,
 				D20696C01F6F673A00979DDA /* TimeUtility.swift */,
 			);
 			name = Utilities;
@@ -249,6 +295,7 @@
 		D2459AC41C61D621003AEFDC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D2E5B0C31FB4F1390075FA97 /* NSManagedObjectExtension.swift */,
 				D2459AC51C61D649003AEFDC /* UIScrollViewExtension.swift */,
 			);
 			path = Extensions;
@@ -264,7 +311,7 @@
 				D2B1DC2C1EE337AA00444FD7 /* IGDBDetailParser.swift */,
 				D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */,
 				D2EEF7D11C66939D0025B133 /* LastFMDetailParser.swift */,
-				D2EEF7C91C646F310025B133 /* TMDBParser.swift */,
+				D2EEF7C91C646F310025B133 /* TMDBSearchParser.swift */,
 				D20562551EE4ABAF007B8345 /* ParserDelegate.swift */,
 			);
 			path = Parsers;
@@ -292,8 +339,10 @@
 				D2414AC01C5B3F2300146CCE /* MediaViewController.swift */,
 				D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */,
 				D2414AC41C5F157D00146CCE /* MediaDetailViewController.swift */,
+				D2B267C61FB3E3F700E319E3 /* MediaDetailControlsViewController.swift */,
 				D2414ACA1C60721400146CCE /* MediaNavigationController.swift */,
 				D2A7A87E1C4D8FD800B21BEA /* SearchViewController.swift */,
+				D2BDCF391FB4365E00941717 /* EditViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -323,6 +372,7 @@
 		D2A7A87B1C4D8FD800B21BEA /* MediaManager */ = {
 			isa = PBXGroup;
 			children = (
+				D28A904C1FB3B820002F35F0 /* MediaManager-Bridging-Header.h */,
 				D2778AFF1C4DB53700BD2994 /* Controllers */,
 				D2AE8EB31EDD28AE00A76BE4 /* Data */,
 				D2459AC41C61D621003AEFDC /* Extensions */,
@@ -362,11 +412,15 @@
 		D2A870F51C51B7C400F8C2D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D2CC2E7D1FB513D800DCC5BD /* EditTableViewCells */,
 				D2A7A8881C4D8FD800B21BEA /* LaunchScreen.storyboard */,
 				D2A7A8801C4D8FD800B21BEA /* Main.storyboard */,
+				D20696C21F71C77200979DDA /* HeaderView.xib */,
 				D2414AC81C60167400146CCE /* CircularImageView.swift */,
+				D20696C41F71C79700979DDA /* HeaderView.swift */,
 				D283B2221ECF426F007EE445 /* MediaDetailCell.swift */,
 				D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */,
+				D28A903F1FB39CCD002F35F0 /* LabelDetailCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,6 +454,20 @@
 				D2A6EB971EE133130033AD1E /* SearchDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D2CC2E7D1FB513D800DCC5BD /* EditTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D2BDCF371FB430C900941717 /* EditCell.swift */,
+				D2CC2E821FB51C3400DCC5BD /* EditDateCell.swift */,
+				D2CC2E861FB51C4500DCC5BD /* EditNumberCell.swift */,
+				D2CC2E7E1FB5146200DCC5BD /* EditStringCell.swift */,
+				D2CC2E881FB51C6C00DCC5BD /* EditStringArrayCell.swift */,
+				D2CC2E801FB51C1E00DCC5BD /* EditTextCell.swift */,
+				D2CC2E841FB51C3D00DCC5BD /* EditTimeCell.swift */,
+			);
+			path = EditTableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,21 +536,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Scott Mielcarski";
 				TargetAttributes = {
 					D2A7A8781C4D8FD800B21BEA = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						DevelopmentTeam = 57LJ37Z96Z;
+						LastSwiftMigration = 0910;
 					};
 					D2A7A88F1C4D8FD800B21BEA = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0910;
 						TestTargetID = D2A7A8781C4D8FD800B21BEA;
 					};
 					D2A7A89A1C4D8FD800B21BEA = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0910;
 						TestTargetID = D2A7A8781C4D8FD800B21BEA;
 					};
 				};
@@ -515,6 +584,7 @@
 				D2A7A88A1C4D8FD800B21BEA /* LaunchScreen.storyboard in Resources */,
 				D2AE8EB21EDD13CA00A76BE4 /* Secrets.plist in Resources */,
 				D2A7A8871C4D8FD800B21BEA /* Assets.xcassets in Resources */,
+				D20696C31F71C77200979DDA /* HeaderView.xib in Resources */,
 				D2A7A8821C4D8FD800B21BEA /* Main.storyboard in Resources */,
 				D2414ABB1C5B392000146CCE /* MediaIcons.xcassets in Resources */,
 			);
@@ -607,14 +677,22 @@
 				D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */,
 				D2B1DC2D1EE337AA00444FD7 /* IGDBDetailParser.swift in Sources */,
 				D2414AC51C5F157D00146CCE /* MediaDetailViewController.swift in Sources */,
+				D20696C51F71C79700979DDA /* HeaderView.swift in Sources */,
 				D2778AF81C4DA49700BD2994 /* APIParser.swift in Sources */,
 				D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */,
+				D28A904F1FB3CF27002F35F0 /* Spotify.swift in Sources */,
 				D262042C1ED65ACC00AC31B0 /* ManagedMedia.swift in Sources */,
+				D28A90401FB39CCD002F35F0 /* LabelDetailCell.swift in Sources */,
+				D2CC2E811FB51C1E00DCC5BD /* EditTextCell.swift in Sources */,
 				D2219CA41C50A5400017D4FB /* XMLParser.swift in Sources */,
+				D2E5B0C41FB4F1390075FA97 /* NSManagedObjectExtension.swift in Sources */,
 				D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */,
+				D2CC2E891FB51C6C00DCC5BD /* EditStringArrayCell.swift in Sources */,
 				D2B1DC381EE386BC00444FD7 /* ShowEditTableViewController.swift in Sources */,
+				D2BDCF381FB430C900941717 /* EditCell.swift in Sources */,
 				D2B1DC341EE386A300444FD7 /* GameEditTableViewController.swift in Sources */,
 				D2459AC61C61D649003AEFDC /* UIScrollViewExtension.swift in Sources */,
+				D2CC2E871FB51C4500DCC5BD /* EditNumberCell.swift in Sources */,
 				D2EEF7D01C652A560025B133 /* JSONParser.swift in Sources */,
 				D20562581EE8DD44007B8345 /* AuthorManaged.swift in Sources */,
 				D2414AC11C5B3F2300146CCE /* MediaViewController.swift in Sources */,
@@ -622,21 +700,26 @@
 				D262043A1ED65BDF00AC31B0 /* GenreManaged.swift in Sources */,
 				D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */,
 				D20696D21F71D97600979DDA /* ShowDetailTableViewController.swift in Sources */,
+				D2BDCF3A1FB4365E00941717 /* EditViewController.swift in Sources */,
 				D26204301ED65B6000AC31B0 /* BookManaged.swift in Sources */,
 				D2B1DC3C1EE39EF600444FD7 /* MediaEditCell.swift in Sources */,
 				D2219CA61C50ACF40017D4FB /* ArtistManaged.swift in Sources */,
 				D26204321ED65B7800AC31B0 /* GameManaged.swift in Sources */,
 				D2EEF7D41C66968E0025B133 /* ParserType.swift in Sources */,
 				D2414ACB1C60721400146CCE /* MediaNavigationController.swift in Sources */,
+				D2B267C71FB3E3F700E319E3 /* MediaDetailControlsViewController.swift in Sources */,
 				D20696CC1F71D94E00979DDA /* GameDetailTableViewController.swift in Sources */,
+				D2CC2E7F1FB5146200DCC5BD /* EditStringCell.swift in Sources */,
 				D20696CE1F71D95D00979DDA /* MovieDetailTableViewController.swift in Sources */,
 				D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */,
 				D2A7A8851C4D8FD800B21BEA /* MediaManager.xcdatamodeld in Sources */,
 				D26204341ED65B9100AC31B0 /* MovieManaged.swift in Sources */,
 				D2B1DC301EE385BB00444FD7 /* MusicEditTableViewController.swift in Sources */,
+				D2CC2E851FB51C3D00DCC5BD /* EditTimeCell.swift in Sources */,
 				D26204361ED65BA700AC31B0 /* ShowManaged.swift in Sources */,
 				D26204381ED65BBE00AC31B0 /* SongManaged.swift in Sources */,
-				D2EEF7CA1C646F310025B133 /* TMDBParser.swift in Sources */,
+				D2EEF7CA1C646F310025B133 /* TMDBSearchParser.swift in Sources */,
+				D2CC2E831FB51C3400DCC5BD /* EditDateCell.swift in Sources */,
 				D2A7A87D1C4D8FD800B21BEA /* AppDelegate.swift in Sources */,
 				D2A6EB981EE133130033AD1E /* SearchDelegate.swift in Sources */,
 				D262042E1ED65B2A00AC31B0 /* AlbumManaged.swift in Sources */,
@@ -708,14 +791,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -755,14 +844,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -793,12 +888,23 @@
 			baseConfigurationReference = 50F57ADE2A29AD7E24AB2CE9 /* Pods-MediaManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 57LJ37Z96Z;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MediaManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Scott-Mielcarski.MediaManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "MediaManager/MediaManager-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -807,12 +913,23 @@
 			baseConfigurationReference = F34D9348D09081EF42110C1B /* Pods-MediaManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 57LJ37Z96Z;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MediaManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Scott-Mielcarski.MediaManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "MediaManager/MediaManager-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -824,7 +941,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Scott-Mielcarski.MediaManagerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediaManager.app/MediaManager";
 			};
 			name = Debug;
@@ -837,7 +955,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Scott-Mielcarski.MediaManagerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediaManager.app/MediaManager";
 			};
 			name = Release;
@@ -849,7 +968,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Scott-Mielcarski.MediaManagerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = MediaManager;
 				USES_XCTRUNNER = YES;
 			};
@@ -862,7 +982,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Scott-Mielcarski.MediaManagerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = MediaManager;
 				USES_XCTRUNNER = YES;
 			};

@@ -30,7 +30,7 @@ class MediaViewController: UIViewController
                 var tableSections:[TableSection<ManagedMedia>] = [TableSection<ManagedMedia>]()
                 for m in sortedMedia
                 {
-                    let firstChar:String = "\(m.name?.characters.first ?? Character(""))"
+                    let firstChar:String = "\(m.name?.first ?? Character(""))"
                     if (tableSections.count < 1 || tableSections[tableSections.count - 1].name != firstChar)
                     {
                         tableSections.append(TableSection<ManagedMedia>(name: firstChar, objects: [ManagedMedia]()))
@@ -72,8 +72,8 @@ class MediaViewController: UIViewController
         mediaFilter.selectionIndicatorLocation = .down
         mediaFilter.selectionIndicatorColor = UIColor.white
         mediaFilter.titleTextAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
-            NSForegroundColorAttributeName: UIColor.white
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
+            NSAttributedStringKey.foregroundColor: UIColor.white
         ]
         mediaFilter.indexChangeBlock = { index in
             self._selectedMediaType = MediaType.values[index]

@@ -14,7 +14,7 @@ import UIKit
 
 class SongManaged : NSManagedObject, ManagedMedia
 {
-    var imageData: NSData?
+    var imageData: Data?
     {
         get
         {
@@ -55,11 +55,17 @@ class SongManaged : NSManagedObject, ManagedMedia
         }
     }
     
-    var dateReleased: NSDate?
+    var dateReleased: Date?
     {
         get
         {
             return self.album?.dateReleased
         }
+    }
+    
+    
+    public override func value(forUndefinedKey key: String) -> Any?
+    {
+        return nil
     }
 }

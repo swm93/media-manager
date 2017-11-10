@@ -47,7 +47,7 @@ class AuthorManaged : NSManagedObject, ManagedMedia
         }
     }
     
-    var dateReleased: NSDate?
+    var dateReleased: Date?
     {
         get
         {

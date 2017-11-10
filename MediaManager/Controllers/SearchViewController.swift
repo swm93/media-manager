@@ -53,14 +53,19 @@ class SearchViewController: UIViewController
         
         switch (self.mediaType as MediaType)
         {
-        case .music:
-            self._searchParser = LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
-            self._detailParser = LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
-            break
-            
         case .game:
             self._searchParser = IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
             self._detailParser = IGDBDetailParser(PListManager("Secrets")["igdb_api_key"] as! String)
+            break
+
+        case .movie:
+            self._searchParser = TMDBSearchParser(PListManager("Secrets")["tmdb_api_key"] as! String)
+            self._detailParser = nil
+            break
+            
+        case .music:
+            self._searchParser = LastFMSearchParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
+            self._detailParser = LastFMDetailParser(PListManager("Secrets")["audioscrobbler_api_key"] as! String)
             break
             
         default:
@@ -75,8 +80,8 @@ class SearchViewController: UIViewController
         
         if (segue.identifier == "MediaCreateSegue")
         {
-            let destinationVC: MediaEditViewController = segue.destination as! MediaEditViewController
-            destinationVC.managedObject = self._selectedMedia ?? self.createMedia()
+            let destinationVC: EditViewController = segue.destination as! EditViewController
+            destinationVC.mediaObject = self._selectedMedia ?? self.createMedia()
             
             self._selectedMedia = nil
         }

@@ -17,7 +17,15 @@ protocol ManagedMedia
     var name: String? { get set }
     var primaryText: String? { get }
     var secondaryText: String? { get }
-    var dateReleased: NSDate? { get }
-    var imageData: NSData? { get }
+    var dateReleased: Date? { get }
+    var imageData: Data? { get }
     var genres: NSSet? { get }
+    
+
+    func value(for key: String) -> Any?
+    func setValue(_ value: Any?, for key: String)
+    func getString(forKey key: String) -> String?
+    func getString(forKeyPath keyPath: String) -> String?
+    func setString(_ value: String, forKey key: String)
+    func setString(_ value: String, forKeyPath keyPath: String)
 }

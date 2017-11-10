@@ -6,8 +6,9 @@
 //  Copyright © 2016 Scott Mielcarski. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
+import NYTPhotoViewer
 import UIKit
 
 
@@ -186,6 +187,20 @@ class MediaDetailViewController : UIViewController
             let destinationVC: MediaEditViewController = segue.destination as! MediaEditViewController
             destinationVC.mediaObject = self.mediaObject
         }
+    }
+    
+    
+    @IBAction func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let imageView: UIImageView = tapGestureRecognizer.view as! UIImageView
+        let photo: NYTPhoto = Photo(
+            image: imageView.image!,
+            title: self.mediaObject.name,
+            summary: self.getSubtitleText()
+        )
+        let imageViewController: NYTPhotosViewController = NYTPhotosViewController(photos: [photo])
+        
+        self.present(imageViewController, animated: true)
     }
     
     

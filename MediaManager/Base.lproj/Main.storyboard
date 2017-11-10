@@ -276,6 +276,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
+                                        <connections>
+                                            <action selector="nameFieldChanged:" destination="kGL-Nh-75q" eventType="editingChanged" id="M11-Fg-S3V"/>
+                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dlc-i4-sJI" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="64" height="64"/>
@@ -873,11 +876,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENO-is-tie">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OVC-ow-rpp">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OVC-ow-rpp">
                                         <rect key="frame" x="8" y="0.0" width="359" height="192"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T4m-sL-LdV" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
-                                                <rect key="frame" x="132" y="0.0" width="95.5" height="95"/>
+                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T4m-sL-LdV" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
+                                                <rect key="frame" x="138" y="0.0" width="83" height="82.5"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="T4m-sL-LdV" secondAttribute="height" multiplier="1:1" id="JC7-eh-UV1"/>
                                                 </constraints>
@@ -889,24 +893,21 @@
                                                         <real key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="jzd-rQ-6oP" appends="YES" id="YCL-5B-ulZ"/>
+                                                </connections>
                                             </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="uiJ-w4-7bp">
-                                                <rect key="frame" x="150" y="103" width="59" height="45"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="j3E-AE-hNT">
+                                                <rect key="frame" x="150" y="87.5" width="59" height="49.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANg-kw-fCK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="24" id="BSH-8K-tNk"/>
-                                                        </constraints>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANg-kw-fCK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="29"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fy-oI-JD3" userLabel="Subtitle Label">
-                                                        <rect key="frame" x="0.0" y="28" width="59" height="17"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="17" id="kMR-r8-gz4"/>
-                                                        </constraints>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fy-oI-JD3" userLabel="Subtitle Label">
+                                                        <rect key="frame" x="0.0" y="29" width="59" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -999,6 +1000,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEg-et-FYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jzd-rQ-6oP">
+                    <connections>
+                        <action selector="imageTappedWithTapGestureRecognizer:" destination="fW0-D5-UdU" id="ohO-oL-T76"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1117.5999999999999" y="2996.8515742128939"/>
         </scene>

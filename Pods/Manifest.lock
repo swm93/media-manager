@@ -1,12 +1,23 @@
 PODS:
+  - FLAnimatedImage (1.0.12)
   - HMSegmentedControl (1.5.3)
+  - NYTPhotoViewer (1.1.0):
+    - NYTPhotoViewer/AnimatedGifSupport (= 1.1.0)
+    - NYTPhotoViewer/Core (= 1.1.0)
+  - NYTPhotoViewer/AnimatedGifSupport (1.1.0):
+    - FLAnimatedImage (~> 1.0.8)
+    - NYTPhotoViewer/Core
+  - NYTPhotoViewer/Core (1.1.0)
 
 DEPENDENCIES:
   - HMSegmentedControl
+  - NYTPhotoViewer (~> 1.1.0)
 
 SPEC CHECKSUMS:
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
+  NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
 
-PODFILE CHECKSUM: 4cd3a3913275c28d55b50c2dcf9a418c22b20af4
+PODFILE CHECKSUM: c0deac0be8fd1adfb9de807501166d38631cae1c
 
 COCOAPODS: 1.2.1

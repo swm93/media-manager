@@ -99,6 +99,18 @@ class MediaEditViewController : UIViewController, UITableViewDataSource, EditCel
     }
     
     
+    @IBAction func nameFieldChanged(_ sender: UITextField)
+    {
+        var value: String? = sender.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if (value == "")
+        {
+            value = nil
+        }
+        
+        self.mediaObject.name = value
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let (key, cellId, label): (String, String, String) = self._fields[indexPath.section][indexPath.row]

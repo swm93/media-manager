@@ -19,6 +19,7 @@
 		D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA11C503FD60017D4FB /* XMLNode.swift */; };
 		D2219CA41C50A5400017D4FB /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA31C50A5400017D4FB /* XMLParser.swift */; };
 		D2219CA61C50ACF40017D4FB /* ArtistManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA51C50ACF40017D4FB /* ArtistManaged.swift */; };
+		D22CE8521FB66137004245A3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22CE8511FB66137004245A3 /* Photo.swift */; };
 		D2414ABB1C5B392000146CCE /* MediaIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2414ABA1C5B392000146CCE /* MediaIcons.xcassets */; };
 		D2414AC11C5B3F2300146CCE /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2414AC01C5B3F2300146CCE /* MediaViewController.swift */; };
 		D2414AC51C5F157D00146CCE /* MediaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2414AC41C5F157D00146CCE /* MediaDetailViewController.swift */; };
@@ -104,6 +105,7 @@
 		D2219CA11C503FD60017D4FB /* XMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
 		D2219CA31C50A5400017D4FB /* XMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		D2219CA51C50ACF40017D4FB /* ArtistManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistManaged.swift; sourceTree = "<group>"; };
+		D22CE8511FB66137004245A3 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		D2414ABA1C5B392000146CCE /* MediaIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MediaIcons.xcassets; sourceTree = "<group>"; };
 		D2414AC01C5B3F2300146CCE /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		D2414AC41C5F157D00146CCE /* MediaDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				D2EEF7CD1C64831C0025B133 /* MediaType.swift */,
 				D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */,
 				D2EEF7D31C66968E0025B133 /* ParserType.swift */,
+				D22CE8511FB66137004245A3 /* Photo.swift */,
 				D2EEF7CB1C647A1F0025B133 /* SearchResult.swift */,
 				D2219CA11C503FD60017D4FB /* XMLNode.swift */,
 				D2A6EB991EE2617E0033AD1E /* TableSection.swift */,
@@ -628,6 +631,7 @@
 				D2219CA61C50ACF40017D4FB /* ArtistManaged.swift in Sources */,
 				D26204321ED65B7800AC31B0 /* GameManaged.swift in Sources */,
 				D2EEF7D41C66968E0025B133 /* ParserType.swift in Sources */,
+				D22CE8521FB66137004245A3 /* Photo.swift in Sources */,
 				D2414ACB1C60721400146CCE /* MediaNavigationController.swift in Sources */,
 				D2B267C71FB3E3F700E319E3 /* MediaDetailControlsViewController.swift in Sources */,
 				D2CC2E7F1FB5146200DCC5BD /* EditStringCell.swift in Sources */,

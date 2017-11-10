@@ -181,14 +181,9 @@ class MediaDetailViewController : UIViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if (segue.identifier == "EditSegue")
+        if (segue.identifier == "MediaEditSegue")
         {
             let destinationVC: MediaEditViewController = segue.destination as! MediaEditViewController
-            destinationVC.managedObject = self.mediaObject
-        }
-        else if (segue.identifier == "MediaEditSegue")
-        {
-            let destinationVC: EditViewController = segue.destination as! EditViewController
             destinationVC.mediaObject = self.mediaObject
         }
     }

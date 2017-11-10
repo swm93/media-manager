@@ -22,7 +22,6 @@ class MediaViewController: UIViewController
     {
         didSet
         {
-            // set _groupedMediaObjects
             var groupedMediaObjects:[MediaType: [TableSection<ManagedMedia>]] = [MediaType: [TableSection<ManagedMedia>]]()
             for (type, media) in mediaObjects
             {

@@ -14,14 +14,6 @@
 		D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */; };
 		D20696BD1F6F3FF400979DDA /* DebounceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */; };
 		D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C01F6F673A00979DDA /* TimeUtility.swift */; };
-		D20696C31F71C77200979DDA /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20696C21F71C77200979DDA /* HeaderView.xib */; };
-		D20696C51F71C79700979DDA /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C41F71C79700979DDA /* HeaderView.swift */; };
-		D20696C81F71D92900979DDA /* MediaDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */; };
-		D20696CA1F71D93600979DDA /* BookDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */; };
-		D20696CC1F71D94E00979DDA /* GameDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */; };
-		D20696CE1F71D95D00979DDA /* MovieDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696CD1F71D95D00979DDA /* MovieDetailTableViewController.swift */; };
-		D20696D01F71D96800979DDA /* MusicDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696CF1F71D96800979DDA /* MusicDetailTableViewController.swift */; };
-		D20696D21F71D97600979DDA /* ShowDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20696D11F71D97600979DDA /* ShowDetailTableViewController.swift */; };
 		D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */; };
 		D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */; };
 		D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2219CA11C503FD60017D4FB /* XMLNode.swift */; };
@@ -43,14 +35,12 @@
 		D262043A1ED65BDF00AC31B0 /* GenreManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26204391ED65BDF00AC31B0 /* GenreManaged.swift */; };
 		D2778AF81C4DA49700BD2994 /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2778AF71C4DA49700BD2994 /* APIParser.swift */; };
 		D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */; };
-		D283B2231ECF426F007EE445 /* MediaDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D283B2221ECF426F007EE445 /* MediaDetailCell.swift */; };
 		D28A90401FB39CCD002F35F0 /* LabelDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A903F1FB39CCD002F35F0 /* LabelDetailCell.swift */; };
 		D28A90421FB3B4F0002F35F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90411FB3B4E3002F35F0 /* AVFoundation.framework */; };
 		D28A90461FB3B72E002F35F0 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90431FB3B72E002F35F0 /* SpotifyMetadata.framework */; };
 		D28A90471FB3B72E002F35F0 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90441FB3B72E002F35F0 /* SpotifyAuthentication.framework */; };
 		D28A90481FB3B72E002F35F0 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28A90451FB3B72E002F35F0 /* SpotifyAudioPlayback.framework */; };
 		D28A904F1FB3CF27002F35F0 /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A904E1FB3CF27002F35F0 /* Spotify.swift */; };
-		D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */; };
 		D2A6EB981EE133130033AD1E /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB971EE133130033AD1E /* SearchDelegate.swift */; };
 		D2A6EB9A1EE2617E0033AD1E /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A6EB991EE2617E0033AD1E /* TableSection.swift */; };
 		D2A7A87D1C4D8FD800B21BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7A87C1C4D8FD800B21BEA /* AppDelegate.swift */; };
@@ -64,17 +54,10 @@
 		D2AE8EB21EDD13CA00A76BE4 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2AE8EB11EDD13CA00A76BE4 /* Secrets.plist */; };
 		D2AE8EB51EDD28D100A76BE4 /* PListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE8EB41EDD28D100A76BE4 /* PListManager.swift */; };
 		D2B1DC2D1EE337AA00444FD7 /* IGDBDetailParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC2C1EE337AA00444FD7 /* IGDBDetailParser.swift */; };
-		D2B1DC301EE385BB00444FD7 /* MusicEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC2F1EE385BB00444FD7 /* MusicEditTableViewController.swift */; };
-		D2B1DC321EE3869A00444FD7 /* BookEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC311EE3869A00444FD7 /* BookEditTableViewController.swift */; };
-		D2B1DC341EE386A300444FD7 /* GameEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC331EE386A300444FD7 /* GameEditTableViewController.swift */; };
-		D2B1DC361EE386AF00444FD7 /* MovieEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC351EE386AF00444FD7 /* MovieEditTableViewController.swift */; };
-		D2B1DC381EE386BC00444FD7 /* ShowEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC371EE386BC00444FD7 /* ShowEditTableViewController.swift */; };
-		D2B1DC3A1EE38E3B00444FD7 /* MediaEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC391EE38E3B00444FD7 /* MediaEditTableViewController.swift */; };
-		D2B1DC3C1EE39EF600444FD7 /* MediaEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */; };
 		D2B267C71FB3E3F700E319E3 /* MediaDetailControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B267C61FB3E3F700E319E3 /* MediaDetailControlsViewController.swift */; };
 		D2B2BA291C6A71C400BF1957 /* TableCellRenderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2BA281C6A71C400BF1957 /* TableCellRenderable.swift */; };
 		D2BDCF381FB430C900941717 /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDCF371FB430C900941717 /* EditCell.swift */; };
-		D2BDCF3A1FB4365E00941717 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDCF391FB4365E00941717 /* EditViewController.swift */; };
+		D2BDCF3A1FB4365E00941717 /* MediaEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDCF391FB4365E00941717 /* MediaEditViewController.swift */; };
 		D2CC2E7F1FB5146200DCC5BD /* EditStringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E7E1FB5146200DCC5BD /* EditStringCell.swift */; };
 		D2CC2E811FB51C1E00DCC5BD /* EditTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E801FB51C1E00DCC5BD /* EditTextCell.swift */; };
 		D2CC2E831FB51C3400DCC5BD /* EditDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC2E821FB51C3400DCC5BD /* EditDateCell.swift */; };
@@ -116,14 +99,6 @@
 		D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectManager.swift; sourceTree = "<group>"; };
 		D20696BC1F6F3FF400979DDA /* DebounceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebounceUtility.swift; sourceTree = "<group>"; };
 		D20696C01F6F673A00979DDA /* TimeUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtility.swift; sourceTree = "<group>"; };
-		D20696C21F71C77200979DDA /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
-		D20696C41F71C79700979DDA /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailTableViewController.swift; sourceTree = "<group>"; };
-		D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailTableViewController.swift; sourceTree = "<group>"; };
-		D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetailTableViewController.swift; sourceTree = "<group>"; };
-		D20696CD1F71D95D00979DDA /* MovieDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailTableViewController.swift; sourceTree = "<group>"; };
-		D20696CF1F71D96800979DDA /* MusicDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicDetailTableViewController.swift; sourceTree = "<group>"; };
-		D20696D11F71D97600979DDA /* ShowDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDetailTableViewController.swift; sourceTree = "<group>"; };
 		D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMSearchParser.swift; sourceTree = "<group>"; };
 		D2219C9E1C4EF96C0017D4FB /* ParameterizedURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParameterizedURL.swift; path = ../Parsers/ParameterizedURL.swift; sourceTree = "<group>"; };
 		D2219CA11C503FD60017D4FB /* XMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
@@ -145,7 +120,6 @@
 		D26204391ED65BDF00AC31B0 /* GenreManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreManaged.swift; sourceTree = "<group>"; };
 		D2778AF71C4DA49700BD2994 /* APIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBSearchParser.swift; sourceTree = "<group>"; };
-		D283B2221ECF426F007EE445 /* MediaDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailCell.swift; sourceTree = "<group>"; };
 		D28A903F1FB39CCD002F35F0 /* LabelDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDetailCell.swift; sourceTree = "<group>"; };
 		D28A90411FB3B4E3002F35F0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D28A90431FB3B72E002F35F0 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
@@ -153,7 +127,6 @@
 		D28A90451FB3B72E002F35F0 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		D28A904C1FB3B820002F35F0 /* MediaManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediaManager-Bridging-Header.h"; sourceTree = "<group>"; };
 		D28A904E1FB3CF27002F35F0 /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
-		D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditViewController.swift; sourceTree = "<group>"; };
 		D2A6EB971EE133130033AD1E /* SearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		D2A6EB991EE2617E0033AD1E /* TableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		D2A7A8791C4D8FD800B21BEA /* MediaManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,17 +146,10 @@
 		D2AE8EB11EDD13CA00A76BE4 /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		D2AE8EB41EDD28D100A76BE4 /* PListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PListManager.swift; sourceTree = "<group>"; };
 		D2B1DC2C1EE337AA00444FD7 /* IGDBDetailParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBDetailParser.swift; sourceTree = "<group>"; };
-		D2B1DC2F1EE385BB00444FD7 /* MusicEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicEditTableViewController.swift; sourceTree = "<group>"; };
-		D2B1DC311EE3869A00444FD7 /* BookEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookEditTableViewController.swift; sourceTree = "<group>"; };
-		D2B1DC331EE386A300444FD7 /* GameEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEditTableViewController.swift; sourceTree = "<group>"; };
-		D2B1DC351EE386AF00444FD7 /* MovieEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieEditTableViewController.swift; sourceTree = "<group>"; };
-		D2B1DC371EE386BC00444FD7 /* ShowEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEditTableViewController.swift; sourceTree = "<group>"; };
-		D2B1DC391EE38E3B00444FD7 /* MediaEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditTableViewController.swift; sourceTree = "<group>"; };
-		D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaEditCell.swift; sourceTree = "<group>"; };
 		D2B267C61FB3E3F700E319E3 /* MediaDetailControlsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailControlsViewController.swift; sourceTree = "<group>"; };
 		D2B2BA281C6A71C400BF1957 /* TableCellRenderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellRenderable.swift; sourceTree = "<group>"; };
 		D2BDCF371FB430C900941717 /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
-		D2BDCF391FB4365E00941717 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		D2BDCF391FB4365E00941717 /* MediaEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaEditViewController.swift; sourceTree = "<group>"; };
 		D2CC2E7E1FB5146200DCC5BD /* EditStringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStringCell.swift; sourceTree = "<group>"; };
 		D2CC2E801FB51C1E00DCC5BD /* EditTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextCell.swift; sourceTree = "<group>"; };
 		D2CC2E821FB51C3400DCC5BD /* EditDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateCell.swift; sourceTree = "<group>"; };
@@ -258,20 +224,7 @@
 				D28A904E1FB3CF27002F35F0 /* Spotify.swift */,
 				D20696C01F6F673A00979DDA /* TimeUtility.swift */,
 			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
-		D20696C61F71D90800979DDA /* DetailControllers */ = {
-			isa = PBXGroup;
-			children = (
-				D20696C71F71D92900979DDA /* MediaDetailTableViewController.swift */,
-				D20696C91F71D93600979DDA /* BookDetailTableViewController.swift */,
-				D20696CB1F71D94E00979DDA /* GameDetailTableViewController.swift */,
-				D20696CD1F71D95D00979DDA /* MovieDetailTableViewController.swift */,
-				D20696CF1F71D96800979DDA /* MusicDetailTableViewController.swift */,
-				D20696D11F71D97600979DDA /* ShowDetailTableViewController.swift */,
-			);
-			path = DetailControllers;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		D2219CA01C4EF9930017D4FB /* CoreData */ = {
@@ -289,7 +242,7 @@
 				D26204351ED65BA700AC31B0 /* ShowManaged.swift */,
 				D26204371ED65BBE00AC31B0 /* SongManaged.swift */,
 			);
-			name = CoreData;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		D2459AC41C61D621003AEFDC /* Extensions */ = {
@@ -334,15 +287,12 @@
 		D2778AFF1C4DB53700BD2994 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D20696C61F71D90800979DDA /* DetailControllers */,
-				D2B1DC2E1EE385A400444FD7 /* EditControllers */,
 				D2414AC01C5B3F2300146CCE /* MediaViewController.swift */,
-				D2A6EB951EE0EABA0033AD1E /* MediaEditViewController.swift */,
 				D2414AC41C5F157D00146CCE /* MediaDetailViewController.swift */,
 				D2B267C61FB3E3F700E319E3 /* MediaDetailControlsViewController.swift */,
+				D2BDCF391FB4365E00941717 /* MediaEditViewController.swift */,
 				D2414ACA1C60721400146CCE /* MediaNavigationController.swift */,
 				D2A7A87E1C4D8FD800B21BEA /* SearchViewController.swift */,
-				D2BDCF391FB4365E00941717 /* EditViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -415,11 +365,7 @@
 				D2CC2E7D1FB513D800DCC5BD /* EditTableViewCells */,
 				D2A7A8881C4D8FD800B21BEA /* LaunchScreen.storyboard */,
 				D2A7A8801C4D8FD800B21BEA /* Main.storyboard */,
-				D20696C21F71C77200979DDA /* HeaderView.xib */,
 				D2414AC81C60167400146CCE /* CircularImageView.swift */,
-				D20696C41F71C79700979DDA /* HeaderView.swift */,
-				D283B2221ECF426F007EE445 /* MediaDetailCell.swift */,
-				D2B1DC3B1EE39EF600444FD7 /* MediaEditCell.swift */,
 				D28A903F1FB39CCD002F35F0 /* LabelDetailCell.swift */,
 			);
 			path = Views;
@@ -432,19 +378,6 @@
 				D205625B1EE9007D007B8345 /* ManagedObjectManager.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		D2B1DC2E1EE385A400444FD7 /* EditControllers */ = {
-			isa = PBXGroup;
-			children = (
-				D2B1DC391EE38E3B00444FD7 /* MediaEditTableViewController.swift */,
-				D2B1DC311EE3869A00444FD7 /* BookEditTableViewController.swift */,
-				D2B1DC331EE386A300444FD7 /* GameEditTableViewController.swift */,
-				D2B1DC351EE386AF00444FD7 /* MovieEditTableViewController.swift */,
-				D2B1DC2F1EE385BB00444FD7 /* MusicEditTableViewController.swift */,
-				D2B1DC371EE386BC00444FD7 /* ShowEditTableViewController.swift */,
-			);
-			path = EditControllers;
 			sourceTree = "<group>";
 		};
 		D2B2BA251C6A719100BF1957 /* Protocols */ = {
@@ -584,7 +517,6 @@
 				D2A7A88A1C4D8FD800B21BEA /* LaunchScreen.storyboard in Resources */,
 				D2AE8EB21EDD13CA00A76BE4 /* Secrets.plist in Resources */,
 				D2A7A8871C4D8FD800B21BEA /* Assets.xcassets in Resources */,
-				D20696C31F71C77200979DDA /* HeaderView.xib in Resources */,
 				D2A7A8821C4D8FD800B21BEA /* Main.storyboard in Resources */,
 				D2414ABB1C5B392000146CCE /* MediaIcons.xcassets in Resources */,
 			);
@@ -662,24 +594,18 @@
 				D2EEF7CC1C647A1F0025B133 /* SearchResult.swift in Sources */,
 				D20562561EE4ABAF007B8345 /* ParserDelegate.swift in Sources */,
 				D205625A1EE8DE15007B8345 /* PlatformManaged.swift in Sources */,
-				D20696CA1F71D93600979DDA /* BookDetailTableViewController.swift in Sources */,
 				D2EEF7D21C66939D0025B133 /* LastFMDetailParser.swift in Sources */,
 				D2A7A87F1C4D8FD800B21BEA /* SearchViewController.swift in Sources */,
 				D2219C9D1C4DCB7F0017D4FB /* LastFMSearchParser.swift in Sources */,
-				D20696D01F71D96800979DDA /* MusicDetailTableViewController.swift in Sources */,
-				D20696C81F71D92900979DDA /* MediaDetailTableViewController.swift in Sources */,
 				D2B2BA291C6A71C400BF1957 /* TableCellRenderable.swift in Sources */,
 				D2EEF7CE1C64831C0025B133 /* MediaType.swift in Sources */,
 				D2A6EB9A1EE2617E0033AD1E /* TableSection.swift in Sources */,
 				D2AE8EB51EDD28D100A76BE4 /* PListManager.swift in Sources */,
 				D2414AC91C60167400146CCE /* CircularImageView.swift in Sources */,
-				D2B1DC3A1EE38E3B00444FD7 /* MediaEditTableViewController.swift in Sources */,
 				D2219CA21C503FD60017D4FB /* XMLNode.swift in Sources */,
 				D2B1DC2D1EE337AA00444FD7 /* IGDBDetailParser.swift in Sources */,
 				D2414AC51C5F157D00146CCE /* MediaDetailViewController.swift in Sources */,
-				D20696C51F71C79700979DDA /* HeaderView.swift in Sources */,
 				D2778AF81C4DA49700BD2994 /* APIParser.swift in Sources */,
-				D2A6EB961EE0EABA0033AD1E /* MediaEditViewController.swift in Sources */,
 				D28A904F1FB3CF27002F35F0 /* Spotify.swift in Sources */,
 				D262042C1ED65ACC00AC31B0 /* ManagedMedia.swift in Sources */,
 				D28A90401FB39CCD002F35F0 /* LabelDetailCell.swift in Sources */,
@@ -688,9 +614,7 @@
 				D2E5B0C41FB4F1390075FA97 /* NSManagedObjectExtension.swift in Sources */,
 				D205625C1EE9007D007B8345 /* ManagedObjectManager.swift in Sources */,
 				D2CC2E891FB51C6C00DCC5BD /* EditStringArrayCell.swift in Sources */,
-				D2B1DC381EE386BC00444FD7 /* ShowEditTableViewController.swift in Sources */,
 				D2BDCF381FB430C900941717 /* EditCell.swift in Sources */,
-				D2B1DC341EE386A300444FD7 /* GameEditTableViewController.swift in Sources */,
 				D2459AC61C61D649003AEFDC /* UIScrollViewExtension.swift in Sources */,
 				D2CC2E871FB51C4500DCC5BD /* EditNumberCell.swift in Sources */,
 				D2EEF7D01C652A560025B133 /* JSONParser.swift in Sources */,
@@ -699,22 +623,17 @@
 				D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */,
 				D262043A1ED65BDF00AC31B0 /* GenreManaged.swift in Sources */,
 				D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */,
-				D20696D21F71D97600979DDA /* ShowDetailTableViewController.swift in Sources */,
-				D2BDCF3A1FB4365E00941717 /* EditViewController.swift in Sources */,
+				D2BDCF3A1FB4365E00941717 /* MediaEditViewController.swift in Sources */,
 				D26204301ED65B6000AC31B0 /* BookManaged.swift in Sources */,
-				D2B1DC3C1EE39EF600444FD7 /* MediaEditCell.swift in Sources */,
 				D2219CA61C50ACF40017D4FB /* ArtistManaged.swift in Sources */,
 				D26204321ED65B7800AC31B0 /* GameManaged.swift in Sources */,
 				D2EEF7D41C66968E0025B133 /* ParserType.swift in Sources */,
 				D2414ACB1C60721400146CCE /* MediaNavigationController.swift in Sources */,
 				D2B267C71FB3E3F700E319E3 /* MediaDetailControlsViewController.swift in Sources */,
-				D20696CC1F71D94E00979DDA /* GameDetailTableViewController.swift in Sources */,
 				D2CC2E7F1FB5146200DCC5BD /* EditStringCell.swift in Sources */,
-				D20696CE1F71D95D00979DDA /* MovieDetailTableViewController.swift in Sources */,
 				D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */,
 				D2A7A8851C4D8FD800B21BEA /* MediaManager.xcdatamodeld in Sources */,
 				D26204341ED65B9100AC31B0 /* MovieManaged.swift in Sources */,
-				D2B1DC301EE385BB00444FD7 /* MusicEditTableViewController.swift in Sources */,
 				D2CC2E851FB51C3D00DCC5BD /* EditTimeCell.swift in Sources */,
 				D26204361ED65BA700AC31B0 /* ShowManaged.swift in Sources */,
 				D26204381ED65BBE00AC31B0 /* SongManaged.swift in Sources */,
@@ -723,10 +642,7 @@
 				D2A7A87D1C4D8FD800B21BEA /* AppDelegate.swift in Sources */,
 				D2A6EB981EE133130033AD1E /* SearchDelegate.swift in Sources */,
 				D262042E1ED65B2A00AC31B0 /* AlbumManaged.swift in Sources */,
-				D2B1DC361EE386AF00444FD7 /* MovieEditTableViewController.swift in Sources */,
-				D283B2231ECF426F007EE445 /* MediaDetailCell.swift in Sources */,
 				D20696BD1F6F3FF400979DDA /* DebounceUtility.swift in Sources */,
-				D2B1DC321EE3869A00444FD7 /* BookEditTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

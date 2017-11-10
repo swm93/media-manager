@@ -259,7 +259,7 @@
         <!--Edit View Controller-->
         <scene sceneID="TW3-X2-92y">
             <objects>
-                <viewController id="kGL-Nh-75q" userLabel="Edit View Controller" customClass="EditViewController" customModule="MediaManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kGL-Nh-75q" userLabel="Edit View Controller" customClass="MediaEditViewController" customModule="MediaManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jGn-aX-AjD"/>
                         <viewControllerLayoutGuide type="bottom" id="AKQ-a5-7gh"/>

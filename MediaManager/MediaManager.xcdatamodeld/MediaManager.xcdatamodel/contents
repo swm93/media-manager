@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B48" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Album" representedClassName=".AlbumManaged" syncable="YES" codeGenerationType="category">
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="albums" inverseEntity="Artist" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="albums" inverseEntity="Genre" syncable="YES"/>
         <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="album" inverseEntity="Song" syncable="YES"/>
@@ -34,6 +35,7 @@
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="plot" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Author" inverseName="books" inverseEntity="Author" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="books" inverseEntity="Genre" syncable="YES"/>
     </entity>
@@ -61,8 +63,10 @@
     </entity>
     <entity name="Movie" representedClassName=".MovieManaged" syncable="YES" codeGenerationType="category">
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="plot" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="movies" inverseEntity="Genre" syncable="YES"/>
     </entity>
     <entity name="Platform" representedClassName=".PlatformManaged" syncable="YES" codeGenerationType="category">
@@ -76,26 +80,30 @@
     </entity>
     <entity name="Show" representedClassName=".ShowManaged" syncable="YES" codeGenerationType="category">
         <attribute name="dateReleased" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="shows" inverseEntity="Genre" syncable="YES"/>
     </entity>
     <entity name="Song" representedClassName=".SongManaged" syncable="YES" codeGenerationType="category">
         <attribute name="duration" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lyrics" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="trackNumber" optional="YES" attributeType="Integer 16" minValueString="1" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Album" positionX="-353" positionY="-133" width="128" height="135"/>
+        <element name="Album" positionX="-353" positionY="-133" width="128" height="150"/>
         <element name="Artist" positionX="-522" positionY="-135" width="128" height="105"/>
         <element name="Author" positionX="-695" positionY="17" width="128" height="105"/>
-        <element name="Book" positionX="-522" positionY="18" width="128" height="120"/>
+        <element name="Book" positionX="-522" positionY="18" width="128" height="135"/>
         <element name="Game" positionX="-522" positionY="146" width="128" height="150"/>
         <element name="Genre" positionX="7" positionY="32" width="128" height="135"/>
-        <element name="Movie" positionX="-522" positionY="297" width="128" height="105"/>
+        <element name="Movie" positionX="-522" positionY="297" width="128" height="135"/>
         <element name="Platform" positionX="-693" positionY="144" width="128" height="75"/>
-        <element name="Show" positionX="-522" positionY="387" width="128" height="105"/>
-        <element name="Song" positionX="-182" positionY="-135" width="128" height="105"/>
+        <element name="Show" positionX="-522" positionY="387" width="128" height="135"/>
+        <element name="Song" positionX="-182" positionY="-135" width="128" height="135"/>
     </elements>
 </model>

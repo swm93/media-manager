@@ -29,14 +29,54 @@ class MediaEditViewController : UIViewController, UITableViewDataSource, EditCel
     
     private var _fields: [[(String, String, String)]]!
     private let _fieldSets: [MediaType: [[(String, String, String)]]] = [
+        .book: [
+            [
+                ("dateReleased", "EditDateCell", "Date Released")
+            ],
+            [
+                ("plot", "EditTextCell", "Plot")
+            ]
+        ],
+        .game: [
+            [
+                ("esrbRating", "EditNumberCell", "ESRB Rating"),
+                ("dateReleased", "EditDateCell", "Date Released")
+            ],
+            [
+                ("summary", "EditTextCell", "Summary")
+            ]
+        ],
+        .movie: [
+            [
+                ("duration", "EditTimeCell", "Duration"),
+                ("dateReleased", "EditDateCell", "Date Released")
+            ],
+            [
+                ("plot", "EditTextCell", "Plot")
+            ]
+        ],
         .music: [
             [
                 ("album.artist.name", "EditStringCell", "Artist"),
                 ("album.name", "EditStringCell", "Album"),
-                ("trackNumber", "EditNumberCell", "Track Number")
+                ("trackNumber", "EditNumberCell", "Track Number"),
+                ("duration", "EditTimeCell", "Duration"),
+                ("album.dateReleased", "EditDateCell", "Date Released")
             ],
             [
-                ("duration", "EditTimeCell", "Duration")
+                ("summary", "EditTextCell", "Summary")
+            ],
+            [
+                ("lyrics", "EditTextCell", "Lyrics")
+            ]
+        ],
+        .show: [
+            [
+                ("duration", "EditTimeCell", "Duration"),
+                ("dateReleased", "EditDateCell", "Date Released")
+            ],
+            [
+                ("summary", "EditTextCell", "Summary")
             ]
         ]
     ]
@@ -113,79 +153,53 @@ class MediaEditViewController : UIViewController, UITableViewDataSource, EditCel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        var cell: UITableViewCell
         let (key, cellId, label): (String, String, String) = self._fields[indexPath.section][indexPath.row]
         
-        switch (cellId)
+        if var editCell: EditCell & UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? EditCell & UITableViewCell
         {
-        case "EditDateCell":
-            var c: EditDateCell? = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? EditDateCell
-            if (c == nil)
-            {
-                c = EditDateCell()
-            }
-            c!.key = key
-            c!.label.text = label
-            c!.value = self.mediaObject.value(for: key) as? EditDateCell.ValueType
-            return c!
+            editCell.key = key
+            editCell.label.text = label
+            editCell.value = self.mediaObject.value(for: key)
             
-        case "EditNumberCell":
-            var c: EditNumberCell? = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? EditNumberCell
-            if (c == nil)
-            {
-                c = EditNumberCell()
-            }
-            c!.key = key
-            c!.label.text = label
-            c!.value = self.mediaObject.value(for: key) as? EditNumberCell.ValueType
-            return c!
-            
-        case "EditStringCell":
-            var c: EditStringCell? = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? EditStringCell
-            if (c == nil)
-            {
-                c = EditStringCell()
-            }
-            c!.key = key
-            c!.label.text = label
-            c!.value = self.mediaObject.value(for: key) as? EditStringCell.ValueType
-            return c!
-            
-        case "EditStringArrayCell":
-            var c: EditStringArrayCell? = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? EditStringArrayCell
-            if (c == nil)
-            {
-                c = EditStringArrayCell()
-            }
-            c!.key = key
-            c!.label.text = label
-            c!.value = self.mediaObject.value(for: key) as? EditStringArrayCell.ValueType
-            return c!
-            
-        case "EditTextCell":
-            var c: EditTextCell? = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? EditTextCell
-            if (c == nil)
-            {
-                c = EditTextCell()
-            }
-            c!.key = key
-            c!.label.text = label
-            c!.value = self.mediaObject.value(for: key) as? EditTextCell.ValueType
-            return c!
-            
-        case "EditTimeCell":
-            var c: EditTimeCell? = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? EditTimeCell
-            if (c == nil)
-            {
-                c = EditTimeCell()
-            }
-            c!.key = key
-            c!.label.text = label
-            c!.value = self.mediaObject.value(for: key) as? EditTimeCell.ValueType
-            return c!
-            
-        default:
-            return UITableViewCell()
+            cell = editCell
         }
+        else
+        {
+            cell = UITableViewCell()
+        }
+        
+//        switch (cellId)
+//        {
+//        case "EditDateCell":
+//            let c: EditDateCell = self.dequeueReusableCell(tableView, for: indexPath)
+//            cell = c
+//
+//        case "EditNumberCell":
+//            let c: EditNumberCell = self.dequeueReusableCell(tableView, for: indexPath)
+//            cell = c
+//
+//        case "EditStringCell":
+//            let c: EditStringCell = self.dequeueReusableCell(tableView, for: indexPath)
+//            cell = c
+//
+//        case "EditStringArrayCell":
+//            let c: EditStringArrayCell = self.dequeueReusableCell(tableView, for: indexPath)
+//            cell = c
+//
+//        case "EditTextCell":
+//            let c: EditTextCell = self.dequeueReusableCell(tableView, for: indexPath)
+//            cell = c
+//
+//        case "EditTimeCell":
+//            let c: EditTimeCell = self.dequeueReusableCell(tableView, for: indexPath)
+//            cell = c
+//
+//        default:
+//            cell = UITableViewCell()
+//        }
+        
+        return cell
     }
     
     
@@ -205,4 +219,26 @@ class MediaEditViewController : UIViewController, UITableViewDataSource, EditCel
     {
         self.mediaObject.setValue(value, for: key)
     }
+    
+    
+//    private func dequeueReusableCell<T>(_ tableView: UITableView, for indexPath: IndexPath) -> T
+//        where T : EditCell & UITableViewCell
+//    {
+//        let (key, cellId, label): (String, String, String) = self._fields[indexPath.section][indexPath.row]
+//        var cell: UITableViewCell
+//        if var editCell: T = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? T
+//        {
+//            editCell.key = key
+//            editCell.label.text = label
+//            editCell.value = self.mediaObject.value(for: key) as? T.ValueType
+//
+//            cell = editCell
+//        }
+//        else
+//        {
+//            cell = UITableViewCell()
+//        }
+//
+//        return cell
+//    }
 }

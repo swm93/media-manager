@@ -38,4 +38,10 @@ class BookManaged : NSManagedObject, ManagedMedia
             return nil
         }
     }
+    
+    
+    public override func value(forUndefinedKey key: String) -> Any?
+    {
+        return nil
+    }
 }

@@ -53,11 +53,24 @@ class LastFMDetailParser : JSONParser<ManagedMedia>
                 result.duration = NSNumber(value: duration)
             }
             
+            if let wikiObj: [String: Any] = trackObj["wiki"] as? [String: Any],
+               let summary: String = wikiObj["summary"] as? String
+            {
+                result.summary = summary
+            }
+            
             if let albumObj:[String: Any] = trackObj["album"] as? [String: Any],
                let albumName:String = albumObj["title"] as? String,
                let artistObj:[String: Any] = trackObj["artist"] as? [String: Any],
                let artistName:String = artistObj["name"] as? String
             {
+                if let albumAttrObj: [String: Any] = albumObj["@attr"] as? [String: Any],
+                   let positionStr: String = albumAttrObj["position"] as? String,
+                   let position: Int = Int(positionStr)
+                {
+                    result.trackNumber = NSNumber(value: position)
+                }
+                
                 let albums: [AlbumManaged] = ManagedObjectManager.getBy(
                     fetchRequest: AlbumManaged.fetchRequest(),
                     attribute: "name",

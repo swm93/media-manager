@@ -12,19 +12,17 @@ import UIKit
 
 class EditStringCell : UITableViewCell, EditCell
 {
-    typealias ValueType = String
-    
     @IBOutlet var delegate: EditCellDelegate?
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var valueTextField: UITextField!
     
     var key: String?
     
-    var value: ValueType?
+    var value: Any?
     {
         get
         {
-            var result: ValueType? = self.valueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            var result: String? = self.valueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             if (result == "")
             {
                 result = nil
@@ -34,7 +32,7 @@ class EditStringCell : UITableViewCell, EditCell
         }
         set
         {
-            self.valueTextField.text = newValue
+            self.valueTextField.text = newValue as? String
         }
     }
     

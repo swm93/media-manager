@@ -59,9 +59,17 @@ class LastFMSearchParser : JSONParser<[SearchResult]>
                     
                     // get identifier
                     identifier = tObj["mbid"] as? String
+                    if (identifier == "")
+                    {
+                        identifier = nil
+                    }
                     
                     // get primary text
                     primaryText = tObj["name"] as? String
+                    if (primaryText == "")
+                    {
+                        primaryText = nil
+                    }
                     
                     // get secondary text
                     secondaryText = tObj["artist"] as? String

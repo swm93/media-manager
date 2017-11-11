@@ -13,13 +13,11 @@ import UIKit
 
 protocol EditCell
 {
-    associatedtype ValueType
-    
     var delegate: EditCellDelegate? { get set }
     
     var key: String? { get set }
     var label: UILabel! { get }
-    var value: ValueType? { get set }
+    var value: Any? { get set }
 }
 
 

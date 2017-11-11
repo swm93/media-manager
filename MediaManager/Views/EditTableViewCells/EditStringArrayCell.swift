@@ -12,24 +12,22 @@ import UIKit
 
 class EditStringArrayCell : UITableViewCell, EditCell
 {
-    typealias ValueType = [String]
-    
     @IBOutlet var delegate: EditCellDelegate?
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var valueTextField: UITextField!
     
     var key: String?
     
-    var value: ValueType?
+    var value: Any?
     {
         get
         {
-            var result: ValueType?
+            var result: [String]?
             
             if let strArray: [String.SubSequence] = self.valueTextField.text?.split(separator: ",")
             {
                 result = strArray.flatMap()
-                    { (subStr: String.SubSequence) in
+                { (subStr: String.SubSequence) in
                         let str: String = String(describing: subStr)
                         var trimmedStr: String? = str.trimmingCharacters(in: .whitespacesAndNewlines)
                         if (trimmedStr == "")
@@ -45,7 +43,10 @@ class EditStringArrayCell : UITableViewCell, EditCell
         }
         set
         {
-            self.valueTextField.text = newValue?.joined(separator: ", ")
+            if let val: [String] = newValue as? [String]
+            {
+                self.valueTextField.text = val.joined(separator: ", ")
+            }
         }
     }
     

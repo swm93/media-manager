@@ -12,30 +12,28 @@ import UIKit
 
 class EditNumberCell : UITableViewCell, EditCell
 {
-    typealias ValueType = Int
-    
     @IBOutlet var delegate: EditCellDelegate?
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var valueTextField: UITextField!
     
     var key: String?
     
-    var value: ValueType?
+    var value: Any?
     {
         get
         {
-            var result: ValueType?
+            var result: Int?
             let textFieldValue: String? = self.valueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             if (textFieldValue != nil && textFieldValue != "")
             {
-                result = ValueType(textFieldValue!)
+                result = Int(textFieldValue!)
             }
             
             return result
         }
         set
         {
-            if let val: ValueType = newValue
+            if let val: Int = newValue as? Int
             {
                 self.valueTextField.text = String(describing: val)
             }

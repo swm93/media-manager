@@ -512,19 +512,16 @@
                                                                 <constraint firstAttribute="width" constant="1" id="poN-Sm-RFG"/>
                                                             </constraints>
                                                         </view>
-                                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IxC-UK-lcm">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHG-SA-zGu" customClass="UIDatePicker">
                                                             <rect key="frame" x="81" y="0.0" width="262" height="43.5"/>
-                                                            <date key="date" timeIntervalSinceReferenceDate="531903050.33107901">
-                                                                <!--2017-11-09 06:50:50 +0000-->
-                                                            </date>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
-                                                                <action selector="valueChanged" destination="Fhd-V3-120" eventType="valueChanged" id="Efi-MT-QcJ"/>
+                                                                <action selector="valueChanged" destination="Fhd-V3-120" eventType="editingChanged" id="2Ve-Ac-GZV"/>
                                                             </connections>
-                                                        </datePicker>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="JLf-vs-WHJ" secondAttribute="bottom" constant="4" id="7YV-QE-axM"/>
-                                                        <constraint firstAttribute="bottom" secondItem="IxC-UK-lcm" secondAttribute="bottom" id="r3d-pi-1ps"/>
                                                         <constraint firstAttribute="bottom" secondItem="b6c-S2-PjI" secondAttribute="bottom" priority="750" id="swd-jc-Oy6"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="xiA-Gx-Amb"/>
                                                     </constraints>
@@ -540,7 +537,7 @@
                                         <connections>
                                             <outlet property="delegate" destination="kGL-Nh-75q" id="U9m-EA-TbG"/>
                                             <outlet property="label" destination="b6c-S2-PjI" id="bbE-a6-nUh"/>
-                                            <outlet property="valueDatePicker" destination="IxC-UK-lcm" id="mHt-aU-Ozt"/>
+                                            <outlet property="valueDatePicker" destination="uHG-SA-zGu" id="Vl6-MX-dor"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditTimeCell" id="wGm-EI-cin" customClass="EditTimeCell" customModule="MediaManager" customModuleProvider="target">
@@ -570,17 +567,17 @@
                                                                 <constraint firstAttribute="width" constant="1" id="z1N-V5-sWX"/>
                                                             </constraints>
                                                         </view>
-                                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IIc-Yg-EZO">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-zW-TCR" customClass="UIPickerView">
                                                             <rect key="frame" x="81" y="0.0" width="262" height="43.5"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
-                                                                <outlet property="dataSource" destination="wGm-EI-cin" id="LYJ-Hd-0af"/>
-                                                                <outlet property="delegate" destination="wGm-EI-cin" id="g7M-IE-nBD"/>
+                                                                <outlet property="dataSource" destination="wGm-EI-cin" id="mbr-MG-OtY"/>
+                                                                <outlet property="delegate" destination="wGm-EI-cin" id="YmR-fR-xeu"/>
                                                             </connections>
-                                                        </pickerView>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="VKT-GJ-DHh" secondAttribute="bottom" priority="750" id="D5r-p3-cgU"/>
-                                                        <constraint firstAttribute="bottom" secondItem="IIc-Yg-EZO" secondAttribute="bottom" id="eSf-0j-Ooa"/>
                                                         <constraint firstAttribute="bottom" secondItem="iu5-At-kjM" secondAttribute="bottom" constant="4" id="iNI-tt-1aq"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="yQu-sM-MRP"/>
                                                     </constraints>
@@ -596,7 +593,7 @@
                                         <connections>
                                             <outlet property="delegate" destination="kGL-Nh-75q" id="MfQ-76-LcE"/>
                                             <outlet property="label" destination="VKT-GJ-DHh" id="a5D-ZI-hI3"/>
-                                            <outlet property="valuePicker" destination="IIc-Yg-EZO" id="aDR-y0-e6D"/>
+                                            <outlet property="valuePicker" destination="ayw-zW-TCR" id="uZF-13-Z4E"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditTextCell" rowHeight="120" id="Wf3-Rh-E3a" customClass="EditTextCell" customModule="MediaManager" customModuleProvider="target">

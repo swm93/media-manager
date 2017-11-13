@@ -54,7 +54,6 @@ class IGDBDetailParser: JSONParser<ManagedMedia>
                 // get date released
                 if let dateReleased: Int64 = resultObj["first_release_date"] as? Int64
                 {
-                    
                     result.dateReleased = Date(timeIntervalSince1970: TimeInterval(dateReleased / 1000))
                 }
                 

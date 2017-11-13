@@ -60,7 +60,7 @@ class SearchViewController: UIViewController
 
         case .movie:
             self._searchParser = TMDBSearchParser(PListManager("Secrets")["tmdb_api_key"] as! String)
-            self._detailParser = nil
+            self._detailParser = TMDBDetailParser(PListManager("Secrets")["tmdb_api_key"] as! String)
             break
             
         case .music:

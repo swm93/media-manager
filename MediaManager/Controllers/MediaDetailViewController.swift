@@ -69,9 +69,9 @@ class MediaDetailViewController : UIViewController
                 return nil
             },
             "released": { (obj: NSManagedObject) -> Date? in
-                if let value: NSDate = obj.value(forKey: "dateReleased") as? NSDate
+                if let value: Date = obj.value(forKey: "dateReleased") as? Date
                 {
-                    return value as Date
+                    return value
                 }
                 return nil
             },
@@ -282,7 +282,7 @@ extension MediaDetailViewController : UITableViewDataSource
         
         case let v as Date:
             let formatter: DateFormatter = DateFormatter()
-            formatter.dateFormat = "MM dd, yyyy"
+            formatter.dateStyle = .long
             cell?.value.text = formatter.string(from: v)
         
         default:

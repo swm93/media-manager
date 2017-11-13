@@ -73,6 +73,8 @@
 		D2EEF7D01C652A560025B133 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7CF1C652A560025B133 /* JSONParser.swift */; };
 		D2EEF7D21C66939D0025B133 /* LastFMDetailParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7D11C66939D0025B133 /* LastFMDetailParser.swift */; };
 		D2EEF7D41C66968E0025B133 /* ParserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EEF7D31C66968E0025B133 /* ParserType.swift */; };
+		D2F419311FB7ED72007DFACA /* ISBNDBSearchParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F419301FB7ED72007DFACA /* ISBNDBSearchParser.swift */; };
+		D2F419331FB8FDA8007DFACA /* ISBNDBDetailParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F419321FB8FDA8007DFACA /* ISBNDBDetailParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,8 @@
 		D2EEF7CF1C652A560025B133 /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		D2EEF7D11C66939D0025B133 /* LastFMDetailParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFMDetailParser.swift; sourceTree = "<group>"; };
 		D2EEF7D31C66968E0025B133 /* ParserType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserType.swift; sourceTree = "<group>"; };
+		D2F419301FB7ED72007DFACA /* ISBNDBSearchParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNDBSearchParser.swift; sourceTree = "<group>"; };
+		D2F419321FB8FDA8007DFACA /* ISBNDBDetailParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNDBDetailParser.swift; sourceTree = "<group>"; };
 		F34D9348D09081EF42110C1B /* Pods-MediaManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediaManager/Pods-MediaManager.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,6 +270,8 @@
 				D2219CA31C50A5400017D4FB /* XMLParser.swift */,
 				D283B2201ECEA680007EE445 /* IGDBSearchParser.swift */,
 				D2B1DC2C1EE337AA00444FD7 /* IGDBDetailParser.swift */,
+				D2F419301FB7ED72007DFACA /* ISBNDBSearchParser.swift */,
+				D2F419321FB8FDA8007DFACA /* ISBNDBDetailParser.swift */,
 				D2219C9C1C4DCB7F0017D4FB /* LastFMSearchParser.swift */,
 				D2EEF7D11C66939D0025B133 /* LastFMDetailParser.swift */,
 				D2EEF7C91C646F310025B133 /* TMDBSearchParser.swift */,
@@ -630,6 +636,7 @@
 				D20696C11F6F673A00979DDA /* TimeUtility.swift in Sources */,
 				D262043A1ED65BDF00AC31B0 /* GenreManaged.swift in Sources */,
 				D283B2211ECEA680007EE445 /* IGDBSearchParser.swift in Sources */,
+				D2F419311FB7ED72007DFACA /* ISBNDBSearchParser.swift in Sources */,
 				D2BDCF3A1FB4365E00941717 /* MediaEditViewController.swift in Sources */,
 				D26204301ED65B6000AC31B0 /* BookManaged.swift in Sources */,
 				D2219CA61C50ACF40017D4FB /* ArtistManaged.swift in Sources */,
@@ -641,6 +648,7 @@
 				D2CC2E7F1FB5146200DCC5BD /* EditStringCell.swift in Sources */,
 				D2219C9F1C4EF96C0017D4FB /* ParameterizedURL.swift in Sources */,
 				D2A7A8851C4D8FD800B21BEA /* MediaManager.xcdatamodeld in Sources */,
+				D2F419331FB8FDA8007DFACA /* ISBNDBDetailParser.swift in Sources */,
 				D26204341ED65B9100AC31B0 /* MovieManaged.swift in Sources */,
 				D2CC2E851FB51C3D00DCC5BD /* EditTimeCell.swift in Sources */,
 				D26204361ED65BA700AC31B0 /* ShowManaged.swift in Sources */,

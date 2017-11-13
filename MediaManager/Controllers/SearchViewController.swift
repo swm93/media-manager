@@ -53,6 +53,17 @@ class SearchViewController: UIViewController
         
         switch (self.mediaType as MediaType)
         {
+        case .book:
+            self._searchParser = ISBNDBSearchParser(
+                PListManager("Secrets")["isbndb_api_key"] as! String,
+                libraryThingApiKey: PListManager("Secrets")["library_thing_api_key"] as! String
+            )
+            self._detailParser = ISBNDBDetailParser(
+                PListManager("Secrets")["isbndb_api_key"] as! String,
+                libraryThingApiKey: PListManager("Secrets")["library_thing_api_key"] as! String
+            )
+            break
+            
         case .game:
             self._searchParser = IGDBSearchParser(PListManager("Secrets")["igdb_api_key"] as! String)
             self._detailParser = IGDBDetailParser(PListManager("Secrets")["igdb_api_key"] as! String)

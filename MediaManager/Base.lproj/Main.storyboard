@@ -871,73 +871,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENO-is-tie">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OVC-ow-rpp">
-                                        <rect key="frame" x="8" y="0.0" width="359" height="192"/>
-                                        <subviews>
-                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T4m-sL-LdV" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
-                                                <rect key="frame" x="138" y="0.0" width="83" height="82.5"/>
-                                                <gestureRecognizers/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="T4m-sL-LdV" secondAttribute="height" multiplier="1:1" id="JC7-eh-UV1"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="jzd-rQ-6oP" appends="YES" id="YCL-5B-ulZ"/>
-                                                </connections>
-                                            </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="j3E-AE-hNT">
-                                                <rect key="frame" x="150" y="87.5" width="59" height="49.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANg-kw-fCK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="29"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fy-oI-JD3" userLabel="Subtitle Label">
-                                                        <rect key="frame" x="0.0" y="29" width="59" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlM-Qq-wPP">
-                                                <rect key="frame" x="8" y="156" width="343" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="49Y-3S-ecO"/>
-                                                </constraints>
-                                                <connections>
-                                                    <segue destination="EI9-4J-rMw" kind="embed" id="STF-dg-Rib"/>
-                                                </connections>
-                                            </containerView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="jlM-Qq-wPP" firstAttribute="leading" secondItem="OVC-ow-rpp" secondAttribute="leading" constant="8" id="ML0-lb-wya"/>
-                                            <constraint firstAttribute="trailing" secondItem="jlM-Qq-wPP" secondAttribute="trailing" constant="8" id="h7y-88-wOw"/>
-                                            <constraint firstItem="jlM-Qq-wPP" firstAttribute="centerX" secondItem="OVC-ow-rpp" secondAttribute="centerX" id="oX5-9A-DwL"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.38049958880000001" blue="0.33467824839999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="23c-Vz-TpN"/>
-                                    <constraint firstItem="OVC-ow-rpp" firstAttribute="leading" secondItem="ENO-is-tie" secondAttribute="leading" constant="8" id="JBu-3y-rDy"/>
-                                    <constraint firstAttribute="bottom" secondItem="OVC-ow-rpp" secondAttribute="bottom" constant="8" id="WxN-D4-ta1"/>
-                                    <constraint firstAttribute="trailing" secondItem="OVC-ow-rpp" secondAttribute="trailing" constant="8" id="dCs-oS-DyJ"/>
-                                    <constraint firstItem="OVC-ow-rpp" firstAttribute="top" secondItem="ENO-is-tie" secondAttribute="top" id="tuI-7R-PWA"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="sHE-T5-78H">
                                 <rect key="frame" x="0.0" y="200" width="375" height="354"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -972,6 +905,73 @@
                                     <outlet property="dataSource" destination="fW0-D5-UdU" id="n0Z-T0-1Oh"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENO-is-tie">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OVC-ow-rpp">
+                                        <rect key="frame" x="8" y="0.0" width="359" height="192"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T4m-sL-LdV" customClass="CircularImageView" customModule="MediaManager" customModuleProvider="target">
+                                                <rect key="frame" x="138" y="0.0" width="83" height="82.5"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="T4m-sL-LdV" secondAttribute="height" multiplier="1:1" id="JC7-eh-UV1"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="jzd-rQ-6oP" appends="YES" id="YCL-5B-ulZ"/>
+                                                </connections>
+                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="j3E-AE-hNT">
+                                                <rect key="frame" x="-8" y="87.5" width="0.0" height="49.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANg-kw-fCK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fy-oI-JD3" userLabel="Subtitle Label">
+                                                        <rect key="frame" x="0.0" y="29" width="0.0" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlM-Qq-wPP">
+                                                <rect key="frame" x="8" y="156" width="343" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="49Y-3S-ecO"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="EI9-4J-rMw" kind="embed" id="STF-dg-Rib"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="jlM-Qq-wPP" firstAttribute="leading" secondItem="OVC-ow-rpp" secondAttribute="leading" constant="8" id="ML0-lb-wya"/>
+                                            <constraint firstAttribute="trailing" secondItem="jlM-Qq-wPP" secondAttribute="trailing" constant="8" id="h7y-88-wOw"/>
+                                            <constraint firstItem="jlM-Qq-wPP" firstAttribute="centerX" secondItem="OVC-ow-rpp" secondAttribute="centerX" id="oX5-9A-DwL"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.38049958880000001" blue="0.33467824839999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="23c-Vz-TpN"/>
+                                    <constraint firstItem="OVC-ow-rpp" firstAttribute="leading" secondItem="ENO-is-tie" secondAttribute="leading" constant="8" id="JBu-3y-rDy"/>
+                                    <constraint firstAttribute="bottom" secondItem="OVC-ow-rpp" secondAttribute="bottom" constant="8" id="WxN-D4-ta1"/>
+                                    <constraint firstAttribute="trailing" secondItem="OVC-ow-rpp" secondAttribute="trailing" constant="8" id="dCs-oS-DyJ"/>
+                                    <constraint firstItem="OVC-ow-rpp" firstAttribute="top" secondItem="ENO-is-tie" secondAttribute="top" id="tuI-7R-PWA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -992,6 +992,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="headerView" destination="ENO-is-tie" id="yUl-SY-is5"/>
                         <outlet property="imageView" destination="T4m-sL-LdV" id="14z-dn-znv"/>
                         <outlet property="subtitleLabel" destination="6Fy-oI-JD3" id="4XS-P4-gk8"/>
                         <outlet property="tableView" destination="sHE-T5-78H" id="qE0-dU-kAE"/>

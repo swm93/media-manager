@@ -18,6 +18,7 @@ class MediaDetailViewController : UIViewController
     @IBOutlet public weak var imageView: CircularImageView!
     @IBOutlet public weak var titleLabel: UILabel!
     @IBOutlet public weak var subtitleLabel: UILabel!
+    @IBOutlet public weak var headerView: UIView!
     @IBOutlet public weak var tableView: UITableView!
 
     public var mediaObject: ManagedMedia!
@@ -155,6 +156,14 @@ class MediaDetailViewController : UIViewController
                 controlsViewController.mediaObject = self.mediaObject
             }
         }
+        
+        let shadowPath = UIBezierPath(rect: self.headerView.bounds)
+        let headerLayer: CALayer = self.headerView.layer
+        headerLayer.masksToBounds = false
+        headerLayer.shadowColor = UIColor.black.cgColor
+        headerLayer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        headerLayer.shadowOpacity = 0.35
+        headerLayer.shadowPath = shadowPath.cgPath
     }
     
     
